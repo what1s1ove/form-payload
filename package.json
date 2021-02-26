@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "src/index.ts",
   "scripts": {
+    "lint:js": "eslint --ext .ts src",
     "build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
     "build": "npm run build:ts && cp package.json build"
   },
@@ -14,6 +15,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "4.15.2",
+    "@typescript-eslint/parser": "4.15.2",
+    "eslint": "7.20.0",
     "tscpaths": "0.0.9",
     "typescript": "4.2.2"
   }
