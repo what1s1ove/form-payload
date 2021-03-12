@@ -15,11 +15,13 @@
     "editorconfig-checker": "3.3.0",
     "eslint": "7.20.0",
     "lint-staged": "10.5.4",
-    "simple-pre-commit": "1.2.1",
+    "simple-git-hooks": "2.0.2",
     "tscpaths": "0.0.9",
     "typescript": "4.2.2"
   },
-  "simple-pre-commit": "npx lint-staged",
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
   "keywords": [
     "form",
     "form-data",
