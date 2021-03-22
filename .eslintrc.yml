@@ -15,4 +15,9 @@ settings:
     alias:
       extensions: ['.js']
       map:
-        - ['~', './source/js']
+        - ['~', './src/js']
+
+rules:
+  '@typescript-eslint/quotes':
+    - error
+    - single
