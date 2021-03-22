@@ -6,20 +6,20 @@
     "lint:fs": "ls-lint",
     "lint:editorconfig": "editorconfig-checker",
     "lint:ts": "eslint --ext .ts src",
-    "lint": "npm run lint:fs && npm run lint:editorconfig && npm run lint:ts",
+    "lint": "npm run lint:fs && npm run lint:editorconfig",
     "build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
     "build": "npm run build:ts && cp package.json build"
   },
   "devDependencies": {
     "@ls-lint/ls-lint": "1.9.2",
-    "@typescript-eslint/eslint-plugin": "4.15.2",
-    "@typescript-eslint/parser": "4.15.2",
-    "editorconfig-checker": "3.3.0",
-    "eslint": "7.20.0",
+    "@typescript-eslint/eslint-plugin": "4.19.0",
+    "@typescript-eslint/parser": "4.19.0",
+    "editorconfig-checker": "4.0.1",
+    "eslint": "7.22.0",
     "lint-staged": "10.5.4",
-    "simple-git-hooks": "2.0.2",
+    "simple-git-hooks": "2.0.3",
     "tscpaths": "0.0.9",
-    "typescript": "4.2.2"
+    "typescript": "4.2.3"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
