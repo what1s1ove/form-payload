@@ -6,7 +6,7 @@
     "lint:fs": "ls-lint",
     "lint:editorconfig": "editorconfig-checker",
     "lint:ts": "eslint --ext .ts src",
-    "lint": "npm run lint:fs && npm run lint:editorconfig && npm run lint:ts",
+    "lint": "npm run lint:fs && npm run lint:editorconfig",
     "build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
     "build": "npm run build:ts && cp package.json build"
   },
