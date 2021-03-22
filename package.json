@@ -23,7 +23,9 @@
   "keywords": [
     "form",
     "form-data",
-    "form-payload"
+    "form-values",
+    "form-payload",
+    "input-value"
   ],
   "license": "ISC"
 }
