@@ -18,6 +18,19 @@ settings:
         - ['~', './src/js']
 
 rules:
+  no-multiple-empty-lines:
+    - error
+    - max: 1
+  '@typescript-eslint/explicit-function-return-type':
+    - error
+  '@typescript-eslint/no-unused-vars':
+    - error
+  '@typescript-eslint/comma-dangle':
+    - error
+    - always-multiline
+  '@typescript-eslint/object-curly-spacing':
+    - error
+    - always
   '@typescript-eslint/quotes':
     - error
     - single
