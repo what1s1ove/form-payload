@@ -1,0 +1,8 @@
+ls:
+  .dir: regex:([.a-z]*)([-.][a-z]+)*
+  .ts: regex:([.a-z]*)([-.][a-z]+)*
+
+ignore:
+  - node_modules
+  - build
+  - .git

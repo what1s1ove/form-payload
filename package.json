@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "main": "src/index.ts",
   "scripts": {
+    "lint:fs": "ls-lint",
     "lint:editorconfig": "editorconfig-checker",
     "lint:ts": "eslint --ext .ts src",
-    "lint": "npm run lint:editorconfig && npm run lint:ts",
+    "lint": "npm run lint:fs && npm run lint:editorconfig && npm run lint:ts",
     "build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
     "build": "npm run build:ts && cp package.json build"
   },
   "devDependencies": {
+    "@ls-lint/ls-lint": "1.9.2",
     "@typescript-eslint/eslint-plugin": "4.15.2",
     "@typescript-eslint/parser": "4.15.2",
     "editorconfig-checker": "3.3.0",
