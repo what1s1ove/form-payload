@@ -23,8 +23,6 @@ rules:
     - max: 1
   '@typescript-eslint/explicit-function-return-type':
     - error
-  '@typescript-eslint/no-unused-vars':
-    - error
   '@typescript-eslint/comma-dangle':
     - error
     - always-multiline
@@ -34,3 +32,9 @@ rules:
   '@typescript-eslint/quotes':
     - error
     - single
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - vars: all
+      args: after-used
+      argsIgnorePattern: ^_
+      caughtErrors: all
