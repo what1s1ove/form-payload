@@ -11,7 +11,7 @@ const ControlType = {
   PASSWORD: 'password',
   RADIO: 'radio',
   RANGE: 'range',
-  RESET: 'rest',
+  RESET: 'reset',
   SEARCH: 'search',
   SUBMIT: 'submit',
   TEL: 'tel',
