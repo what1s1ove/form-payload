@@ -2,9 +2,9 @@ name: Notify
 
 on:
   pull_request:
-    # types:
-    #   - opened
-    #   - reopened
+    types:
+      - opened
+      - reopened
 
 jobs:
   notify:
@@ -18,10 +18,10 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            *Service* — ${{ github.repository }}
+            *Repository* — ${{ github.repository }}
             *Owner* — ${{ github.actor }}
-            *PR NAME* — ${{ github.event.pull_request.title }}
+            *PR name* — ${{ github.event.pull_request.title }}
+            *Message* — ${{ env.commitmsg || '📭' }}
             *Ref* — ${{ github.ref }}
             *SHA* — ${{ github.sha }}
-            *Message* — ${{ env.commitmsg || '➖' }}
             [PR URL](https://github.com/${{ github.repository }}/pull/${{ github.event.number }})
