@@ -1,6 +1,6 @@
 const createElement = (
   tagName: string,
-  props?: Partial<HTMLInputElement>,
+  props?: Partial<HTMLInputElement | HTMLFieldSetElement>,
   ...children: HTMLElement[]
 ): HTMLElement => {
   const element = document.createElement(tagName);
