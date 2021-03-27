@@ -22,13 +22,15 @@ jobs:
               ${{ github.repository }}
             *Owner*
               ${{ github.actor }}
+            *Owner*
+              ${{ github.event_name }}
             *Ref*
               ${{ github.ref }}
             *SHA*
               ${{ github.sha }}
             *Message*
-              ${{ env.commitmsg }}
+              ${{ env.commitmsg || ➖ }}
             *PR URL*
-              [PR URL](https://github.com/${{github.repository_owner}}/${{github.repository}}/pull/${{ github.event.number }})
+              [PR URL](https://github.com/${{github.repository}}/pull/${{ github.event.number }})
             *Action URL*
-              [ACTION URL](https://github.com/${{github.repository_owner}}/${{github.repository}}/actions/runs/${{ github.run_id }})
+              [ACTION URL](https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }})
