@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 
 on:
   pull_request:
@@ -7,8 +7,8 @@ on:
       - production
 
 jobs:
-  linting:
-    name: Linting
+  testing:
+    name: Testing
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,6 +27,6 @@ jobs:
         run: |
           npm ci
 
-      - name: Code Linting
+      - name: Code Testing
         run: |
-          npm run lint
+          npm run test
