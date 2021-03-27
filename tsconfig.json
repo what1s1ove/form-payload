@@ -1,5 +1,9 @@
 {
-  "include": ["src/*"],
+  "include": [
+    "src",
+    "package.json",
+    "package-lock.json"
+  ],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
     "allowJs": true,
