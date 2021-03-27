@@ -16,5 +16,19 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: 'New PR :eyes'
-
+          format: markdown
+          message: |
+            *Service*
+              ${{ github.repository }}
+            *Owner*
+              ${{ github.actor }}
+            *Ref*
+              ${{ github.ref }}
+            *SHA*
+              ${{ github.sha }}
+            *Message*
+              ${{ env.commitmsg }}
+            *PR URL*
+            [PR URL](https://github.com/${{github.repository_owner}}/${{github.repository}}/pull/${{ github.event.number }})
+            *Action URL*
+            [ACTION URL](https://github.com/${{github.repository_owner}}/${{github.repository}}/actions/runs/${{ github.run_id }})
