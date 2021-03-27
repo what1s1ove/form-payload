@@ -21,6 +21,9 @@ settings:
       map:
         - ['~', './src/js']
 
+ignorePatterns:
+  - build
+
 rules:
   no-multiple-empty-lines:
     - error
