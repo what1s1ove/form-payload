@@ -65,7 +65,7 @@ generalFormNode.addEventListener('submit', (evt) => {
   //   birthday: Sat Mar 27 2021 18:06:42 GMT+0200 (Eastern European Standard Time),
   //   friendsCount: 1,
   //   friend: {
-  //     friendName: Kate,
+  //     friendName: 'Kate',
   //   },
   // }
 });
