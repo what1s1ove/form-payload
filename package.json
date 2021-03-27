@@ -13,7 +13,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
-    "build": "npm run build:ts && cp package.json build"
+    "build:copy": "cp readme.md build",
+    "build": "npm run build:ts && npm run build:copy"
   },
   "devDependencies": {
     "@ls-lint/ls-lint": "1.9.2",
