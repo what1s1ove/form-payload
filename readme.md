@@ -72,7 +72,7 @@ generalFormNode.addEventListener('submit', (evt) => {
 
 mailingFormNode.addEventListener('change', (evt) => {
   console.log(getControlValue(evt.target));
-  // example@mail.com
+  // 'example@mail.com'
 });
 
 ```
@@ -99,7 +99,7 @@ const SimpleForm = () => {
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     console.log(getControlValue(evt.target));
-    // example@mail.com
+    // 'example@mail.com'
   };
 
   return (
