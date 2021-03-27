@@ -8,7 +8,7 @@ Gets form payload (or payload for a named form field) - via `form.elements`.
 
 ## Install
 
-`npm install from-payload`
+`npm install form-payload`
 
 ## Usage
 
