@@ -1,8 +1,7 @@
 {
   "include": [
     "src",
-    "package.json",
-    "package-lock.json"
+    "package.json"
   ],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
