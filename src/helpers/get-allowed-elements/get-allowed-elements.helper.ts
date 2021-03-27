@@ -1,10 +1,4 @@
-import { ControlType } from '~/common/enums';
-
-const BANNED_CONTROL_TYPES = [
-  ControlType.BUTTON,
-  ControlType.RESET,
-  ControlType.SUBMIT,
-] as const;
+import { BANNED_CONTROL_TYPES } from '~/common/constants';
 
 const checkControlFnMap = {
   checkHasControlName(element: HTMLInputElement) {
