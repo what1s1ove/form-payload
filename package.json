@@ -1,7 +1,10 @@
 {
   "name": "form-payload",
   "version": "0.0.2",
-  "main": "src/index.ts",
+  "engines": {
+    "node": "14.x.x",
+    "npm": "6.x.x"
+  },
   "scripts": {
     "lint:fs": "ls-lint",
     "lint:editorconfig": "editorconfig-checker",
