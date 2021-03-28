@@ -4,7 +4,7 @@
 [![](https://github.com/what1s1ove/form-payload/workflows/Test/badge.svg)](https://github.com/What1s1ove/form-payload/actions?query=workflow%3ATest)
 [![](https://github.com/what1s1ove/form-payload/workflows/Publish/badge.svg)](https://github.com/What1s1ove/form-payload/actions?query=workflow%3APublish)
 
-Gets form payload (or payload for a named form field) - via `form.elements`.
+Gets form-payload (or payload for a named form field) - via `form.elements`.
 
 ## Install
 
