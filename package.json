@@ -29,7 +29,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
-    "build:copy": "cp readme.md build",
+    "build:copy": "cp readme.md package.json build",
     "build": "npm run build:ts && npm run build:copy"
   },
   "dependencies": {},
