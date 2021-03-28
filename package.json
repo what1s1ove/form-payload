@@ -1,6 +1,22 @@
 {
   "name": "form-payload",
+  "description": "Gets form-payload via form.elements",
   "version": "0.0.3",
+  "author": "Vladyslav Zubko <zubko.2007@gmail.com>",
+  "homepage": "https://github.com/what1s1ove/form-payload",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/what1s1ove/form-payload.git"
+  },
+  "keywords": [
+    "form",
+    "form-data",
+    "form-values",
+    "form-payload",
+    "input-data",
+    "input-value",
+    "input-payload"
+  ],
   "engines": {
     "node": "14.x.x",
     "npm": "6.x.x"
@@ -16,6 +32,7 @@
     "build:copy": "cp readme.md build",
     "build": "npm run build:ts && npm run build:copy"
   },
+  "dependencies": {},
   "devDependencies": {
     "@ls-lint/ls-lint": "1.9.2",
     "@testing-library/dom": "7.30.0",
@@ -37,12 +54,5 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
   },
-  "keywords": [
-    "form",
-    "form-data",
-    "form-values",
-    "form-payload",
-    "input-value"
-  ],
   "license": "ISC"
 }
