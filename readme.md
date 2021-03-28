@@ -8,12 +8,11 @@ Gets form-payload (or payload for a named form field) - via `form.elements`.
 
 ## Install
 
-`npm install form-payload`
+```
+npm install form-payload
+```
 
 ## Usage
-
-### Getting form payload
-
 
 ```html
 <!-- index.html -->
@@ -77,7 +76,7 @@ mailingFormNode.addEventListener('change', (evt) => {
 
 ```
 
-## Frameworks
+## With Frameworks
 
 *It doesn't matter which framework you use, you just need to pass the valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement).*
 
