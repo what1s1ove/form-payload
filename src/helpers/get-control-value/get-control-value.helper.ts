@@ -1,6 +1,6 @@
 import { ControlType } from '~/common/enums';
 import { getElementsValues } from '../get-elements-values/get-elements-values.helper';
-import { getMultiSelectValues } from './helpers';
+import { getMultiSelectValues, getInputFileValue } from './helpers';
 
 const getControlValue = (controlNode: Element): unknown => {
   switch ((<HTMLInputElement>controlNode).type) {
@@ -34,6 +34,9 @@ const getControlValue = (controlNode: Element): unknown => {
     }
     case ControlType.SELECT_MULTIPLE: {
       return getMultiSelectValues(<HTMLSelectElement>controlNode);
+    }
+    case ControlType.FILE: {
+      return getInputFileValue(<HTMLInputElement>controlNode);
     }
     case ControlType.FIELDSET: {
       return getElementsValues(
