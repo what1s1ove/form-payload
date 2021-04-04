@@ -34,4 +34,11 @@ const createOptionsElements = (
   });
 };
 
-export { createLabelElement, createOptionsElements, createFormElement };
+const getInputFiles = (...files: File[]): File[] => files;
+
+export {
+  createLabelElement,
+  createOptionsElements,
+  createFormElement,
+  getInputFiles,
+};
