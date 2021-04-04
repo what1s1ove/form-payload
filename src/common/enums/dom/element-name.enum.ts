@@ -2,7 +2,7 @@ const ElementName = {
   FORM: 'form',
   LABEL: 'label',
   INPUT: 'input',
-  SELECT: 'SELECT',
+  SELECT: 'select',
   OPTION: 'option',
   FIELDSET: 'fieldset',
 } as const;
