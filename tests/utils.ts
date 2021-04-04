@@ -16,16 +16,22 @@ const createLabelElement = (...children: ChildElement[]): HTMLElement => {
   return createElement(ElementName.LABEL, {}, ...children);
 };
 
-const createOptionElement = (...options: string[]): HTMLOptionElement[] => {
+const createOptionsElements = (
+  options: string[],
+  ...selectedOptions: string[]
+): HTMLOptionElement[] => {
   return <HTMLOptionElement[]>options.map((opt) => {
+    const isSelected = selectedOptions.includes(opt);
+
     return createElement(
       ElementName.OPTION,
       {
         value: opt,
+        selected: isSelected,
       },
       opt,
     );
   });
 };
 
-export { createLabelElement, createOptionElement, createFormElement };
+export { createLabelElement, createOptionsElements, createFormElement };
