@@ -40,9 +40,42 @@ describe('getFormValues should work correctly', () => {
         }),
       );
 
-      const controlValue = getControlValue(control);
+      expect(getControlValue(control) instanceof File).toBe(true);
+    });
 
-      expect(controlValue instanceof File).toBe(true);
+    test('should get value from multiple input type file correctly', async () => {
+      const files = getInputFiles(
+        new File(['test-file-1'], 'test-file-1'),
+        new File(['test-file-2'], 'test-file-2'),
+      );
+
+      document.body.append(
+        createLabelElement(
+          INPUT_FILE_LABEL,
+          createElement(ElementName.INPUT, {
+            type: ControlType.FILE,
+            multiple: true,
+          }),
+        ),
+      );
+
+      const control = <HTMLInputElement>screen.getByLabelText(INPUT_FILE_LABEL);
+
+      expect(Array.isArray(getControlValue(control))).toBe(true);
+
+      await waitFor(() =>
+        fireEvent.change(control, {
+          target: {
+            files,
+          },
+        }),
+      );
+
+      const controlValue = <File[]>getControlValue(control);
+
+      expect(controlValue.every((file) => file instanceof File)).toBe(true);
+
+      expect(controlValue.length).toBe(files.length);
     });
   });
 
