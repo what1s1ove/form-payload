@@ -131,8 +131,6 @@ describe('getFormValues should work correctly', () => {
         <HTMLSelectElement>screen.getByLabelText(SELECT_LABEL),
       );
 
-      expect(typeof controlValue).toBe('object');
-
       expect(Array.isArray(controlValue)).toBe(true);
 
       expect(controlValue).toEqual(selectedValues);
