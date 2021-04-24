@@ -13,7 +13,38 @@ describe('getFormValues should work correctly', () => {
     document.body.innerHTML = '';
   });
 
-  describe('getFormValues should work correctly with input', () => {
+  describe('should work correctly with texts inputs', () => {
+    test.each`
+      type                    | value
+      ${ControlType.COLOR}    | ${'#999999'}
+      ${ControlType.EMAIL}    | ${'test@mail.com'}
+      ${ControlType.HIDDEN}   | ${'metrics'}
+      ${ControlType.PASSWORD} | ${'top-secret'}
+      ${ControlType.RADIO}    | ${'color-1'}
+      ${ControlType.SEARCH}   | ${'apples'}
+      ${ControlType.TEL}      | ${'10000000000'}
+      ${ControlType.TEXT}     | ${'Name'}
+      ${ControlType.URL}      | ${'form-payload.com'}
+      ${ControlType.OUTPUT}   | ${'empty'}
+    `('should get value from input type $type correctly', ({ type, value }) => {
+      document.body.append(
+        createElement(ElementName.INPUT, {
+          name: type,
+          type: type,
+          value,
+        }),
+      );
+
+      const control = <HTMLInputElement>screen.getByDisplayValue(value);
+      const controlValue = getControlValue(control);
+
+      expect(typeof controlValue).toBe('string');
+
+      expect(controlValue).toBe(value);
+    });
+  });
+
+  describe('should work correctly with file input', () => {
     const INPUT_FILE_LABEL = 'Upload' as const;
 
     test('should get value from input type file correctly', async () => {
@@ -79,7 +110,7 @@ describe('getFormValues should work correctly', () => {
     });
   });
 
-  describe('getFormValues should work correctly with select', () => {
+  describe('should work correctly with select', () => {
     const SELECT_LABEL = 'Colors' as const;
 
     const Color = {
