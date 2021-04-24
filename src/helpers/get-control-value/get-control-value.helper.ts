@@ -1,6 +1,27 @@
 import { ControlType } from '~/common/enums';
-import { getElementsValues } from '../get-elements-values/get-elements-values.helper';
+import { CustomRecord } from '~/common/types';
+import { checkIsReferToAnotherNode } from '../check-is-refer-to-another-node/check-is-refer-to-another-node.helper';
+import { getAllowedElements } from '../get-allowed-elements/get-allowed-elements.helper';
 import { getMultiSelectValues, getInputFileValue } from './helpers';
+
+const getElementsValues = (controlNodeElements: Element[]): CustomRecord => {
+  const elements = <HTMLInputElement[]>(
+    getAllowedElements(Array.from(controlNodeElements))
+  );
+
+  return elements.reduce<CustomRecord>((acc, element, _idx, arr) => {
+    const isReferToAnotherNode = checkIsReferToAnotherNode(element, ...arr);
+
+    if (isReferToAnotherNode) {
+      return acc;
+    }
+
+    return {
+      ...acc,
+      [element.name]: getControlValue(element),
+    };
+  }, {});
+};
 
 const getControlValue = (controlNode: Element): unknown => {
   switch ((<HTMLInputElement>controlNode).type) {
@@ -48,4 +69,4 @@ const getControlValue = (controlNode: Element): unknown => {
   }
 };
 
-export { getControlValue };
+export { getElementsValues, getControlValue };
