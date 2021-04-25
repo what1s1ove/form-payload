@@ -17,7 +17,7 @@ const checkControlFnMap = <const>{
 const getAllowedElements = (elements: ControlElement[]): ControlElement[] => {
   return elements.filter((element) => {
     return Object.values(checkControlFnMap).every((checkFunction) => {
-      return checkFunction(<ControlElement>element);
+      return checkFunction(element);
     });
   });
 };

@@ -16,7 +16,7 @@ const getElementsValues = (
   controlElements: ControlCollection,
 ): CustomObject => {
   const allowedElements = getAllowedElements(
-    <ControlElement[]>Array.from<Element>(controlElements),
+    <ControlElement[]>Array.from(controlElements),
   );
 
   return allowedElements.reduce<CustomObject>((acc, element, _idx, arr) => {
@@ -35,6 +35,14 @@ const getElementsValues = (
 
 const getControlValue = (controlNode: ControlElement): unknown | never => {
   switch (controlNode.type) {
+    case ControlType.BUTTON:
+    case ControlType.IMAGE:
+    case ControlType.RESET:
+    case ControlType.SUBMIT: {
+      throw new FormPayloadError({
+        message: `${ErrorMessage.BANNED_TYPE}${controlNode.type}`,
+      });
+    }
     case ControlType.COLOR:
     case ControlType.EMAIL:
     case ControlType.HIDDEN:
@@ -43,9 +51,9 @@ const getControlValue = (controlNode: ControlElement): unknown | never => {
     case ControlType.SEARCH:
     case ControlType.TEL:
     case ControlType.TEXT:
-    case ControlType.TEXTAREA:
     case ControlType.URL:
     case ControlType.OUTPUT:
+    case ControlType.TEXTAREA:
     case ControlType.SELECT_ONE: {
       return (<HTMLInputElement | HTMLSelectElement>controlNode).value;
     }
@@ -71,16 +79,6 @@ const getControlValue = (controlNode: ControlElement): unknown | never => {
     }
     case ControlType.FIELDSET: {
       return getElementsValues((<HTMLFieldSetElement>controlNode).elements);
-    }
-    case ControlType.BUTTON:
-    case ControlType.IMAGE:
-    case ControlType.RESET:
-    case ControlType.SUBMIT: {
-      throw new FormPayloadError({
-        message: `${ErrorMessage.BANNED_TYPE}${
-          (<ControlElement>controlNode).type
-        }`,
-      });
     }
   }
 
