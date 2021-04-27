@@ -18,9 +18,11 @@ const getElementsValues = (
   const allowedElements = getAllowedElements(
     <ControlElement[]>Array.from(controlElements),
   );
-
-  return allowedElements.reduce<CustomObject>((acc, element, _idx, arr) => {
-    const isReferToAnotherNode = checkIsReferToAnotherNode(element, ...arr);
+  return allowedElements.reduce<CustomObject>((acc, element) => {
+    const isReferToAnotherNode = checkIsReferToAnotherNode(
+      element,
+      ...allowedElements,
+    );
 
     if (isReferToAnotherNode) {
       return acc;
