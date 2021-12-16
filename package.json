@@ -1,7 +1,7 @@
 {
   "name": "form-payload",
   "description": "Gets form-payload via form.elements",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "Vladyslav Zubko <zubko.2007@gmail.com>",
   "homepage": "https://github.com/what1s1ove/form-payload",
   "repository": {
@@ -18,8 +18,7 @@
     "input-payload"
   ],
   "engines": {
-    "node": "14.x.x",
-    "npm": "6.x.x"
+    "node": ">=10"
   },
   "scripts": {
     "lint:fs": "ls-lint",
