@@ -1,0 +1,29 @@
+name: Continuous Delivery
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Release
+        id: release
+        uses: google-github-actions/release-please-action@v3
+        with:
+          command: manifest
