@@ -1,24 +1,24 @@
 import { ChildElement } from '~/common/types';
 
 const createElement = (
-  tagName: string,
-  props?: Partial<
-    | HTMLInputElement
-    | HTMLFieldSetElement
-    | HTMLSelectElement
-    | HTMLOptionElement
-  >,
-  ...children: ChildElement[]
+	tagName: string,
+	props?: Partial<
+		| HTMLInputElement
+		| HTMLFieldSetElement
+		| HTMLSelectElement
+		| HTMLOptionElement
+	>,
+	...children: ChildElement[]
 ): HTMLElement => {
-  const element = document.createElement(tagName);
+	const element = document.createElement(tagName);
 
-  if (props) {
-    Object.assign(element, props);
-  }
+	if (props) {
+		Object.assign(element, props);
+	}
 
-  children.forEach((child) => element.append(child));
+	children.forEach((child) => element.append(child));
 
-  return element;
+	return element;
 };
 
 export { createElement };

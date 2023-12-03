@@ -1,31 +1,31 @@
 {
-  "include": ["src"],
-  "exclude": ["node_modules"],
-  "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "build",
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"]
-    },
-    "lib": ["es2020", "DOM"],
-    "target": "ES6",
-    "declaration": true,
-    "isolatedModules": true,
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "alwaysStrict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "strictBindCallApply": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitUseStrict": false,
-    "noStrictGenericChecks": false,
-    "suppressExcessPropertyErrors": false,
-    "suppressImplicitAnyIndexErrors": false
-  }
+	"include": ["src"],
+	"exclude": ["node_modules"],
+	"compilerOptions": {
+		"module": "commonjs",
+		"outDir": "build",
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["src/*"]
+		},
+		"lib": ["es2020", "DOM"],
+		"target": "ES6",
+		"declaration": true,
+		"isolatedModules": true,
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"alwaysStrict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"strictBindCallApply": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitUseStrict": false,
+		"noStrictGenericChecks": false,
+		"suppressExcessPropertyErrors": false,
+		"suppressImplicitAnyIndexErrors": false
+	}
 }

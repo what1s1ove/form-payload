@@ -1,64 +1,64 @@
 {
-  "name": "form-payload",
-  "description": "Gets form-payload via form.elements",
-  "version": "1.0.0",
-  "type": "module",
-  "author": "Vladyslav Zubko <zubko.2007@gmail.com>",
-  "homepage": "https://github.com/what1s1ove/form-payload",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/what1s1ove/form-payload.git"
-  },
-  "keywords": [
-    "form",
-    "form-data",
-    "form-values",
-    "form-payload",
-    "input-data",
-    "input-value",
-    "input-payload"
-  ],
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "postinstall": "npx simple-git-hooks",
-    "format": "prettier --write \"**/*.{json,md,yml,js,ts,d.ts}\"",
-    "lint:fs": "ls-lint",
-    "lint:editorconfig": "editorconfig-checker",
-    "lint:format": "prettier --check \"**/*.{json,md,yml,js,ts,d.ts}\"",
-    "lint:ts": "eslint --ext .ts src",
-    "lint": "npm run lint:fs && npm run lint:editorconfig && npm run lint:format && npm run lint:ts",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
-    "build:copy": "cp readme.md package.json build",
-    "build": "npm run build:ts && npm run build:copy"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "18.4.3",
-    "@commitlint/config-conventional": "18.4.3",
-    "@ls-lint/ls-lint": "2.2.2",
-    "@testing-library/dom": "7.30.0",
-    "@testing-library/jest-dom": "5.11.9",
-    "@types/jest": "26.0.21",
-    "@typescript-eslint/eslint-plugin": "4.19.0",
-    "editorconfig-checker": "5.1.1",
-    "eslint": "7.22.0",
-    "eslint-import-resolver-alias": "1.1.2",
-    "eslint-plugin-jest-dom": "3.6.5",
-    "jest": "26.6.3",
-    "lint-staged": "10.5.4",
-    "prettier": "3.1.0",
-    "simple-git-hooks": "2.0.3",
-    "ts-jest": "26.5.4",
-    "ts-node": "9.1.1",
-    "tscpaths": "0.0.9",
-    "typescript": "4.2.3"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged",
-    "commit-msg": "npx commitlint --edit $1"
-  },
-  "license": "ISC"
+	"name": "form-payload",
+	"description": "Gets form-payload via form.elements",
+	"version": "1.0.0",
+	"type": "module",
+	"author": "Vladyslav Zubko <zubko.2007@gmail.com>",
+	"homepage": "https://github.com/what1s1ove/form-payload",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/what1s1ove/form-payload.git"
+	},
+	"keywords": [
+		"form",
+		"form-data",
+		"form-values",
+		"form-payload",
+		"input-data",
+		"input-value",
+		"input-payload"
+	],
+	"engines": {
+		"node": ">=10"
+	},
+	"scripts": {
+		"postinstall": "npx simple-git-hooks",
+		"format": "prettier --write \"**/*.{json,md,yml,js,ts,d.ts}\"",
+		"lint:fs": "ls-lint",
+		"lint:editorconfig": "editorconfig-checker",
+		"lint:format": "prettier --check \"**/*.{json,md,yml,js,ts,d.ts}\"",
+		"lint:ts": "eslint --ext .ts src",
+		"lint": "npm run lint:fs && npm run lint:editorconfig && npm run lint:format && npm run lint:ts",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
+		"build:copy": "cp readme.md package.json build",
+		"build": "npm run build:ts && npm run build:copy"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "18.4.3",
+		"@commitlint/config-conventional": "18.4.3",
+		"@ls-lint/ls-lint": "2.2.2",
+		"@testing-library/dom": "7.30.0",
+		"@testing-library/jest-dom": "5.11.9",
+		"@types/jest": "26.0.21",
+		"@typescript-eslint/eslint-plugin": "4.19.0",
+		"editorconfig-checker": "5.1.1",
+		"eslint": "7.22.0",
+		"eslint-import-resolver-alias": "1.1.2",
+		"eslint-plugin-jest-dom": "3.6.5",
+		"jest": "26.6.3",
+		"lint-staged": "10.5.4",
+		"prettier": "3.1.0",
+		"simple-git-hooks": "2.0.3",
+		"ts-jest": "26.5.4",
+		"ts-node": "9.1.1",
+		"tscpaths": "0.0.9",
+		"typescript": "4.2.3"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "npx lint-staged",
+		"commit-msg": "npx commitlint --edit $1"
+	},
+	"license": "ISC"
 }

@@ -1,15 +1,15 @@
 import { CustomExceptionName } from '~/common/enums';
 
 type Constructor = {
-  message: string;
+	message: string;
 };
 
 class FormPayloadError extends Error {
-  constructor({ message }: Constructor) {
-    super(message);
-    this.message = message;
-    this.name = CustomExceptionName.FORM_PAYLOAD_ERROR;
-  }
+	constructor({ message }: Constructor) {
+		super(message);
+		this.message = message;
+		this.name = CustomExceptionName.FORM_PAYLOAD_ERROR;
+	}
 }
 
 export { FormPayloadError };
