@@ -2,6 +2,7 @@
   "name": "form-payload",
   "description": "Gets form-payload via form.elements",
   "version": "0.0.8",
+  "type": "module",
   "author": "Vladyslav Zubko <zubko.2007@gmail.com>",
   "homepage": "https://github.com/what1s1ove/form-payload",
   "repository": {
@@ -31,15 +32,15 @@
     "build:copy": "cp readme.md package.json build",
     "build": "npm run build:ts && npm run build:copy"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@ls-lint/ls-lint": "1.9.2",
+    "@commitlint/cli": "18.4.3",
+    "@commitlint/config-conventional": "18.4.3",
+    "@ls-lint/ls-lint": "2.2.2",
     "@testing-library/dom": "7.30.0",
     "@testing-library/jest-dom": "5.11.9",
     "@types/jest": "26.0.21",
     "@typescript-eslint/eslint-plugin": "4.19.0",
-    "@typescript-eslint/parser": "4.19.0",
-    "editorconfig-checker": "4.0.1",
+    "editorconfig-checker": "5.1.1",
     "eslint": "7.22.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-jest-dom": "3.6.5",
@@ -52,7 +53,8 @@
     "typescript": "4.2.3"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx lint-staged",
+    "commit-msg": "npx commitlint --edit $1"
   },
   "license": "ISC"
 }
