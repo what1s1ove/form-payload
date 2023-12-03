@@ -19,21 +19,21 @@ npm install form-payload
 <form name="general">
   <label>
     Name
-    <input type="text" name="name" value="Jon">
+    <input type="text" name="name" value="Jon" />
   </label>
   <label>
     Birthday
-    <input type="date" name="birthday" value="2021-03-27">
+    <input type="date" name="birthday" value="2021-03-27" />
   </label>
   <label>
     Friends Count
-    <input type="number" name="friendsCount" value="1">
+    <input type="number" name="friendsCount" value="1" />
   </label>
   <fieldset name="friend">
     <legend>Friend</legend>
     <label>
       Friend Name
-      <input type="test" name="friendName" value="Kate">
+      <input type="test" name="friendName" value="Kate" />
     </label>
   </fieldset>
   <button type="submit">Submit</button>
@@ -44,7 +44,7 @@ npm install form-payload
 <form name="mailing">
   <label>
     Mailing
-    <input type="email" name="mail" name="example@mail.com">
+    <input type="email" name="mail" name="example@mail.com" />
   </label>
 </form>
 ```
@@ -73,12 +73,11 @@ mailingFormNode.addEventListener('change', (evt) => {
   console.log(getControlValue(evt.target));
   // 'example@mail.com'
 });
-
 ```
 
 ## With Frameworks
 
-*It doesn't matter which framework you use, you just need to pass the valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement).*
+_It doesn't matter which framework you use, you just need to pass the valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement)._
 
 ### React
 
