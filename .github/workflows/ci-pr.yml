@@ -1,0 +1,84 @@
+name: Continuous Integration Pull Request
+
+on:
+  pull_request:
+    types:
+      - assigned
+      - unassigned
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - labeled
+      - unlabeled
+      - ready_for_review
+
+concurrency:
+  group: ci-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependencies:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Cache Dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ci-pr-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ci-pr-
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install
+
+  lint:
+    name: Pull Request Linting
+    needs: dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Restore Dependencies
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ci-pr-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Lint Commits
+        uses: wagoid/commitlint-github-action@v5
+
+  labeler:
+    name: Labeler
+    needs: lint
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add Environment Label
+        uses: ffittschen/pr-branch-labeler@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
