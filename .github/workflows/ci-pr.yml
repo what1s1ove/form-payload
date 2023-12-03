@@ -68,17 +68,3 @@ jobs:
 
       - name: Lint Commits
         uses: wagoid/commitlint-github-action@v5
-
-  labeler:
-    name: Labeler
-    needs: lint
-    permissions:
-      contents: read
-      pull-requests: write
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Add Environment Label
-        uses: ffittschen/pr-branch-labeler@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
