@@ -22,6 +22,7 @@
     "node": ">=10"
   },
   "scripts": {
+    "postinstall": "npx simple-git-hooks",
     "format": "prettier --write \"**/*.{json,md,yml,js,ts,d.ts}\"",
     "lint:fs": "ls-lint",
     "lint:editorconfig": "editorconfig-checker",
