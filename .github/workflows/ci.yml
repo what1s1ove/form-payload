@@ -1,0 +1,83 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependencies:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Cache Dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ci-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ci-
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install
+
+  lint:
+    name: Code Linting
+    needs: dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Restore Dependencies
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ci-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Code Linting
+        run: |
+          npm run lint
+
+  test:
+    name: Code Testing
+    needs: dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Restore Dependencies
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ci-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Code Testing
+        run: |
+          npm run test
