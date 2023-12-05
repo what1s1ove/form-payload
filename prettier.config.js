@@ -1,5 +1,5 @@
 /** @type {import('prettier').Config} */
-let config = {
+const config = {
 	printWidth: 80,
 	semi: true,
 	singleQuote: true,
