@@ -7,9 +7,13 @@ import { createElement } from '../create-element/create-element.helper';
  */
 const createFormElement = (...children) => {
 	return /** @type {HTMLFormElement} */ (
-		createElement(ElementName.FORM, {
-			name: ''
-		}, ...children)
+		createElement(
+			ElementName.FORM,
+			{
+				name: '',
+			},
+			...children,
+		)
 	);
 };
 
