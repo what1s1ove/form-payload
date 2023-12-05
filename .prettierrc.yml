@@ -5,3 +5,5 @@ quoteProps: as-needed
 trailingComma: all
 bracketSpacing: true
 arrowParens: always
+plugins:
+  - prettier-plugin-jsdoc
