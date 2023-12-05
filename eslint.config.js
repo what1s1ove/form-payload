@@ -6,6 +6,8 @@ import importPlugin from 'eslint-plugin-import';
 import jsdoc from 'eslint-plugin-jsdoc';
 // @ts-expect-error: no declaration file
 import perfectionist from 'eslint-plugin-perfectionist';
+// @ts-expect-error: no declaration file
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import sonarjs from 'eslint-plugin-sonarjs';
 // @ts-expect-error: no declaration file
 import unicorn from 'eslint-plugin-unicorn';
@@ -103,6 +105,17 @@ const perfectionistConfig = {
 };
 
 /** @type {import('eslint').Linter.FlatConfig} */
+const simpleImportSortConfig = {
+	plugins: {
+		'simple-import-sort': simpleImportSort,
+	},
+	rules: {
+		'simple-import-sort/exports': ['error'],
+		'simple-import-sort/imports': ['error'],
+	},
+};
+
+/** @type {import('eslint').Linter.FlatConfig} */
 const mainRulesConfig = {
 	rules: {
 		'arrow-parens': ['error', 'always'],
@@ -149,6 +162,7 @@ const config = [
 	sonarConfig,
 	unicornConfig,
 	perfectionistConfig,
+	simpleImportSortConfig,
 	...overridesConfigs,
 ];
 
