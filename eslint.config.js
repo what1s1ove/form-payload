@@ -6,6 +6,8 @@ import importPlugin from 'eslint-plugin-import';
 // @ts-expect-error: no declaration file
 import jsdoc from 'eslint-plugin-jsdoc';
 import sonarjs from 'eslint-plugin-sonarjs';
+// @ts-expect-error: no declaration file
+import unicorn from 'eslint-plugin-unicorn';
 
 /** @type {import('eslint').Linter.FlatConfig} */
 const globalConfig = {
@@ -80,6 +82,17 @@ const sonarConfig = {
 };
 
 /** @type {import('eslint').Linter.FlatConfig} */
+const unicornConfig = {
+	plugins: {
+		unicorn,
+	},
+	rules: {
+		...unicorn.configs.recommended.rules,
+		'unicorn/no-null': ['off'],
+	},
+};
+
+/** @type {import('eslint').Linter.FlatConfig} */
 const mainRulesConfig = {
 	rules: {
 		'no-multiple-empty-lines': [
@@ -124,6 +137,7 @@ const config = [
 	jsdocConfig,
 	mainRulesConfig,
 	sonarConfig,
+	unicornConfig,
 	...overridesConfigs,
 ];
 
