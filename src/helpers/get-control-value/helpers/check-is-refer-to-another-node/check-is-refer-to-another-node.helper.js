@@ -14,11 +14,7 @@ const checkIsReferToAnotherNode = (currentNode, ...checkNodes) => {
 			return false;
 		}
 
-		const IsReferToAnotherNode = Boolean(
-			checkNode.elements.namedItem(currentNode.name),
-		);
-
-		return IsReferToAnotherNode;
+		return Boolean(checkNode.elements.namedItem(currentNode.name));
 	});
 };
 

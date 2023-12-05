@@ -5,6 +5,7 @@ import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 // @ts-expect-error: no declaration file
 import jsdoc from 'eslint-plugin-jsdoc';
+import sonarjs from 'eslint-plugin-sonarjs';
 
 /** @type {import('eslint').Linter.FlatConfig} */
 const globalConfig = {
@@ -71,6 +72,14 @@ const jsdocConfig = {
 };
 
 /** @type {import('eslint').Linter.FlatConfig} */
+const sonarConfig = {
+	plugins: {
+		sonarjs,
+	},
+	rules: sonarjs.configs.recommended.rules,
+};
+
+/** @type {import('eslint').Linter.FlatConfig} */
 const mainRulesConfig = {
 	rules: {
 		'no-multiple-empty-lines': [
@@ -114,6 +123,7 @@ const config = [
 	importConfig,
 	jsdocConfig,
 	mainRulesConfig,
+	sonarConfig,
 	...overridesConfigs,
 ];
 
