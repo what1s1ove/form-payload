@@ -6,7 +6,7 @@ const getInputFileValue = (inputNode) => {
 	const inputFiles = inputNode.files ?? [];
 
 	if (inputNode.multiple) {
-		return Array.from(inputFiles);
+		return [...inputFiles];
 	}
 	const [file] = inputFiles;
 

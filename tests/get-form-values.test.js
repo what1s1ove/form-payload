@@ -1,5 +1,6 @@
-import { describe, beforeEach, test, expect } from '@jest/globals';
+import { beforeEach, describe, expect, test } from '@jest/globals';
 import { screen } from '@testing-library/dom';
+
 import { BANNED_CONTROL_TYPES } from '../src/common/constants/constants.js';
 import { ControlType, ElementName } from '../src/common/enums/enums.js';
 import { getFormValues } from '../src/index.js';
@@ -13,8 +14,8 @@ describe('getFormValues should work correctly', () => {
 	test('should skip banned types', () => {
 		const bannedElements = BANNED_CONTROL_TYPES.map((type) => {
 			return createElement(ElementName.INPUT, {
-				type: type,
 				name: type,
+				type: type,
 			});
 		});
 
@@ -45,15 +46,15 @@ describe('getFormValues should work correctly', () => {
 
 	test('should return the correct object with values', () => {
 		const FormPayloadKey = /** @type {const} */ ({
-			NAME: 'name',
-			FRIENDS_COUNT: 'friendsCount',
 			BIRTHDAY: 'birthday',
+			FRIENDS_COUNT: 'friendsCount',
+			NAME: 'name',
 		});
 
 		const formPayload = {
-			[FormPayloadKey.NAME]: 'Brad',
-			[FormPayloadKey.FRIENDS_COUNT]: 3,
 			[FormPayloadKey.BIRTHDAY]: new Date('1992-06-13'),
+			[FormPayloadKey.FRIENDS_COUNT]: 3,
+			[FormPayloadKey.NAME]: 'Brad',
 		};
 
 		document.body.append(
@@ -85,20 +86,20 @@ describe('getFormValues should work correctly', () => {
 
 	test('should return the correct nested object with values', () => {
 		const FormPayloadKey = /** @type {const} */ ({
-			NAME: 'name',
-			FRIENDS_COUNT: 'friendsCount',
 			BIRTHDAY: 'birthday',
+			FRIENDS_COUNT: 'friendsCount',
 			MAIN_FRIEND: 'mainFriend',
 			MAIN_FRIEND_NAME: 'friendName',
+			NAME: 'name',
 		});
 
 		const formPayload = {
-			[FormPayloadKey.NAME]: 'David',
-			[FormPayloadKey.FRIENDS_COUNT]: 2,
 			[FormPayloadKey.BIRTHDAY]: new Date('1994-06-13'),
+			[FormPayloadKey.FRIENDS_COUNT]: 2,
 			[FormPayloadKey.MAIN_FRIEND]: {
 				[FormPayloadKey.MAIN_FRIEND_NAME]: 'Jason',
 			},
+			[FormPayloadKey.NAME]: 'David',
 		};
 
 		document.body.append(

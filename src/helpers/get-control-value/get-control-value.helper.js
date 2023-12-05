@@ -3,8 +3,8 @@ import { FormPayloadError } from '../../exceptions/exceptions.js';
 import {
 	checkIsReferToAnotherNode,
 	getAllowedElements,
-	getMultiSelectValues,
 	getInputFileValue,
+	getMultiSelectValues,
 } from './helpers/helpers.js';
 
 /** @typedef {import('../../common/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
@@ -18,21 +18,25 @@ import {
 const getElementsValues = (controlElements) => {
 	const allowedElements = getAllowedElements(controlElements);
 
-	return allowedElements.reduce((acc, element) => {
+	let elementsValues = /** @type {T} */ ({});
+
+	for (const element of allowedElements) {
 		const isReferToAnotherNode = checkIsReferToAnotherNode(
 			element,
 			...allowedElements,
 		);
 
 		if (isReferToAnotherNode) {
-			return acc;
+			continue;
 		}
 
-		return {
-			...acc,
+		elementsValues = {
+			...elementsValues,
 			[element.name]: getControlValue(element),
 		};
-	}, /** @type {T} */ ({}));
+	}
+
+	return elementsValues;
 };
 
 /**
@@ -111,9 +115,9 @@ const getControlValue = (controlNode) => {
 			);
 
 			return getElementsValues(
-				/** @type {HTMLFormControlElement[]} */ (
-					Array.from(specifiedControlNode.elements)
-				),
+				/** @type {HTMLFormControlElement[]} */ ([
+					...specifiedControlNode.elements,
+				]),
 			);
 		}
 	}
@@ -123,4 +127,4 @@ const getControlValue = (controlNode) => {
 	});
 };
 
-export { getElementsValues, getControlValue };
+export { getControlValue, getElementsValues };

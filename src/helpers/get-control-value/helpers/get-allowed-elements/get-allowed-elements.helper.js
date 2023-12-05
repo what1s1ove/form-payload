@@ -6,7 +6,7 @@ import {
 /** @typedef {import('../../../../common/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 /** @typedef {import('../../../../common/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
-const checkControlFnMap = /** @type {const} */ ({
+const checkControlFunctionMap = /** @type {const} */ ({
 	/**
 	 * @param {HTMLFormControlElement} element
 	 * @returns {boolean}
@@ -19,9 +19,9 @@ const checkControlFnMap = /** @type {const} */ ({
 	 * @returns {boolean}
 	 */
 	checkIsAllowedControl(element) {
-		const isBannedType = BANNED_CONTROL_TYPES.some((type) => {
-			return type === element.type;
-		});
+		const isBannedType = /** @type {readonly string[]} */ (
+			BANNED_CONTROL_TYPES
+		).includes(element.type);
 
 		return !isBannedType;
 	},
@@ -51,9 +51,11 @@ const getAllowedElements = (elements) => {
 		 * 	element: HTMLFormControlElement,
 		 * ) => element is HTMLFormOperationalControlElement}
 		 */ (element) => {
-			return Object.values(checkControlFnMap).every((checkFunction) => {
-				return checkFunction(element);
-			});
+			return Object.values(checkControlFunctionMap).every(
+				(checkFunction) => {
+					return checkFunction(element);
+				},
+			);
 		},
 	);
 };

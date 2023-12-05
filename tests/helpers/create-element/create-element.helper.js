@@ -2,18 +2,20 @@
 
 /**
  * @param {string} tagName
- * @param {Partial<HTMLElement | HTMLOptionElement | HTMLInputElement>} props
+ * @param {Partial<HTMLElement | HTMLOptionElement | HTMLInputElement>} properties
  * @param {...(HTMLElement | string)} children
  * @returns {HTMLElement}
  */
-const createElement = (tagName, props, ...children) => {
+const createElement = (tagName, properties, ...children) => {
 	const element = document.createElement(tagName);
 
-	if (props) {
-		Object.assign(element, props);
+	if (properties) {
+		Object.assign(element, properties);
 	}
 
-	children.forEach((child) => element.append(child));
+	for (const child of children) {
+		element.append(child);
+	}
 
 	return element;
 };

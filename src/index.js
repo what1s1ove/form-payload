@@ -1,6 +1,4 @@
-import { getElementsValues, getControlValue } from './helpers/helpers.js';
-import { FormPayloadError } from './exceptions/exceptions.js';
-import { ControlType } from './common/enums/enums.js';
+import { getElementsValues } from './helpers/helpers.js';
 
 /** @typedef {import('./common/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 
@@ -11,8 +9,11 @@ import { ControlType } from './common/enums/enums.js';
  */
 const getFormValues = (formNode) => {
 	return getElementsValues(
-		/** @type {HTMLFormControlElement[]} */ (Array.from(formNode.elements)),
+		/** @type {HTMLFormControlElement[]} */ ([...formNode.elements]),
 	);
 };
 
-export { ControlType, FormPayloadError, getControlValue, getFormValues };
+export { getFormValues };
+export { ControlType } from './common/enums/enums.js';
+export { FormPayloadError } from './exceptions/exceptions.js';
+export { getControlValue } from './helpers/helpers.js';

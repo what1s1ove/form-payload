@@ -1,5 +1,6 @@
-import { describe, beforeEach, test, expect } from '@jest/globals';
+import { beforeEach, describe, expect, test } from '@jest/globals';
 import { fireEvent, screen, waitFor } from '@testing-library/dom';
+
 import { ControlType, ElementName } from '../src/common/enums/enums.js';
 import { FormPayloadError, getControlValue } from '../src/index.js';
 import {
@@ -92,8 +93,8 @@ describe('getFormValues should work correctly', () => {
 				createLabelElement(
 					INPUT_FILE_LABEL,
 					createElement(ElementName.INPUT, {
-						type: ControlType.FILE,
 						multiple: true,
+						type: ControlType.FILE,
 					}),
 				),
 			);
@@ -128,8 +129,8 @@ describe('getFormValues should work correctly', () => {
 		const SELECT_LABEL = 'Colors';
 
 		const Color = {
-			RED: 'red',
 			BLUE: 'blue',
+			RED: 'red',
 			YELLOW: 'yellow',
 		};
 
@@ -158,7 +159,7 @@ describe('getFormValues should work correctly', () => {
 		});
 
 		test('should get values from multi-select correctly', () => {
-			const selectedValues = [Color.RED, Color.BLUE];
+			const selectedValues = [Color.BLUE, Color.RED];
 			const selectOptions = createOptionsElements(
 				options,
 				...selectedValues,

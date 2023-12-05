@@ -1,13 +1,13 @@
 /** @type {import('prettier').Config} */
 const config = {
+	arrowParens: 'always',
+	bracketSpacing: true,
+	plugins: ['prettier-plugin-jsdoc'],
 	printWidth: 80,
+	quoteProps: 'as-needed',
 	semi: true,
 	singleQuote: true,
-	quoteProps: 'as-needed',
 	trailingComma: 'all',
-	bracketSpacing: true,
-	arrowParens: 'always',
-	plugins: ['prettier-plugin-jsdoc'],
 };
 
 export default config;

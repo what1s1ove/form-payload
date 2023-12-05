@@ -14,8 +14,8 @@ const createOptionsElements = (options, ...selectedOptions) => {
 			return createElement(
 				ElementName.OPTION,
 				{
-					value: opt,
 					selected: isSelected,
+					value: opt,
 				},
 				opt,
 			);
