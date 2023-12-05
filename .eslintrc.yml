@@ -1,26 +1,13 @@
 env:
-  es2021: true
   browser: true
-  jest: true
 
 parserOptions:
-  ecmaVersion: 2021
+  ecmaVersion: 2022
   sourceType: module
-  project: tsconfig.json
 
 extends:
   - eslint:recommended
-  - plugin:@typescript-eslint/recommended
-
-plugins:
-  - jest-dom
-
-settings:
-  import/resolver:
-    alias:
-      extensions: ['.ts']
-      map:
-        - ['~', './src']
+  - plugin:jsdoc/recommended-typescript-flavor-error
 
 ignorePatterns:
   - build
@@ -35,25 +22,20 @@ rules:
   arrow-parens:
     - error
     - always
-  '@typescript-eslint/explicit-function-return-type':
+  jsdoc/require-jsdoc:
     - error
-  '@typescript-eslint/no-explicit-any':
-    - error
-  '@typescript-eslint/comma-dangle':
-    - error
-    - always-multiline
-  '@typescript-eslint/object-curly-spacing':
-    - error
-    - always
-  '@typescript-eslint/quotes':
-    - error
-    - single
-  '@typescript-eslint/semi':
-    - error
-    - always
-  '@typescript-eslint/no-unused-vars':
-    - error
-    - vars: all
-      args: after-used
-      argsIgnorePattern: ^_
-      caughtErrors: all
+    - checkConstructors: false
+      checkGetters: true
+      checkSetters: true
+      contexts:
+        - ArrowFunctionExpression
+        - ClassProperty
+        - FunctionDeclaration
+        - FunctionExpression
+        - MethodDefinition
+  jsdoc/valid-types:
+    - off
+  jsdoc/require-returns-description:
+    - off
+  jsdoc/require-param-description:
+    - off

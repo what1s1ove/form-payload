@@ -1,0 +1,5 @@
+const BANNED_FORM_OPERATIONAL_CONTROL_ELEMENTS = /** @type {const} */ ([
+	HTMLObjectElement,
+]);
+
+export { BANNED_FORM_OPERATIONAL_CONTROL_ELEMENTS };

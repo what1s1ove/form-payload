@@ -1,31 +1,18 @@
 {
-	"include": ["src"],
+	"include": ["**/*.js"],
 	"exclude": ["node_modules"],
 	"compilerOptions": {
-		"module": "commonjs",
-		"outDir": "build",
-		"baseUrl": ".",
-		"paths": {
-			"~/*": ["src/*"]
-		},
-		"lib": ["es2020", "DOM"],
-		"target": "ES6",
-		"declaration": true,
-		"isolatedModules": true,
+		"skipLibCheck": true,
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"esModuleInterop": true,
+		"moduleResolution": "Bundler",
+		"target": "ESNext",
+		"module": "ESNext",
 		"allowJs": true,
-		"resolveJsonModule": true,
-		"alwaysStrict": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictPropertyInitialization": true,
-		"noImplicitThis": true,
-		"strictBindCallApply": true,
-		"noPropertyAccessFromIndexSignature": true,
+		"checkJs": true,
+		"strict": true,
 		"noUncheckedIndexedAccess": true,
-		"noImplicitUseStrict": false,
-		"noStrictGenericChecks": false,
-		"suppressExcessPropertyErrors": false,
-		"suppressImplicitAnyIndexErrors": false
+		"exactOptionalPropertyTypes": true,
+		"noPropertyAccessFromIndexSignature": true
 	}
 }
