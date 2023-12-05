@@ -126,6 +126,21 @@ const mainRulesConfig = {
 				max: 1,
 			},
 		],
+		'no-restricted-syntax': [
+			'error',
+			{
+				message: 'Switch cases without blocks are forbidden.',
+				selector: 'SwitchCase > *.consequent[type!="BlockStatement"]',
+			},
+			{
+				message: 'Export/Import all (*) is forbidden.',
+				selector: 'ExportAllDeclaration,ImportAllDeclaration',
+			},
+			{
+				message: 'Exports should be at the end of the file.',
+				selector: 'ExportNamedDeclaration[declaration!=null]',
+			},
+		],
 		'prefer-const': ['error'],
 		quotes: ['error', 'single'],
 	},

@@ -159,7 +159,7 @@ describe('getFormValues should work correctly', () => {
 		});
 
 		test('should get values from multi-select correctly', () => {
-			const selectedValues = [Color.RED, Color.BLUE];
+			const selectedValues = [Color.BLUE, Color.RED];
 			const selectOptions = createOptionsElements(
 				options,
 				...selectedValues,
