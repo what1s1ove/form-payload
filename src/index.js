@@ -14,6 +14,6 @@ const getFormValues = (formNode) => {
 };
 
 export { getFormValues };
-export { getControlValue } from './helpers/helpers.js';
-export { FormPayloadError } from './exceptions/exceptions.js';
 export { ControlType } from './common/enums/enums.js';
+export { FormPayloadError } from './exceptions/exceptions.js';
+export { getControlValue } from './helpers/helpers.js';

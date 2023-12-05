@@ -3,8 +3,8 @@ import { FormPayloadError } from '../../exceptions/exceptions.js';
 import {
 	checkIsReferToAnotherNode,
 	getAllowedElements,
-	getMultiSelectValues,
 	getInputFileValue,
+	getMultiSelectValues,
 } from './helpers/helpers.js';
 
 /** @typedef {import('../../common/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
@@ -127,4 +127,4 @@ const getControlValue = (controlNode) => {
 	});
 };
 
-export { getElementsValues, getControlValue };
+export { getControlValue, getElementsValues };

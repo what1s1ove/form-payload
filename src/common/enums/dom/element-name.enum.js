@@ -1,10 +1,10 @@
 const ElementName = /** @type {const} */ ({
-	FORM: 'form',
-	LABEL: 'label',
-	INPUT: 'input',
-	SELECT: 'select',
-	OPTION: 'option',
 	FIELDSET: 'fieldset',
+	FORM: 'form',
+	INPUT: 'input',
+	LABEL: 'label',
+	OPTION: 'option',
+	SELECT: 'select',
 });
 
 export { ElementName };

@@ -1,13 +1,15 @@
-import globals from 'globals';
 // @ts-expect-error: no declaration file
 import js from '@eslint/js';
 // @ts-expect-error: no declaration file
 import importPlugin from 'eslint-plugin-import';
 // @ts-expect-error: no declaration file
 import jsdoc from 'eslint-plugin-jsdoc';
+// @ts-expect-error: no declaration file
+import perfectionist from 'eslint-plugin-perfectionist';
 import sonarjs from 'eslint-plugin-sonarjs';
 // @ts-expect-error: no declaration file
 import unicorn from 'eslint-plugin-unicorn';
+import globals from 'globals';
 
 /** @type {import('eslint').Linter.FlatConfig} */
 const globalConfig = {
@@ -93,18 +95,26 @@ const unicornConfig = {
 };
 
 /** @type {import('eslint').Linter.FlatConfig} */
+const perfectionistConfig = {
+	plugins: {
+		perfectionist,
+	},
+	rules: perfectionist.configs['recommended-natural'].rules,
+};
+
+/** @type {import('eslint').Linter.FlatConfig} */
 const mainRulesConfig = {
 	rules: {
+		'arrow-parens': ['error', 'always'],
+		curly: ['error', 'all'],
 		'no-multiple-empty-lines': [
 			'error',
 			{
 				max: 1,
 			},
 		],
-		curly: ['error', 'all'],
-		quotes: ['error', 'single'],
-		'arrow-parens': ['error', 'always'],
 		'prefer-const': ['error'],
+		quotes: ['error', 'single'],
 	},
 };
 
@@ -138,6 +148,7 @@ const config = [
 	mainRulesConfig,
 	sonarConfig,
 	unicornConfig,
+	perfectionistConfig,
 	...overridesConfigs,
 ];
 
