@@ -3,7 +3,7 @@ import { RuleConfigSeverity } from '@commitlint/types';
 const PROJECT_PREFIXES = /** @type {const} */ ([`fp`, `release`]);
 
 /** @type {import('@commitlint/types').UserConfig} */
-let configuration = {
+const configuration = {
 	extends: [`@commitlint/config-conventional`],
 	parserPreset: {
 		parserOpts: {
