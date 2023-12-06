@@ -1,4 +1,4 @@
-/** @typedef {import('../../../../common/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
+/** @typedef {import('../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 /**
  * @template {HTMLFormOperationalControlElement} T

@@ -1,10 +1,11 @@
 import { beforeEach, describe, expect, test } from '@jest/globals';
 import { screen } from '@testing-library/dom';
 
-import { BANNED_CONTROL_TYPES } from '../src/common/constants/constants.js';
-import { ControlType, ElementName } from '../src/common/enums/enums.js';
-import { getFormValues } from '../src/index.js';
-import { createElement, createFormElement } from './helpers/helpers.js';
+import { getFormPayload } from '../src/index.js';
+import { BANNED_CONTROL_TYPES } from '../src/libs/constants/constants.js';
+import { ControlType } from '../src/libs/enums/enums.js';
+import { ElementName } from './libs/enums/enums.js';
+import { createElement, createFormElement } from './libs/helpers/helpers.js';
 
 describe('getFormValues should work correctly', () => {
 	beforeEach(() => {
@@ -25,7 +26,7 @@ describe('getFormValues should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormValues(formNode)).toEqual({});
+		expect(getFormPayload(formNode)).toEqual({});
 	});
 
 	test('should skip controls without name', () => {
@@ -41,7 +42,7 @@ describe('getFormValues should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormValues(formNode)).toEqual({});
+		expect(getFormPayload(formNode)).toEqual({});
 	});
 
 	test('should return the correct object with values', () => {
@@ -81,7 +82,7 @@ describe('getFormValues should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormValues(formNode)).toEqual(formPayload);
+		expect(getFormPayload(formNode)).toEqual(formPayload);
 	});
 
 	test('should return the correct nested object with values', () => {
@@ -137,6 +138,6 @@ describe('getFormValues should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormValues(formNode)).toEqual(formPayload);
+		expect(getFormPayload(formNode)).toEqual(formPayload);
 	});
 });

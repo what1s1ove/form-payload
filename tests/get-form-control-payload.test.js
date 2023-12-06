@@ -1,13 +1,14 @@
 import { beforeEach, describe, expect, test } from '@jest/globals';
 import { fireEvent, screen, waitFor } from '@testing-library/dom';
 
-import { ControlType, ElementName } from '../src/common/enums/enums.js';
-import { FormPayloadError, getControlValue } from '../src/index.js';
+import { FormPayloadError, getFormControlPayload } from '../src/index.js';
+import { ControlType } from '../src/libs/enums/enums.js';
+import { ElementName } from './libs/enums/enums.js';
 import {
 	createElement,
 	createLabelElement,
 	createOptionsElements,
-} from './helpers/helpers.js';
+} from './libs/helpers/helpers.js';
 
 describe('getFormValues should work correctly', () => {
 	beforeEach(() => {
@@ -42,7 +43,7 @@ describe('getFormValues should work correctly', () => {
 					/** @type {HTMLInputElement | HTMLOutputElement} */ (
 						screen.getByDisplayValue(/** @type {string} */ (value))
 					);
-				const controlValue = getControlValue(control);
+				const controlValue = getFormControlPayload(control);
 
 				expect(typeof controlValue).toBe('string');
 
@@ -70,7 +71,7 @@ describe('getFormValues should work correctly', () => {
 				screen.getByLabelText(INPUT_FILE_LABEL)
 			);
 
-			expect(getControlValue(control)).toBeNull();
+			expect(getFormControlPayload(control)).toBeNull();
 
 			await waitFor(() =>
 				fireEvent.change(control, {
@@ -80,7 +81,7 @@ describe('getFormValues should work correctly', () => {
 				}),
 			);
 
-			expect(getControlValue(control)).toBeInstanceOf(File);
+			expect(getFormControlPayload(control)).toBeInstanceOf(File);
 		});
 
 		test('should get value from multiple input type file correctly', async () => {
@@ -103,7 +104,7 @@ describe('getFormValues should work correctly', () => {
 				screen.getByLabelText(INPUT_FILE_LABEL)
 			);
 
-			expect(Array.isArray(getControlValue(control))).toBe(true);
+			expect(Array.isArray(getFormControlPayload(control))).toBe(true);
 
 			await waitFor(() =>
 				fireEvent.change(control, {
@@ -114,7 +115,7 @@ describe('getFormValues should work correctly', () => {
 			);
 
 			const controlValue = /** @type {File[]} */ (
-				getControlValue(control)
+				getFormControlPayload(control)
 			);
 
 			expect(controlValue.every((file) => file instanceof File)).toBe(
@@ -151,7 +152,7 @@ describe('getFormValues should work correctly', () => {
 				screen.getByLabelText(SELECT_LABEL)
 			);
 
-			const controlValue = getControlValue(control);
+			const controlValue = getFormControlPayload(control);
 
 			expect(typeof controlValue).toBe('string');
 
@@ -182,7 +183,7 @@ describe('getFormValues should work correctly', () => {
 				screen.getByLabelText(SELECT_LABEL)
 			);
 
-			const controlValue = getControlValue(control);
+			const controlValue = getFormControlPayload(control);
 
 			expect(Array.isArray(controlValue)).toBe(true);
 
@@ -198,7 +199,9 @@ describe('getFormValues should work correctly', () => {
 				type: 'unknown-type',
 			});
 
-			expect(() => getControlValue(control)).toThrow(FormPayloadError);
+			expect(() => getFormControlPayload(control)).toThrow(
+				FormPayloadError,
+			);
 		});
 	});
 });

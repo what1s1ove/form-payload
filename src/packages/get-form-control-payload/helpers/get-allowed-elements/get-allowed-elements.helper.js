@@ -1,10 +1,10 @@
 import {
 	BANNED_CONTROL_TYPES,
 	BANNED_FORM_OPERATIONAL_CONTROL_ELEMENTS,
-} from '../../../../common/constants/constants.js';
+} from '../../../../libs/constants/constants.js';
 
-/** @typedef {import('../../../../common/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
-/** @typedef {import('../../../../common/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
+/** @typedef {import('../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
+/** @typedef {import('../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 const checkControlFunctionMap = /** @type {const} */ ({
 	/**

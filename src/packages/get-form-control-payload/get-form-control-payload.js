@@ -1,5 +1,5 @@
-import { ControlType } from '../../common/enums/enums.js';
-import { FormPayloadError } from '../../exceptions/exceptions.js';
+import { ControlType } from '../../libs/enums/enums.js';
+import { FormPayloadError } from '../../libs/exceptions/exceptions.js';
 import {
 	checkIsReferToAnotherNode,
 	getAllowedElements,
@@ -7,15 +7,15 @@ import {
 	getMultiSelectValues,
 } from './helpers/helpers.js';
 
-/** @typedef {import('../../common/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
-/** @typedef {import('../../common/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
+/** @typedef {import('../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
+/** @typedef {import('../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 /**
  * @template {Record<string, unknown>} T
  * @param {HTMLFormControlElement[]} controlElements
  * @returns {T}
  */
-const getElementsValues = (controlElements) => {
+const getFormControlsPayload = (controlElements) => {
 	const allowedElements = getAllowedElements(controlElements);
 
 	let elementsValues = /** @type {T} */ ({});
@@ -32,7 +32,7 @@ const getElementsValues = (controlElements) => {
 
 		elementsValues = {
 			...elementsValues,
-			[element.name]: getControlValue(element),
+			[element.name]: getFormControlPayload(element),
 		};
 	}
 
@@ -44,7 +44,7 @@ const getElementsValues = (controlElements) => {
  * @returns {unknown}
  * @throws {FormPayloadError}
  */
-const getControlValue = (controlNode) => {
+const getFormControlPayload = (controlNode) => {
 	switch (controlNode.type) {
 		case ControlType.COLOR:
 		case ControlType.EMAIL:
@@ -114,7 +114,7 @@ const getControlValue = (controlNode) => {
 				controlNode
 			);
 
-			return getElementsValues(
+			return getFormControlsPayload(
 				/** @type {HTMLFormControlElement[]} */ ([
 					...specifiedControlNode.elements,
 				]),
@@ -127,4 +127,4 @@ const getControlValue = (controlNode) => {
 	});
 };
 
-export { getControlValue, getElementsValues };
+export { getFormControlPayload, getFormControlsPayload };

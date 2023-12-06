@@ -1,5 +1,5 @@
-import { ElementName } from '../../../src/common/enums/enums.js';
-import { createElement } from '../create-element/create-element.helper.js';
+import { ElementName } from '../../libs/enums/enums.js';
+import { createElement } from './create-element.helper.js';
 
 /**
  * @param {string[]} options
