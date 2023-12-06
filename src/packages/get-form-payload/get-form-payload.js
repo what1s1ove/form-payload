@@ -8,9 +8,11 @@ import { getFormControlsPayload } from '../get-form-control-payload/get-form-con
  * @returns {T}
  */
 const getFormPayload = (formNode) => {
-	return getFormControlsPayload(
-		/** @type {HTMLFormControlElement[]} */ ([...formNode.elements]),
-	);
+	const elements = /** @type {HTMLFormControlElement[]} */ ([
+		...formNode.elements,
+	]);
+
+	return getFormControlsPayload(...elements);
 };
 
 export { getFormPayload };

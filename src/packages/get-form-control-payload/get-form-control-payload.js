@@ -3,7 +3,11 @@ import { FormPayloadError } from '../../libs/exceptions/exceptions.js';
 import {
 	checkIsReferToAnotherNode,
 	getAllowedElements,
+	getCheckboxValue,
+	getFormControlValue,
+	getInputDateValue,
 	getInputFileValue,
+	getInputNumericValue,
 	getMultiSelectValues,
 } from './helpers/helpers.js';
 
@@ -12,10 +16,10 @@ import {
 
 /**
  * @template {Record<string, unknown>} T
- * @param {HTMLFormControlElement[]} controlElements
+ * @param {...HTMLFormControlElement} controlElements
  * @returns {T}
  */
-const getFormControlsPayload = (controlElements) => {
+const getFormControlsPayload = (...controlElements) => {
 	const allowedElements = getAllowedElements(controlElements);
 
 	let elementsValues = /** @type {T} */ ({});
@@ -58,66 +62,52 @@ const getFormControlPayload = (controlNode) => {
 		case ControlType.OUTPUT:
 		case ControlType.TEXTAREA:
 		case ControlType.SELECT_ONE: {
-			/**
-			 * @typedef {HTMLInputElement
-			 * 	| HTMLOutputElement
-			 * 	| HTMLTextAreaElement
-			 * 	| HTMLSelectElement} SpecifiedControlNode
-			 */
-			const specifiedControlNode = /** @type {SpecifiedControlNode} */ (
-				controlNode
+			return getFormControlValue(
+				/**
+				 * @type {HTMLInputElement
+				 * 	| HTMLOutputElement
+				 * 	| HTMLTextAreaElement
+				 * 	| HTMLSelectElement}
+				 */ (controlNode),
 			);
-
-			return specifiedControlNode.value;
 		}
 		case ControlType.DATE:
 		case ControlType.DATETIME_LOCAL:
 		case ControlType.MONTH:
 		case ControlType.TIME:
 		case ControlType.WEEK: {
-			const specifiedControlNode = /** @type {HTMLInputElement} */ (
-				controlNode
+			return getInputDateValue(
+				/** @type {HTMLInputElement} */ (controlNode),
 			);
-
-			return specifiedControlNode.valueAsDate;
 		}
 		case ControlType.NUMBER:
 		case ControlType.RANGE: {
-			const specifiedControlNode = /** @type {HTMLInputElement} */ (
-				controlNode
+			return getInputNumericValue(
+				/** @type {HTMLInputElement} */ (controlNode),
 			);
-			return specifiedControlNode.valueAsNumber;
 		}
 		case ControlType.CHECKBOX: {
-			const specifiedControlNode = /** @type {HTMLInputElement} */ (
-				controlNode
+			return getCheckboxValue(
+				/** @type {HTMLInputElement} */ (controlNode),
 			);
-
-			return specifiedControlNode.checked;
 		}
 		case ControlType.SELECT_MULTIPLE: {
-			const specifiedControlNode = /** @type {HTMLSelectElement} */ (
-				controlNode
+			return getMultiSelectValues(
+				/** @type {HTMLSelectElement} */ (controlNode),
 			);
-
-			return getMultiSelectValues(specifiedControlNode);
 		}
 		case ControlType.FILE: {
-			const specifiedControlNode = /** @type {HTMLInputElement} */ (
-				controlNode
+			return getInputFileValue(
+				/** @type {HTMLInputElement} */ (controlNode),
 			);
-
-			return getInputFileValue(specifiedControlNode);
 		}
 		case ControlType.FIELDSET: {
-			const specifiedControlNode = /** @type {HTMLFieldSetElement} */ (
-				controlNode
-			);
+			const elements = [
+				.../** @type {HTMLFieldSetElement} */ (controlNode).elements,
+			];
 
 			return getFormControlsPayload(
-				/** @type {HTMLFormControlElement[]} */ ([
-					...specifiedControlNode.elements,
-				]),
+				.../** @type {HTMLFormControlElement[]} */ (elements),
 			);
 		}
 	}

@@ -10,7 +10,7 @@ import {
 	createOptionsElements,
 } from './libs/helpers/helpers.js';
 
-describe('getFormValues should work correctly', () => {
+describe('getFormControlPayload should work correctly', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '';
 	});

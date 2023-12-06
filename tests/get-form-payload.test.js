@@ -7,7 +7,7 @@ import { ControlType } from '../src/libs/enums/enums.js';
 import { ElementName } from './libs/enums/enums.js';
 import { createElement, createFormElement } from './libs/helpers/helpers.js';
 
-describe('getFormValues should work correctly', () => {
+describe('getFormPayload should work correctly', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '';
 	});
