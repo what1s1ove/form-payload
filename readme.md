@@ -50,14 +50,14 @@ npm install form-payload
 
 ```js
 // index.js
-import { getFormValues, getControlValue } from 'form-payload';
+import { getFormPayload, getFormControlPayload } from 'form-payload';
 
 const { general: generalFormNode, mailing: mailingFormNode } = document.forms;
 
 generalFormNode.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
-  console.log(getFormValues(generalFormNode));
+  console.log(getFormPayload(generalFormNode));
   // {
   //   name: 'Jon',
   //   birthday: Sat Mar 27 2021 18:06:42 GMT+0200 (Eastern European Standard Time),
@@ -69,7 +69,7 @@ generalFormNode.addEventListener('submit', (evt) => {
 });
 
 mailingFormNode.addEventListener('change', (evt) => {
-  console.log(getControlValue(evt.target));
+  console.log(getFormControlPayload(evt.target));
   // 'example@mail.com'
 });
 ```
@@ -81,13 +81,13 @@ _It doesn't matter which framework you use, you just need to pass the valid [HTM
 ### React
 
 ```jsx
-import { getFormValues, getControlValue, ControlType } from 'form-payload';
+import { getFormPayload, getFormControlPayload, ControlType } from 'form-payload';
 
 const SimpleForm = () => {
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    console.log(getFormValues(evt.target as HTMLFormElement));
+    console.log(getFormPayload(evt.target as HTMLFormElement));
     // {
     //   name: 'Jon',
     //   birthday: Sat Mar 27 2021 18:06:42 GMT+0200 (Eastern European Standard Time),
@@ -95,7 +95,7 @@ const SimpleForm = () => {
   };
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(getControlValue(evt.target));
+    console.log(getFormControlPayload(evt.target));
     // 'example@mail.com'
   };
 
