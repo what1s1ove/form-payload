@@ -154,7 +154,6 @@ const overridesConfigs = [
 			'prettier.config.js',
 			'lint-staged.config.js',
 			'eslint.config.js',
-			'jest.config.js',
 		],
 		rules: {
 			'import/no-default-export': ['off'],
@@ -164,6 +163,12 @@ const overridesConfigs = [
 		files: ['lint-staged.config.js'],
 		rules: {
 			quotes: ['off'],
+		},
+	},
+	{
+		files: ['tests/**/*.test.js'],
+		rules: {
+			'perfectionist/sort-imports': ['off'],
 		},
 	},
 ];
