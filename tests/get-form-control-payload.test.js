@@ -1,4 +1,6 @@
-import { beforeEach, describe, expect, test } from '@jest/globals';
+import { deepEqual, equal, throws } from 'node:assert/strict';
+import { beforeEach, describe, test } from 'node:test';
+
 import { fireEvent, screen, waitFor } from '@testing-library/dom';
 
 import { FormPayloadError, getFormControlPayload } from '../src/index.js';
@@ -16,21 +18,21 @@ describe('getFormControlPayload should work correctly', () => {
 	});
 
 	describe('should work correctly with texts inputs', () => {
-		test.each`
-			type                    | value
-			${ControlType.COLOR}    | ${'#999999'}
-			${ControlType.EMAIL}    | ${'test@mail.com'}
-			${ControlType.HIDDEN}   | ${'metrics'}
-			${ControlType.PASSWORD} | ${'top-secret'}
-			${ControlType.RADIO}    | ${'color-1'}
-			${ControlType.SEARCH}   | ${'apples'}
-			${ControlType.TEL}      | ${'10000000000'}
-			${ControlType.TEXT}     | ${'Name'}
-			${ControlType.URL}      | ${'form-payload.com'}
-			${ControlType.OUTPUT}   | ${'empty'}
-		`(
-			'should get value from input type $type correctly',
-			({ type, value }) => {
+		test('should get value from corresponding input type correctly', () => {
+			const inputs = [
+				[ControlType.COLOR, '#999999'],
+				[ControlType.EMAIL, 'test@mail.com'],
+				[ControlType.HIDDEN, 'metrics'],
+				[ControlType.PASSWORD, 'top-secret'],
+				[ControlType.RADIO, 'color-1'],
+				[ControlType.SEARCH, 'apples'],
+				[ControlType.TEL, '10000000000'],
+				[ControlType.TEXT, 'Name'],
+				[ControlType.URL, 'form-payload.com'],
+				[ControlType.OUTPUT, 'empty'],
+			];
+
+			for (const [type, value] of inputs) {
 				document.body.append(
 					createElement(ElementName.INPUT, {
 						name: /** @type {string} */ (type),
@@ -45,11 +47,11 @@ describe('getFormControlPayload should work correctly', () => {
 					);
 				const controlValue = getFormControlPayload(control);
 
-				expect(typeof controlValue).toBe('string');
+				equal(typeof controlValue, 'string');
 
-				expect(controlValue).toBe(value);
-			},
-		);
+				equal(controlValue, value);
+			}
+		});
 	});
 
 	describe('should work correctly with file input', () => {
@@ -71,7 +73,7 @@ describe('getFormControlPayload should work correctly', () => {
 				screen.getByLabelText(INPUT_FILE_LABEL)
 			);
 
-			expect(getFormControlPayload(control)).toBeNull();
+			equal(getFormControlPayload(control), null);
 
 			await waitFor(() =>
 				fireEvent.change(control, {
@@ -81,7 +83,7 @@ describe('getFormControlPayload should work correctly', () => {
 				}),
 			);
 
-			expect(getFormControlPayload(control)).toBeInstanceOf(File);
+			equal(getFormControlPayload(control) instanceof File, true);
 		});
 
 		test('should get value from multiple input type file correctly', async () => {
@@ -104,7 +106,7 @@ describe('getFormControlPayload should work correctly', () => {
 				screen.getByLabelText(INPUT_FILE_LABEL)
 			);
 
-			expect(Array.isArray(getFormControlPayload(control))).toBe(true);
+			equal(Array.isArray(getFormControlPayload(control)), true);
 
 			await waitFor(() =>
 				fireEvent.change(control, {
@@ -118,11 +120,12 @@ describe('getFormControlPayload should work correctly', () => {
 				getFormControlPayload(control)
 			);
 
-			expect(controlValue.every((file) => file instanceof File)).toBe(
+			equal(
+				controlValue.every((file) => file instanceof File),
 				true,
 			);
 
-			expect(controlValue).toHaveLength(controlValue.length);
+			equal(controlValue.length, controlValue.length);
 		});
 	});
 
@@ -154,9 +157,9 @@ describe('getFormControlPayload should work correctly', () => {
 
 			const controlValue = getFormControlPayload(control);
 
-			expect(typeof controlValue).toBe('string');
+			equal(typeof controlValue, 'string');
 
-			expect(controlValue).toEqual(selectedValue);
+			equal(controlValue, selectedValue);
 		});
 
 		test('should get values from multi-select correctly', () => {
@@ -185,11 +188,14 @@ describe('getFormControlPayload should work correctly', () => {
 
 			const controlValue = getFormControlPayload(control);
 
-			expect(Array.isArray(controlValue)).toBe(true);
+			equal(Array.isArray(controlValue), true);
 
-			expect(controlValue).toHaveLength(selectedValues.length);
+			equal(
+				/** @type {unknown[]} */ (controlValue).length,
+				selectedValues.length,
+			);
 
-			expect(controlValue).toEqual(selectedValues);
+			deepEqual(controlValue, selectedValues);
 		});
 	});
 
@@ -199,9 +205,7 @@ describe('getFormControlPayload should work correctly', () => {
 				type: 'unknown-type',
 			});
 
-			expect(() => getFormControlPayload(control)).toThrow(
-				FormPayloadError,
-			);
+			throws(() => getFormControlPayload(control), FormPayloadError);
 		});
 	});
 });

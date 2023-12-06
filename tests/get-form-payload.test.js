@@ -1,4 +1,6 @@
-import { beforeEach, describe, expect, test } from '@jest/globals';
+import { deepEqual } from 'node:assert/strict';
+import { beforeEach, describe, test } from 'node:test';
+
 import { screen } from '@testing-library/dom';
 
 import { getFormPayload } from '../src/index.js';
@@ -26,7 +28,7 @@ describe('getFormPayload should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormPayload(formNode)).toEqual({});
+		deepEqual(getFormPayload(formNode), {});
 	});
 
 	test('should skip controls without name', () => {
@@ -42,7 +44,7 @@ describe('getFormPayload should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormPayload(formNode)).toEqual({});
+		deepEqual(getFormPayload(formNode), {});
 	});
 
 	test('should return the correct object with values', () => {
@@ -82,7 +84,7 @@ describe('getFormPayload should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormPayload(formNode)).toEqual(formPayload);
+		deepEqual(getFormPayload(formNode), formPayload);
 	});
 
 	test('should return the correct nested object with values', () => {
@@ -138,6 +140,6 @@ describe('getFormPayload should work correctly', () => {
 			screen.queryByRole('form')
 		);
 
-		expect(getFormPayload(formNode)).toEqual(formPayload);
+		deepEqual(getFormPayload(formNode), formPayload);
 	});
 });
