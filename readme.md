@@ -1,8 +1,7 @@
 # form-payload
 
-[![](https://github.com/what1s1ove/form-payload/workflows/Lint/badge.svg)](https://github.com/What1s1ove/form-payload/actions?query=workflow%3ALint)
-[![](https://github.com/what1s1ove/form-payload/workflows/Test/badge.svg)](https://github.com/What1s1ove/form-payload/actions?query=workflow%3ATest)
-[![](https://github.com/what1s1ove/form-payload/workflows/Publish/badge.svg)](https://github.com/What1s1ove/form-payload/actions?query=workflow%3APublish)
+[![Continuous Integration](https://github.com/what1s1ove/whatislove.dev/actions/workflows/ci.yml/badge.svg)](https://github.com/what1s1ove/whatislove.dev/actions/workflows/ci.yml)
+[![Continuous Delivery](https://github.com/what1s1ove/whatislove.dev/actions/workflows/cd.yml/badge.svg)](https://github.com/what1s1ove/whatislove.dev/actions/workflows/cd.yml)
 
 Gets form-payload (or payload for a named form field) - via `form.elements`.
 
