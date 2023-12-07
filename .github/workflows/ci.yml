@@ -33,8 +33,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          npm install
+        run: npm install
 
   lint:
     name: Code Linting
@@ -56,8 +55,7 @@ jobs:
           key: ci-${{ hashFiles('**/package-lock.json') }}
 
       - name: Code Linting
-        run: |
-          npm run ci:lint
+        run: npm run ci:lint
 
   test:
     name: Code Testing
@@ -79,5 +77,4 @@ jobs:
           key: ci-${{ hashFiles('**/package-lock.json') }}
 
       - name: Code Testing
-        run: |
-          npm run ci:test
+        run: npm run ci:test
