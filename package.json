@@ -1,14 +1,7 @@
 {
 	"name": "form-payload",
-	"description": "Gets form-payload via form.elements",
 	"version": "1.0.0",
-	"type": "module",
-	"author": "Vladyslav Zubko <zubko.2007@gmail.com>",
-	"homepage": "https://github.com/what1s1ove/form-payload",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/what1s1ove/form-payload.git"
-	},
+	"description": "Gets form-payload via form.elements",
 	"keywords": [
 		"form",
 		"form-data",
@@ -18,22 +11,33 @@
 		"input-value",
 		"input-payload"
 	],
+	"author": "Vladyslav Zubko <hello@whatislove.dev> (https://whatislove.dev/)",
+	"homepage": "https://github.com/what1s1ove/form-payload",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/what1s1ove/form-payload.git"
+	},
+	"license": "MIT",
+	"type": "module",
+	"main": "./src/index.js",
 	"engines": {
 		"node": ">=10"
 	},
 	"scripts": {
 		"postinstall": "npx simple-git-hooks",
-		"format": "prettier --write \"**/*.{json,md,yml,js}\"",
-		"lint:fs": "ls-lint",
-		"lint:editor": "editorconfig-checker",
-		"lint:format": "prettier --check \"**/*.{json,md,yml,js}\"",
-		"lint:js": "eslint \"**/*.js\"",
-		"lint:type": "tsc --noEmit",
-		"lint": "npm run lint:fs && npm run lint:editor && npm run lint:format && npm run lint:js && npm run lint:type",
-		"test": "node --import jsdom-global/register.js --test",
-		"build:ts": "tsc && tscpaths -p tsconfig.json -s ./src -o ./build",
-		"build:copy": "cp readme.md package.json build",
-		"build": "npm run build:ts && npm run build:copy"
+		"ci:format": "prettier --write \"**/*.{json,md,yml,js}\"",
+		"ci:lint:fs": "ls-lint",
+		"ci:lint:editor": "editorconfig-checker",
+		"ci:lint:format": "prettier --check \"**/*.{json,md,yml,js}\"",
+		"ci:lint:js": "eslint \"**/*.js\"",
+		"ci:lint:type": "tsc --noEmit",
+		"ci:lint": "npm run ci:lint:fs && npm run ci:lint:editor && npm run ci:lint:format && npm run ci:lint:js && npm run ci:lint:type",
+		"ci:test": "node --import jsdom-global/register.js --test",
+		"build:clean": "rm -rf dist",
+		"build:dist": "tsc -p tsconfig.build.json",
+		"build:cp": "cp -r src readme.md package.json LICENSE dist",
+		"build:pkg": "cd dist && npm pkg set types=\"./src/index.d.ts\"",
+		"build": "npm run ci:build:clean && npm run ci:build:dist && npm run ci:build:pkg && npm run ci:build:cp"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "18.4.3",
@@ -62,5 +66,5 @@
 		"pre-commit": "npx lint-staged",
 		"commit-msg": "npx commitlint --edit $1"
 	},
-	"license": "ISC"
+	"types": "./src/index.d.ts"
 }
