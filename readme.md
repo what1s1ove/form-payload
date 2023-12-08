@@ -17,7 +17,7 @@ npm install form-payload
 - [Advanced (TypeScript + Validation)](https://stackblitz.com/edit/form-payload-advanced?file=index.ts,get-form-payload.ts)
 - [Framework (React + TypeScript)](https://stackblitz.com/edit/form-payload-framework?file=src%2FApp.tsx)
 
-PS. _The library works perfectly with any framework. It doesn't matter which framework is used; Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement). The same applies to validations and any other libraries. Just create your own wrappers on top of the functions exported by **form-payload** library._
+PS. _The library works perfectly with any framework. Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement). The same applies to validations and any other libraries. Just create your own wrappers on top of the functions exported by **form-payload** library._
 
 ## Usage
 
@@ -83,7 +83,7 @@ PS. _The library works perfectly with any framework. It doesn't matter which fra
 | [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="month"`               | ✅       | [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) |
 | [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="week"`                | ✅       | [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) |
 | [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="file"`                | ✅       | [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) or `null`                       |
-| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="file"` and `multiple` | ✅       | `Array<`[`File`](https://developer.mozilla.org/en-US/docs/Web/API/File)`>`                      |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="file"` and `multiple` | ✅       | <code>Array<[File](https://developer.mozilla.org/en-US/docs/Web/API/File)></code>               |
 | [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="button"`              | ❌       | –                                                                                               |
 | [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="submit"`              | ❌       | –                                                                                               |
 | [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="reset"`               | ❌       | –                                                                                               |
