@@ -11,6 +11,14 @@ Gets _proper_ form payload – via `form.elements`.
 npm install form-payload
 ```
 
+## Demo
+
+- [Basic (JavaScript)](https://stackblitz.com/edit/form-payload-basic?file=index.js)
+- [Advanced (TypeScript + Validation)](https://stackblitz.com/edit/form-payload-advanced?file=index.ts,get-form-payload.ts)
+- [Framework (React + TypeScript)](https://stackblitz.com/edit/form-payload-framework?file=src%2FApp.tsx)
+
+PS. _The library works perfectly with any framework. It doesn't matter which framework is used; Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement). The same applies to validations and any other libraries. Just create your own wrappers on top of the functions exported by form-payload library._
+
 ## Usage
 
 ```html
@@ -29,7 +37,7 @@ npm install form-payload
 <form name="mailing">
   <label>
     Mailing
-    <input type="email" name="mail" name="example@mail.com" />
+    <input type="email" name="mail" value="example@mail.com" />
   </label>
 </form>
 
@@ -46,14 +54,12 @@ npm install form-payload
     // => { name: 'John', birthday: 'Sat Mar 27 2021 02:00:00 GMT+0200' }
   });
 
-  mailingFormNode.addEventListener('change', (evt) => {
+  mailingFormNode.addEventListener('input', (evt) => {
     const formControlPayload = getFormControlPayload(evt.target);
     // => 'example@mail.com'
   });
 </script>
 ```
-
-PS. _The library works perfectly with any framework. It doesn't matter which framework is used; Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement)._
 
 ## Value Correspondence Table
 
