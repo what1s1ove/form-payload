@@ -1,31 +1,40 @@
 const ControlType = /** @type {const} */ ({
-	BUTTON: 'button',
-	CHECKBOX: 'checkbox',
-	COLOR: 'color',
-	DATE: 'date',
-	DATETIME_LOCAL: 'datetime-local',
-	EMAIL: 'email',
-	FIELDSET: 'fieldset',
-	FILE: 'file',
-	HIDDEN: 'hidden',
-	IMAGE: 'image',
-	MONTH: 'month',
-	NUMBER: 'number',
-	OUTPUT: 'output',
+	TEXT: 'text',
 	PASSWORD: 'password',
-	RADIO: 'radio',
-	RANGE: 'range',
-	RESET: 'reset',
+	EMAIL: 'email',
 	SEARCH: 'search',
+	URL: 'url',
+	TEL: 'tel',
+	COLOR: 'color',
+	RADIO: 'radio',
+	HIDDEN: 'hidden',
+
+	NUMBER: 'number',
+	RANGE: 'range',
+
+	CHECKBOX: 'checkbox',
+
+	DATE: 'date',
+	TIME: 'time',
+	DATETIME_LOCAL: 'datetime-local',
+	MONTH: 'month',
+	WEEK: 'week',
+
+	FILE: 'file',
+
+	BUTTON: 'button',
+	SUBMIT: 'submit',
+	RESET: 'reset',
+	IMAGE: 'image',
+
+	TEXTAREA: 'textarea',
+
 	SELECT_MULTIPLE: 'select-multiple',
 	SELECT_ONE: 'select-one',
-	SUBMIT: 'submit',
-	TEL: 'tel',
-	TEXT: 'text',
-	TEXTAREA: 'textarea',
-	TIME: 'time',
-	URL: 'url',
-	WEEK: 'week',
+
+	OUTPUT: 'output',
+
+	FIELDSET: 'fieldset',
 });
 
 export { ControlType };

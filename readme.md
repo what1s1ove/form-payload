@@ -3,7 +3,7 @@
 [![Continuous Integration](https://github.com/what1s1ove/whatislove.dev/actions/workflows/ci.yml/badge.svg)](https://github.com/what1s1ove/whatislove.dev/actions/workflows/ci.yml)
 [![Continuous Delivery](https://github.com/what1s1ove/whatislove.dev/actions/workflows/cd.yml/badge.svg)](https://github.com/what1s1ove/whatislove.dev/actions/workflows/cd.yml)
 
-Gets form-payload (or payload for a named form field) - via `form.elements`.
+Gets _proper_ form payload – via `form.elements`.
 
 ## Install
 
@@ -14,31 +14,17 @@ npm install form-payload
 ## Usage
 
 ```html
-<!-- index.html -->
 <form name="general">
   <label>
     Name
-    <input type="text" name="name" value="Jon" />
+    <input type="text" name="name" value="John" />
   </label>
   <label>
     Birthday
     <input type="date" name="birthday" value="2021-03-27" />
   </label>
-  <label>
-    Friends Count
-    <input type="number" name="friendsCount" value="1" />
-  </label>
-  <fieldset name="friend">
-    <legend>Friend</legend>
-    <label>
-      Friend Name
-      <input type="test" name="friendName" value="Kate" />
-    </label>
-  </fieldset>
   <button type="submit">Submit</button>
 </form>
-
-...
 
 <form name="mailing">
   <label>
@@ -46,84 +32,62 @@ npm install form-payload
     <input type="email" name="mail" name="example@mail.com" />
   </label>
 </form>
-```
 
-```js
-// index.js
-import { getFormPayload, getFormControlPayload } from 'form-payload';
+<script>
+  import { getFormPayload, getFormControlPayload } from 'form-payload';
 
-const { general: generalFormNode, mailing: mailingFormNode } = document.forms;
+  const generalFormNode = document.querySelector('form[name="general"]');
+  const mailingFormNode = document.querySelector('form[name="mailing"]');
 
-generalFormNode.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  console.log(getFormPayload(generalFormNode));
-  // {
-  //   name: 'Jon',
-  //   birthday: Sat Mar 27 2021 18:06:42 GMT+0200 (Eastern European Standard Time),
-  //   friendsCount: 1,
-  //   friend: {
-  //     friendName: 'Kate',
-  //   },
-  // }
-});
-
-mailingFormNode.addEventListener('change', (evt) => {
-  console.log(getFormControlPayload(evt.target));
-  // 'example@mail.com'
-});
-```
-
-## With Frameworks
-
-_It doesn't matter which framework you use, you just need to pass the valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement)._
-
-### React
-
-```jsx
-import { getFormPayload, getFormControlPayload, ControlType } from 'form-payload';
-
-const SimpleForm = () => {
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  generalFormNode.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    console.log(getFormPayload(evt.target as HTMLFormElement));
-    // {
-    //   name: 'Jon',
-    //   birthday: Sat Mar 27 2021 18:06:42 GMT+0200 (Eastern European Standard Time),
-    // }
-  };
+    const formPayload = getFormPayload(generalFormNode);
+    // => { name: 'John', birthday: 'Sat Mar 27 2021 02:00:00 GMT+0200' }
+  });
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(getFormControlPayload(evt.target));
-    // 'example@mail.com'
-  };
-
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>
-        Name
-        <input name="name" type={ControlType.TEXT} defaultValue="Jon" />
-        </label>
-        <label>
-        Date
-        <input name="birthday" type={ControlType.DATE} defaultValue="2021-03-27" />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-
-      ...
-
-      <form>
-        <label>
-        Mailing
-        <input name="mail" type={ControlType.EMAIL} onChange={handleChange} />
-        </label>
-      </form>
-    </>
-  );
-};
+  mailingFormNode.addEventListener('change', (evt) => {
+    const formControlPayload = getFormControlPayload(evt.target);
+    // => 'example@mail.com'
+  });
+</script>
 ```
 
-## MIT Licensed
+PS. _The library works perfectly with any framework. It doesn't matter which framework is used; Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement)._
+
+## Value Correspondence Table
+
+| HTMLElement                                                                                 | Attributes                   | Included | Value                                                                                           |
+| ------------------------------------------------------------------------------------------- | ---------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="text"`                | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="password"`            | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="email"`               | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="search"`              | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="url"`                 | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="tel"`                 | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="color"`               | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="radio"`               | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="hidden"`              | ✅       | `string`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="number"`              | ✅       | `number`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="range"`               | ✅       | `number`                                                                                        |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="checkbox"`            | ✅       | `boolean`                                                                                       |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="date"`                | ✅       | [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="time"`                | ✅       | [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="datetime-local"`      | ✅       | [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="month"`               | ✅       | [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="week"`                | ✅       | [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="file"`                | ✅       | [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) or `null`                       |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="file"` and `multiple` | ✅       | Array<[`File`](https://developer.mozilla.org/en-US/docs/Web/API/File)>                          |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="button"`              | ❌       | –                                                                                               |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="submit"`              | ❌       | –                                                                                               |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="reset"`               | ❌       | –                                                                                               |
+| [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)       | `type="image"`               | ❌       | –                                                                                               |
+| [HTMLTextAreaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextareaElement) | –                            | ✅       | `string`                                                                                        |
+| [HTMLSelectElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement)     | –                            | ✅       | `string`                                                                                        |
+| [HTMLSelectElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement)     | `multiple`                   | ✅       | Array<`string`>                                                                                 |
+| [HTMLOutputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOutputElement)     | –                            | ✅       | `string`                                                                                        |
+| [HTMLFieldsetElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldsetElement) | –                            | ✅       | `Object<name: string, value: unknown>` (recursive values of nested elements)                    |
+| [HTMLButtonElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement)     | `type="button"`              | ❌       | –                                                                                               |
+| [HTMLButtonElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement)     | `type="submit"`              | ❌       | –                                                                                               |
+| [HTMLButtonElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement)     | `type="reset"`               | ❌       | –                                                                                               |
+| [HTMLObjectElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement)     | –                            | ❌       | –                                                                                               |
