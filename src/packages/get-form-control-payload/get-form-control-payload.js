@@ -50,18 +50,18 @@ const getFormControlsPayload = (...controlElements) => {
  */
 const getFormControlPayload = (controlNode) => {
 	switch (controlNode.type) {
-		case ControlType.COLOR:
-		case ControlType.EMAIL:
-		case ControlType.HIDDEN:
-		case ControlType.PASSWORD:
-		case ControlType.RADIO:
-		case ControlType.SEARCH:
-		case ControlType.TEL:
 		case ControlType.TEXT:
+		case ControlType.PASSWORD:
+		case ControlType.EMAIL:
+		case ControlType.SEARCH:
 		case ControlType.URL:
-		case ControlType.OUTPUT:
+		case ControlType.TEL:
+		case ControlType.COLOR:
+		case ControlType.RADIO:
+		case ControlType.HIDDEN:
 		case ControlType.TEXTAREA:
-		case ControlType.SELECT_ONE: {
+		case ControlType.SELECT_ONE:
+		case ControlType.OUTPUT: {
 			return getFormControlValue(
 				/**
 				 * @type {HTMLInputElement
@@ -69,15 +69,6 @@ const getFormControlPayload = (controlNode) => {
 				 * 	| HTMLTextAreaElement
 				 * 	| HTMLSelectElement}
 				 */ (controlNode),
-			);
-		}
-		case ControlType.DATE:
-		case ControlType.DATETIME_LOCAL:
-		case ControlType.MONTH:
-		case ControlType.TIME:
-		case ControlType.WEEK: {
-			return getInputDateValue(
-				/** @type {HTMLInputElement} */ (controlNode),
 			);
 		}
 		case ControlType.NUMBER:
@@ -91,14 +82,23 @@ const getFormControlPayload = (controlNode) => {
 				/** @type {HTMLInputElement} */ (controlNode),
 			);
 		}
-		case ControlType.SELECT_MULTIPLE: {
-			return getMultiSelectValues(
-				/** @type {HTMLSelectElement} */ (controlNode),
+		case ControlType.DATE:
+		case ControlType.TIME:
+		case ControlType.DATETIME_LOCAL:
+		case ControlType.MONTH:
+		case ControlType.WEEK: {
+			return getInputDateValue(
+				/** @type {HTMLInputElement} */ (controlNode),
 			);
 		}
 		case ControlType.FILE: {
 			return getInputFileValue(
 				/** @type {HTMLInputElement} */ (controlNode),
+			);
+		}
+		case ControlType.SELECT_MULTIPLE: {
+			return getMultiSelectValues(
+				/** @type {HTMLSelectElement} */ (controlNode),
 			);
 		}
 		case ControlType.FIELDSET: {

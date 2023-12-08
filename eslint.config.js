@@ -171,6 +171,12 @@ const overridesConfigs = [
 			'perfectionist/sort-imports': ['off'],
 		},
 	},
+	{
+		files: ['src/libs/enums/control-type.enum.js'],
+		rules: {
+			'perfectionist/sort-objects': ['off'],
+		},
+	},
 ];
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
