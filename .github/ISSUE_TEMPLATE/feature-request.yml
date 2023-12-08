@@ -1,0 +1,21 @@
+name: Request a feature
+description: Issue for requesting a feature
+title: 'Feature: '
+labels:
+  - feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to share your ideas
+
+  - type: textarea
+    attributes:
+      label: Brief description
+      description: Provide a brief description in your own words about what the rule will check
+      placeholder: Support for a new HTML element...
+
+  - type: textarea
+    attributes:
+      label: Freeform description field
+      description: Add anything else you wanted to share here

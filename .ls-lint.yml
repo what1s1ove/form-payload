@@ -1,6 +1,8 @@
 ls:
   .dir: regex:([.a-z]*)([-.][a-z]+)*
   .ts: regex:([.a-z]*)([-.][a-z]+)*
+  .github/ISSUE_TEMPLATE:
+    .dir: SCREAMING_SNAKE_CASE
 
 ignore:
   - node_modules

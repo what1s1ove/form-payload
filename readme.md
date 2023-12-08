@@ -17,7 +17,7 @@ npm install form-payload
 - [Advanced (TypeScript + Validation)](https://stackblitz.com/edit/form-payload-advanced?file=index.ts,get-form-payload.ts)
 - [Framework (React + TypeScript)](https://stackblitz.com/edit/form-payload-framework?file=src%2FApp.tsx)
 
-PS. _The library works perfectly with any framework. Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement). The same applies to validations and any other libraries. Just create your own wrappers on top of the functions exported by form-payload library._
+PS. _The library works perfectly with any framework. Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement). The same applies to validations and any other libraries. Just create your own wrappers on top of the functions exported by **form-payload** library._
 
 ## Usage
 
