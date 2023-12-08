@@ -1,0 +1,26 @@
+name: Report a bug
+description: Issue for reporting a bug
+title: 'Bug: '
+labels:
+  - 'bug'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping to improve our project! Please fill in the following information:
+
+  - type: textarea
+    attributes:
+      label: The part of the code where the error occurred
+      description: Copy the part of the code where the error occurred
+      placeholder: |
+        ```html
+        <form>
+          <input type="text" />
+        </form>
+        ```
+
+  - type: textarea
+    attributes:
+      label: Description of the bug
+      description: Please provide a detailed description of the bug.
