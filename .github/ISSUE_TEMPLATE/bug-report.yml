@@ -2,7 +2,7 @@ name: Report a bug
 description: Issue for reporting a bug
 title: 'Bug: '
 labels:
-  - 'bug'
+  - bug
 body:
   - type: markdown
     attributes:
@@ -23,4 +23,4 @@ body:
   - type: textarea
     attributes:
       label: Description of the bug
-      description: Please provide a detailed description of the bug.
+      description: Please provide a detailed description of the bug
