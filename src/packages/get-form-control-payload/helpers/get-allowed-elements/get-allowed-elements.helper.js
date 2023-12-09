@@ -1,7 +1,5 @@
-import {
-	BANNED_CONTROL_TYPES,
-	BANNED_FORM_OPERATIONAL_CONTROL_ELEMENTS,
-} from '../../../../libs/constants/constants.js';
+import { BANNED_CONTROL_TYPES } from '../../../../libs/constants/constants.js';
+import { bannedElementNameToElementInstance } from '../../../../libs/maps/maps.js';
 
 /** @typedef {import('../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 /** @typedef {import('../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
@@ -30,13 +28,13 @@ const checkControlFunctionMap = /** @type {const} */ ({
 	 * @returns {boolean}
 	 */
 	checkIsAllowedElement(element) {
-		const isObjectNode = BANNED_FORM_OPERATIONAL_CONTROL_ELEMENTS.some(
-			(node) => {
-				return element instanceof node;
-			},
-		);
+		const isSameNode = Object.values(
+			bannedElementNameToElementInstance,
+		).some((node) => {
+			return element instanceof node;
+		});
 
-		return !isObjectNode;
+		return !isSameNode;
 	},
 });
 
