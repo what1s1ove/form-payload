@@ -37,7 +37,7 @@
 		"build:dist": "tsc -p tsconfig.build.json",
 		"build:cp": "cp -r src readme.md package.json LICENSE dist",
 		"build:pkg": "cd dist && npm pkg set types=\"./src/index.d.ts\"",
-		"build": "npm run ci:build:clean && npm run ci:build:dist && npm run ci:build:pkg && npm run ci:build:cp"
+		"build": "npm run build:clean && npm run build:dist && npm run build:pkg && npm run build:cp"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "18.4.3",
