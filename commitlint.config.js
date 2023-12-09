@@ -7,7 +7,7 @@ const configuration = {
 	extends: ['@commitlint/config-conventional'],
 	parserPreset: {
 		parserOpts: {
-			issuePrefixes: PROJECT_PREFIXES.map((it) => `${it}-`),
+			issuePrefixes: PROJECT_PREFIXES.map((prefix) => `${prefix}-`),
 		},
 	},
 	rules: {

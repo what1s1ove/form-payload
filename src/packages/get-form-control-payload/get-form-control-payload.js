@@ -57,6 +57,7 @@ const getFormControlPayload = (controlNode) => {
 		case ControlType.URL:
 		case ControlType.TEL:
 		case ControlType.COLOR:
+		case ControlType.DATETIME_LOCAL:
 		case ControlType.RADIO:
 		case ControlType.HIDDEN:
 		case ControlType.TEXTAREA:
@@ -84,7 +85,6 @@ const getFormControlPayload = (controlNode) => {
 		}
 		case ControlType.DATE:
 		case ControlType.TIME:
-		case ControlType.DATETIME_LOCAL:
 		case ControlType.MONTH:
 		case ControlType.WEEK: {
 			return getInputDateValue(
@@ -113,7 +113,7 @@ const getFormControlPayload = (controlNode) => {
 	}
 
 	throw new FormPayloadError({
-		message: 'Unknown control type.',
+		message: `Unsupported control type – ${controlNode.type}.`,
 	});
 };
 

@@ -1,137 +1,222 @@
 import { deepEqual, equal, throws } from 'node:assert/strict';
 import { beforeEach, describe, test } from 'node:test';
 
-import { fireEvent, screen, waitFor } from '@testing-library/dom';
+import { fireEvent, waitFor } from '@testing-library/dom';
 
 import { FormPayloadError, getFormControlPayload } from '../src/index.js';
 import { ControlType } from '../src/libs/enums/enums.js';
-import { ElementName } from './libs/enums/enums.js';
-import {
-	createElement,
-	createLabelElement,
-	createOptionsElements,
-} from './libs/helpers/helpers.js';
 
 describe('getFormControlPayload should work correctly', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '';
 	});
 
-	describe('should work correctly with texts inputs', () => {
-		test('should get value from corresponding input type correctly', () => {
-			const inputs = [
-				[ControlType.COLOR, '#999999'],
-				[ControlType.EMAIL, 'test@mail.com'],
-				[ControlType.HIDDEN, 'metrics'],
-				[ControlType.PASSWORD, 'top-secret'],
-				[ControlType.RADIO, 'color-1'],
-				[ControlType.SEARCH, 'apples'],
-				[ControlType.TEL, '10000000000'],
+	describe('should work with HTMLInputElement correctly', () => {
+		test('should get value from string inputs correctly', () => {
+			const inputs = /** @type {const} */ ([
 				[ControlType.TEXT, 'Name'],
+				[ControlType.PASSWORD, 'top-secret'],
+				[ControlType.EMAIL, 'test@mail.com'],
+				[ControlType.SEARCH, 'apples'],
 				[ControlType.URL, 'form-payload.com'],
-				[ControlType.OUTPUT, 'empty'],
-			];
+				[ControlType.TEL, '10000000000'],
+				[ControlType.COLOR, '#999999'],
+				[ControlType.DATETIME_LOCAL, '2018-06-12T19:30'],
+				[ControlType.RADIO, 'color-1'],
+				[ControlType.HIDDEN, 'metrics'],
+			]);
 
 			for (const [type, value] of inputs) {
-				document.body.append(
-					createElement(ElementName.INPUT, {
-						name: /** @type {string} */ (type),
-						type: /** @type {string} */ (type),
-						value: /** @type {string} */ (value),
-					}),
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input type="${type}" value="${value}" />
+					</form>
+				`;
+
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
 				);
 
-				const control =
-					/** @type {HTMLInputElement | HTMLOutputElement} */ (
-						screen.getByDisplayValue(/** @type {string} */ (value))
-					);
 				const controlValue = getFormControlPayload(control);
 
 				equal(typeof controlValue, 'string');
 
 				equal(controlValue, value);
+
+				document.body.innerHTML = '';
 			}
 		});
-	});
 
-	describe('should work correctly with file input', () => {
-		const INPUT_FILE_LABEL = 'Upload';
+		test('should get value from number inputs correctly', () => {
+			const inputs = /** @type {const} */ ([
+				[ControlType.NUMBER, 18],
+				[ControlType.RANGE, 69],
+			]);
 
-		test('should get value from input type file correctly', async () => {
-			const file = [new File(['test-file'], 'test-file')];
+			for (const [type, value] of inputs) {
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input type="${type}" value="${value}" />
+					</form>
+				`;
 
-			document.body.append(
-				createLabelElement(
-					INPUT_FILE_LABEL,
-					createElement(ElementName.INPUT, {
-						type: ControlType.FILE,
-					}),
-				),
-			);
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
+				);
 
-			const control = /** @type {HTMLInputElement} */ (
-				screen.getByLabelText(INPUT_FILE_LABEL)
-			);
+				const controlValue = getFormControlPayload(control);
 
-			equal(getFormControlPayload(control), null);
+				equal(typeof controlValue, 'number');
 
-			await waitFor(() =>
-				fireEvent.change(control, {
-					target: {
-						files: file,
-					},
-				}),
-			);
+				equal(controlValue, value);
 
-			equal(getFormControlPayload(control) instanceof File, true);
+				document.body.innerHTML = '';
+			}
 		});
 
-		test('should get value from multiple input type file correctly', async () => {
-			const files = [
-				new File(['test-file-1'], 'test-file-1'),
-				new File(['test-file-2'], 'test-file-2'),
-			];
+		test('should get value from boolean inputs correctly', () => {
+			const inputs = /** @type {const} */ ([
+				[ControlType.CHECKBOX, false],
+			]);
 
-			document.body.append(
-				createLabelElement(
-					INPUT_FILE_LABEL,
-					createElement(ElementName.INPUT, {
-						multiple: true,
-						type: ControlType.FILE,
+			for (const [type, value] of inputs) {
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input type="${type}" value="${value}" />
+					</form>
+				`;
+
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
+				);
+
+				const controlValue = getFormControlPayload(control);
+
+				equal(typeof controlValue, 'boolean');
+
+				equal(controlValue, value);
+
+				document.body.innerHTML = '';
+			}
+		});
+
+		test('should get value from date inputs correctly', () => {
+			const inputs = /** @type {const} */ ([
+				[ControlType.DATE, '1998-08-03'],
+				[ControlType.TIME, '13:30'],
+				[ControlType.MONTH, '2001-06'],
+				[ControlType.WEEK, '2017-W01'],
+			]);
+
+			for (const [type, value] of inputs) {
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input type="${type}" value="${value}" />
+					</form>
+				`;
+
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
+				);
+
+				const controlValue = getFormControlPayload(control);
+
+				equal(controlValue instanceof Date, true);
+
+				document.body.innerHTML = '';
+			}
+		});
+
+		describe('should get value from file inputs correctly', () => {
+			test('should get value from singular file input correctly', async () => {
+				const file = [new File(['test-file'], 'test-file')];
+
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input type="${ControlType.FILE}" />
+					</form>
+				`;
+
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
+				);
+
+				equal(getFormControlPayload(control), null);
+
+				await waitFor(() =>
+					fireEvent.change(control, {
+						target: {
+							files: file,
+						},
 					}),
-				),
-			);
+				);
 
-			const control = /** @type {HTMLInputElement} */ (
-				screen.getByLabelText(INPUT_FILE_LABEL)
-			);
+				equal(getFormControlPayload(control) instanceof File, true);
+			});
 
-			equal(Array.isArray(getFormControlPayload(control)), true);
+			test('should get value from multiple file input correctly', async () => {
+				const files = [
+					new File(['test-file-1'], 'test-file-1'),
+					new File(['test-file-2'], 'test-file-2'),
+				];
 
-			await waitFor(() =>
-				fireEvent.change(control, {
-					target: {
-						files,
-					},
-				}),
-			);
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input type="${ControlType.FILE}" multiple />
+					</form>
+				`;
 
-			const controlValue = /** @type {File[]} */ (
-				getFormControlPayload(control)
-			);
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
+				);
 
-			equal(
-				controlValue.every((file) => file instanceof File),
-				true,
-			);
+				equal(Array.isArray(getFormControlPayload(control)), true);
 
-			equal(controlValue.length, controlValue.length);
+				await waitFor(() =>
+					fireEvent.change(control, {
+						target: {
+							files,
+						},
+					}),
+				);
+
+				const controlValue = /** @type {File[]} */ (
+					getFormControlPayload(control)
+				);
+
+				equal(
+					controlValue.every((file) => file instanceof File),
+					true,
+				);
+
+				equal(controlValue.length, controlValue.length);
+			});
 		});
 	});
 
-	describe('should work correctly with select', () => {
-		const SELECT_LABEL = 'Colors';
+	describe('should work with HTMLTextAreaElement correctly', () => {
+		test('should get value from HTMLTextAreaElement correctly', () => {
+			const TEXTAREA_VALUE = 'Hello, World!';
 
+			document.body.innerHTML = /* HTML */ `
+				<form>
+					<textarea>${TEXTAREA_VALUE}</textarea>
+				</form>
+			`;
+
+			const control = /** @type {HTMLTextAreaElement} */ (
+				document.querySelector('textarea')
+			);
+
+			const controlValue = getFormControlPayload(control);
+
+			equal(typeof controlValue, 'string');
+
+			equal(controlValue, TEXTAREA_VALUE);
+		});
+	});
+
+	describe('should work with HTMLSelectElement correctly', () => {
 		const Color = {
 			BLUE: 'blue',
 			RED: 'red',
@@ -140,19 +225,30 @@ describe('getFormControlPayload should work correctly', () => {
 
 		const options = Object.values(Color);
 
-		test('should get value from select correctly', () => {
+		test('should get value from singular select correctly', () => {
 			const selectedValue = Color.RED;
-			const selectOptions = createOptionsElements(options, selectedValue);
 
-			document.body.append(
-				createLabelElement(
-					SELECT_LABEL,
-					createElement(ElementName.SELECT, {}, ...selectOptions),
-				),
-			);
+			document.body.innerHTML = /* HTML */ `
+				<form>
+					<select>
+						${options
+							.map(
+								(option) => /** HTML */ `
+							<option
+								value="${option}"
+								${option === selectedValue ? 'selected' : ''}
+							>
+								${option}
+							</option>
+						`,
+							)
+							.join('')}
+					</select>
+				</form>
+			`;
 
 			const control = /** @type {HTMLSelectElement} */ (
-				screen.getByLabelText(SELECT_LABEL)
+				document.querySelector('select')
 			);
 
 			const controlValue = getFormControlPayload(control);
@@ -162,28 +258,30 @@ describe('getFormControlPayload should work correctly', () => {
 			equal(controlValue, selectedValue);
 		});
 
-		test('should get values from multi-select correctly', () => {
+		test('should get value from multiple select correctly', () => {
 			const selectedValues = [Color.BLUE, Color.RED];
-			const selectOptions = createOptionsElements(
-				options,
-				...selectedValues,
-			);
 
-			document.body.append(
-				createLabelElement(
-					SELECT_LABEL,
-					createElement(
-						ElementName.SELECT,
-						{
-							multiple: true,
-						},
-						...selectOptions,
-					),
-				),
-			);
+			document.body.innerHTML = /* HTML */ `
+				<form>
+					<select multiple>
+						${options
+							.map(
+								(option) => /** HTML */ `
+									<option
+										value="${option}"
+										${selectedValues.includes(option) ? 'selected' : ''}
+									>
+										${option}
+									</option>
+								`,
+							)
+							.join(',')}
+					</select>
+				</form>
+			`;
 
 			const control = /** @type {HTMLSelectElement} */ (
-				screen.getByLabelText(SELECT_LABEL)
+				document.querySelector('select')
 			);
 
 			const controlValue = getFormControlPayload(control);
@@ -196,6 +294,136 @@ describe('getFormControlPayload should work correctly', () => {
 			);
 
 			deepEqual(controlValue, selectedValues);
+		});
+	});
+
+	describe('should work with HTMLOutputElement correctly', () => {
+		test('should get value from HTMLOutputElement correctly', () => {
+			const OUTPUT_VALUE = 'Hello, World!';
+
+			document.body.innerHTML = /* HTML */ `
+				<form>
+					<output>${OUTPUT_VALUE}</output>
+				</form>
+			`;
+
+			const control = /** @type {HTMLOutputElement} */ (
+				document.querySelector('output')
+			);
+
+			const controlValue = getFormControlPayload(control);
+
+			equal(typeof controlValue, 'string');
+
+			equal(controlValue, OUTPUT_VALUE);
+		});
+	});
+
+	describe('should work with HTMLFieldSetElement correctly', () => {
+		test('should get value from HTMLFieldSetElement correctly', () => {
+			const BirthdayDate = {
+				OWN: '1994-06-13',
+				SCHOOLFRIEND: '1995-03-18',
+			};
+
+			const FormPayloadKey = /** @type {const} */ ({
+				BESTFRIEND: 'bestfriend',
+				BESTFRIEND_CHILD: 'child',
+				BESTFRIEND_CHILD_AGE: 'age',
+				BESTFRIEND_CHILD_IS_ADULT: 'isAdult',
+				BESTFRIEND_CHILD_NAME: 'name',
+				BESTFRIEND_HAS_FRIEND: 'hasFriend',
+				BESTFRIEND_NAME: 'name',
+				BIRTHDAY: 'birthday',
+				NAME: 'name',
+				SCHOOLFRIEND: 'schoolfriend',
+				SCHOOLFRIEND_BIRTHDAY: 'birthday',
+				SCHOOLFRIEND_NAME: 'name',
+			});
+
+			const formPayload = {
+				[FormPayloadKey.BESTFRIEND]: {
+					[FormPayloadKey.BESTFRIEND_CHILD]: {
+						[FormPayloadKey.BESTFRIEND_CHILD_AGE]: 18,
+						[FormPayloadKey.BESTFRIEND_CHILD_IS_ADULT]: true,
+						[FormPayloadKey.BESTFRIEND_CHILD_NAME]: 'Eva',
+					},
+					[FormPayloadKey.BESTFRIEND_HAS_FRIEND]: true,
+					[FormPayloadKey.BESTFRIEND_NAME]: 'Jason',
+				},
+				[FormPayloadKey.BIRTHDAY]: new Date(BirthdayDate.OWN),
+				[FormPayloadKey.NAME]: 'David',
+				[FormPayloadKey.SCHOOLFRIEND]: {
+					[FormPayloadKey.SCHOOLFRIEND_BIRTHDAY]: new Date(
+						BirthdayDate.SCHOOLFRIEND,
+					),
+					[FormPayloadKey.SCHOOLFRIEND_NAME]: 'Ted',
+				},
+			};
+
+			document.body.innerHTML = /* HTML */ `
+				<fieldset>
+					<input
+						type="${ControlType.TEXT}"
+						name="${FormPayloadKey.NAME}"
+						value="${formPayload.name}"
+					/>
+					<input
+						type="${ControlType.DATE}"
+						name="${FormPayloadKey.BIRTHDAY}"
+						value="${BirthdayDate.OWN}"
+					/>
+					<fieldset name="${FormPayloadKey.BESTFRIEND}">
+						<input
+							type="${ControlType.TEXT}"
+							name="${FormPayloadKey.BESTFRIEND_NAME}"
+							value="${formPayload.bestfriend.name}"
+						/>
+						<input
+							type="${ControlType.CHECKBOX}"
+							name="${FormPayloadKey.BESTFRIEND_HAS_FRIEND}"
+							${formPayload.bestfriend.hasFriend ? 'checked' : ''}
+						/>
+						<fieldset name="${FormPayloadKey.BESTFRIEND_CHILD}">
+							<input
+								type="${ControlType.TEXT}"
+								name="${FormPayloadKey.BESTFRIEND_CHILD_NAME}"
+								value="${formPayload.bestfriend.child.name}"
+							/>
+							<input
+								type="${ControlType.NUMBER}"
+								name="${FormPayloadKey.BESTFRIEND_CHILD_AGE}"
+								value="${formPayload.bestfriend.child.age}"
+							/>
+							<input
+								type="${ControlType.CHECKBOX}"
+								name="${FormPayloadKey.BESTFRIEND_CHILD_IS_ADULT}"
+								${formPayload.bestfriend.child.isAdult
+									? 'checked'
+									: ''}
+							/>
+						</fieldset>
+					</fieldset>
+					<fieldset name="${FormPayloadKey.SCHOOLFRIEND}">
+						<input
+							type="${ControlType.TEXT}"
+							name="${FormPayloadKey.SCHOOLFRIEND_NAME}"
+							value="${formPayload.schoolfriend.name}"
+						/>
+						<input
+							type="${ControlType.DATE}"
+							name="${FormPayloadKey.SCHOOLFRIEND_BIRTHDAY}"
+							value="${BirthdayDate.SCHOOLFRIEND}"
+						/>
+					</fieldset>
+				</fieldset>
+			`;
+
+			const control = /** @type {HTMLFieldSetElement} */ (
+				document.querySelector('fieldset')
+			);
+
+			deepEqual(getFormControlPayload(control), formPayload);
 		});
 	});
 
