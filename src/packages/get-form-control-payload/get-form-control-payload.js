@@ -45,8 +45,9 @@ const getFormControlsPayload = (...controlElements) => {
 };
 
 /**
+ * @template {unknown} T
  * @param {HTMLFormOperationalControlElement} controlNode
- * @returns {unknown}
+ * @returns {T}
  * @throws {FormPayloadError}
  */
 const getFormControlPayload = (controlNode) => {
@@ -63,47 +64,55 @@ const getFormControlPayload = (controlNode) => {
 		case ControlType.TEXTAREA:
 		case ControlType.SELECT_ONE:
 		case ControlType.OUTPUT: {
-			return getFormControlValue(
-				/**
-				 * @type {HTMLInputElement
-				 * 	| HTMLOutputElement
-				 * 	| HTMLTextAreaElement
-				 * 	| HTMLSelectElement}
-				 */ (controlNode),
+			return /** @type {T} */ (
+				getFormControlValue(
+					/**
+					 * @type {HTMLInputElement
+					 * 	| HTMLOutputElement
+					 * 	| HTMLTextAreaElement
+					 * 	| HTMLSelectElement}
+					 */ (controlNode),
+				)
 			);
 		}
 		case ControlType.NUMBER:
 		case ControlType.RANGE: {
-			return getInputNumericValue(
-				/** @type {HTMLInputElement} */ (controlNode),
+			return /** @type {T} */ (
+				getInputNumericValue(
+					/** @type {HTMLInputElement} */ (controlNode),
+				)
 			);
 		}
 		case ControlType.CHECKBOX: {
-			return getCheckboxValue(
-				/** @type {HTMLInputElement} */ (controlNode),
+			return /** @type {T} */ (
+				getCheckboxValue(/** @type {HTMLInputElement} */ (controlNode))
 			);
 		}
 		case ControlType.DATE:
 		case ControlType.TIME:
 		case ControlType.MONTH:
 		case ControlType.WEEK: {
-			return getInputDateValue(
-				/** @type {HTMLInputElement} */ (controlNode),
+			return /** @type {T} */ (
+				getInputDateValue(/** @type {HTMLInputElement} */ (controlNode))
 			);
 		}
 		case ControlType.DATETIME_LOCAL: {
-			return getDatetimeLocalValue(
-				/** @type {HTMLInputElement} */ (controlNode),
+			return /** @type {T} */ (
+				getDatetimeLocalValue(
+					/** @type {HTMLInputElement} */ (controlNode),
+				)
 			);
 		}
 		case ControlType.FILE: {
-			return getInputFileValue(
-				/** @type {HTMLInputElement} */ (controlNode),
+			return /** @type {T} */ (
+				getInputFileValue(/** @type {HTMLInputElement} */ (controlNode))
 			);
 		}
 		case ControlType.SELECT_MULTIPLE: {
-			return getMultiSelectValues(
-				/** @type {HTMLSelectElement} */ (controlNode),
+			return /** @type {T} */ (
+				getMultiSelectValues(
+					/** @type {HTMLSelectElement} */ (controlNode),
+				)
 			);
 		}
 		case ControlType.FIELDSET: {
@@ -111,8 +120,10 @@ const getFormControlPayload = (controlNode) => {
 				.../** @type {HTMLFieldSetElement} */ (controlNode).elements,
 			];
 
-			return getFormControlsPayload(
-				.../** @type {HTMLFormControlElement[]} */ (elements),
+			return /** @type {T} */ (
+				getFormControlsPayload(
+					.../** @type {HTMLFormControlElement[]} */ (elements),
+				)
 			);
 		}
 	}
