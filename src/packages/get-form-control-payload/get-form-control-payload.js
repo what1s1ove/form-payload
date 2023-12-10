@@ -51,6 +51,14 @@ const getFormControlsPayload = (...controlElements) => {
  * @throws {FormPayloadError}
  */
 const getFormControlPayload = (controlNode) => {
+	const hasType = 'type' in controlNode;
+
+	if (!hasType) {
+		throw new FormPayloadError({
+			message: 'Control element has no type attribute.',
+		});
+	}
+
 	switch (controlNode.type) {
 		case ControlType.TEXT:
 		case ControlType.PASSWORD:
@@ -129,7 +137,7 @@ const getFormControlPayload = (controlNode) => {
 	}
 
 	throw new FormPayloadError({
-		message: `Unsupported control type – ${controlNode.type}.`,
+		message: `Unsupported control element type – ${controlNode.type}.`,
 	});
 };
 

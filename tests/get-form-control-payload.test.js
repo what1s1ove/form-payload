@@ -428,6 +428,12 @@ describe('getFormControlPayload should work correctly', () => {
 	});
 
 	describe('should work correctly with an unexpected control type', () => {
+		test('should throw FormPayloadError for elements without type', () => {
+			const control = /** @type {HTMLInputElement} */ ({});
+
+			throws(() => getFormControlPayload(control), FormPayloadError);
+		});
+
 		test('should throw FormPayloadError with unknown input type', () => {
 			const control = /** @type {HTMLInputElement} */ ({
 				type: 'unknown-type',
