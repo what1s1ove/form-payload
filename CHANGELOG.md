@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/what1s1ove/form-payload/compare/1.1.0...1.2.0) (2023-12-10)
+
+
+### Features
+
+* make getFormControlPayload as generic fp-100 ([#111](https://github.com/what1s1ove/form-payload/issues/111)) ([656c577](https://github.com/what1s1ove/form-payload/commit/656c57774b7a601b3a4e903e1219a0c3921346de))
+
 ## [1.1.0](https://github.com/what1s1ove/form-payload/compare/1.0.3...1.1.0) (2023-12-10)
 
 
