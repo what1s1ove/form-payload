@@ -12,7 +12,7 @@ body:
   - type: textarea
     attributes:
       label: Brief description
-      description: Provide a brief description in your own words about what the rule will check
+      description: Provide a brief description in your own words about the feature you are requesting
       placeholder: Support for a new HTML element...
 
   - type: textarea
