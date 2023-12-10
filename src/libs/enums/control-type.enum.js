@@ -6,7 +6,6 @@ const ControlType = /** @type {const} */ ({
 	URL: 'url',
 	TEL: 'tel',
 	COLOR: 'color',
-	DATETIME_LOCAL: 'datetime-local',
 	RADIO: 'radio',
 	HIDDEN: 'hidden',
 
@@ -19,6 +18,7 @@ const ControlType = /** @type {const} */ ({
 	TIME: 'time',
 	MONTH: 'month',
 	WEEK: 'week',
+	DATETIME_LOCAL: 'datetime-local',
 
 	FILE: 'file',
 
