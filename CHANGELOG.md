@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/what1s1ove/form-payload/compare/1.0.2...1.0.3) (2023-12-10)
+
+
+### Bug Fixes
+
+* add scope while publishing to gpr fp-92 ([#93](https://github.com/what1s1ove/form-payload/issues/93)) ([f716ec4](https://github.com/what1s1ove/form-payload/commit/f716ec432e67e2d7a8584c914654c518d231bb4a))
+
 ## [1.0.2](https://github.com/what1s1ove/form-payload/compare/1.0.1...1.0.2) (2023-12-09)
 
 
