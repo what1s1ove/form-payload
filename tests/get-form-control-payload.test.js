@@ -21,7 +21,6 @@ describe('getFormControlPayload should work correctly', () => {
 				[ControlType.URL, 'form-payload.com'],
 				[ControlType.TEL, '10000000000'],
 				[ControlType.COLOR, '#999999'],
-				[ControlType.DATETIME_LOCAL, '2018-06-12T19:30'],
 				[ControlType.RADIO, 'color-1'],
 				[ControlType.HIDDEN, 'metrics'],
 			]);
@@ -106,6 +105,7 @@ describe('getFormControlPayload should work correctly', () => {
 				[ControlType.TIME, '13:30'],
 				[ControlType.MONTH, '2001-06'],
 				[ControlType.WEEK, '2017-W01'],
+				[ControlType.DATETIME_LOCAL, '2018-06-12T19:30'],
 			]);
 
 			for (const [type, value] of inputs) {

@@ -4,6 +4,7 @@ import {
 	checkIsReferToAnotherNode,
 	getAllowedElements,
 	getCheckboxValue,
+	getDatetimeLocalValue,
 	getFormControlValue,
 	getInputDateValue,
 	getInputFileValue,
@@ -57,7 +58,6 @@ const getFormControlPayload = (controlNode) => {
 		case ControlType.URL:
 		case ControlType.TEL:
 		case ControlType.COLOR:
-		case ControlType.DATETIME_LOCAL:
 		case ControlType.RADIO:
 		case ControlType.HIDDEN:
 		case ControlType.TEXTAREA:
@@ -88,6 +88,11 @@ const getFormControlPayload = (controlNode) => {
 		case ControlType.MONTH:
 		case ControlType.WEEK: {
 			return getInputDateValue(
+				/** @type {HTMLInputElement} */ (controlNode),
+			);
+		}
+		case ControlType.DATETIME_LOCAL: {
+			return getDatetimeLocalValue(
 				/** @type {HTMLInputElement} */ (controlNode),
 			);
 		}
