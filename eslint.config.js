@@ -14,6 +14,11 @@ import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 
 /** @type {import('eslint').Linter.FlatConfig} */
+const ignoresConfig = {
+	ignores: ['dist'],
+};
+
+/** @type {import('eslint').Linter.FlatConfig} */
 const globalConfig = {
 	languageOptions: {
 		globals: globals.browser,
@@ -181,6 +186,7 @@ const overridesConfigs = [
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 const config = [
+	ignoresConfig,
 	globalConfig,
 	importConfig,
 	jsdocConfig,
