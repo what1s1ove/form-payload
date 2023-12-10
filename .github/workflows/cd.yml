@@ -136,7 +136,7 @@ jobs:
       - name: Publish
         working-directory: ${{ env.ARTIFACT_PATH }}
         run: |
-          npm pkg set name="@${{ github.repository_owner }}/$(npm pkg get name| sed 's/"//g')"
+          npm init -y --scope=@${{ github.repository_owner }}
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

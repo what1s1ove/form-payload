@@ -17,6 +17,10 @@
 		"type": "git",
 		"url": "git+https://github.com/what1s1ove/form-payload.git"
 	},
+	"bugs": {
+		"url": "https://github.com/what1s1ove/form-payload/issues",
+		"email": "hello@whatislove.dev"
+	},
 	"license": "MIT",
 	"type": "module",
 	"main": "./src/index.js",
