@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/what1s1ove/form-payload/compare/1.2.0...1.3.0) (2023-12-10)
+
+
+### Features
+
+* add exception on elements without type fp-103 ([#113](https://github.com/what1s1ove/form-payload/issues/113)) ([6ec99ca](https://github.com/what1s1ove/form-payload/commit/6ec99ca6b7ab57cbb7a88562cd6e91effa698541))
+
 ## [1.2.0](https://github.com/what1s1ove/form-payload/compare/1.1.0...1.2.0) (2023-12-10)
 
 
