@@ -15,7 +15,7 @@
 	"homepage": "https://github.com/what1s1ove/form-payload",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/what1s1ove/form-payload.git"
+		"url": "git+https://github.com/what1s1ove/form-payload.git"
 	},
 	"license": "MIT",
 	"type": "module",
@@ -36,7 +36,7 @@
 		"build:clean": "rm -rf dist",
 		"build:dist": "tsc -p tsconfig.build.json",
 		"build:cp": "cp -r src readme.md package.json LICENSE dist",
-		"build:pkg": "cd dist && npm pkg set types=\"./src/index.d.ts\"",
+		"build:pkg": "cd dist && npm pkg set types=./src/index.d.ts",
 		"build": "npm run build:clean && npm run build:dist && npm run build:pkg && npm run build:cp"
 	},
 	"devDependencies": {
