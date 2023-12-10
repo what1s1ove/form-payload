@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/what1s1ove/form-payload/compare/1.0.3...1.1.0) (2023-12-10)
+
+
+### Features
+
+* get value from datetime input as date fp-99 ([#109](https://github.com/what1s1ove/form-payload/issues/109)) ([590c541](https://github.com/what1s1ove/form-payload/commit/590c54161908e577cd579e64244cd9d8972955f4))
+
 ## [1.0.3](https://github.com/what1s1ove/form-payload/compare/1.0.2...1.0.3) (2023-12-10)
 
 
