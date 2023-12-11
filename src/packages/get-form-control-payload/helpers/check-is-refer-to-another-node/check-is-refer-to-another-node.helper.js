@@ -3,10 +3,10 @@
 /**
  * @template {HTMLFormOperationalControlElement} T
  * @param {T} currentNode
- * @param {...T} checkNodes
+ * @param {T[]} checkNodes
  * @returns {boolean}
  */
-const checkIsReferToAnotherNode = (currentNode, ...checkNodes) => {
+const checkIsReferToAnotherNode = (currentNode, checkNodes) => {
 	return checkNodes.some((checkNode) => {
 		const hasElements =
 			'elements' in checkNode && checkNode.elements.length > 0;

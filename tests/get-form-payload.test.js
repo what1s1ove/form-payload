@@ -2,7 +2,10 @@ import { deepEqual } from 'node:assert/strict';
 import { beforeEach, describe, test } from 'node:test';
 
 import { getFormPayload } from '../src/index.js';
-import { BANNED_CONTROL_TYPES } from '../src/libs/constants/constants.js';
+import {
+	BANNED_CONTROL_TYPES,
+	VALUE_AS_ARRAY_IDENTIFIER,
+} from '../src/libs/constants/constants.js';
 import { ControlType } from '../src/libs/enums/enums.js';
 import { bannedElementNameToElementInstance } from '../src/libs/maps/maps.js';
 
@@ -119,5 +122,44 @@ describe('getFormPayload should work correctly', () => {
 		);
 
 		deepEqual(getFormPayload(formNode), formPayload);
+	});
+
+	describe('should get multiple value from controls with collection identifier correctly', () => {
+		test('should get multiple value from boolean inputs with collection identifier correctly', () => {
+			const Fruit = {
+				APPLE: 'apple',
+				BANANA: 'banana',
+				ORANGE: 'orange',
+			};
+
+			const formPayload = {
+				fruits: [Fruit.BANANA, Fruit.ORANGE],
+			};
+
+			document.body.innerHTML = /* HTML */ `
+				<form>
+					${Object.values(Fruit)
+						.map(
+							(fruit) => /* HTML */ `
+								<input
+									name="fruits${VALUE_AS_ARRAY_IDENTIFIER}"
+									type="${ControlType.CHECKBOX}"
+									value="${fruit}"
+									${formPayload.fruits.includes(fruit)
+										? 'checked'
+										: ''}
+								/>
+							`,
+						)
+						.join('')}
+				</form>
+			`;
+
+			const formNode = /** @type {HTMLFormElement} */ (
+				document.querySelector('form')
+			);
+
+			deepEqual(getFormPayload(formNode), formPayload);
+		});
 	});
 });

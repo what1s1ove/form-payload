@@ -165,6 +165,12 @@ const overridesConfigs = [
 		},
 	},
 	{
+		files: ['src/libs/enums/control-type.enum.js'],
+		rules: {
+			'perfectionist/sort-objects': ['off'],
+		},
+	},
+	{
 		files: ['lint-staged.config.js'],
 		rules: {
 			quotes: ['off'],
@@ -174,12 +180,7 @@ const overridesConfigs = [
 		files: ['tests/**/*.test.js'],
 		rules: {
 			'perfectionist/sort-imports': ['off'],
-		},
-	},
-	{
-		files: ['src/libs/enums/control-type.enum.js'],
-		rules: {
-			'perfectionist/sort-objects': ['off'],
+			'sonarjs/cognitive-complexity': ['off'],
 		},
 	},
 ];

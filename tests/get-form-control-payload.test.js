@@ -4,6 +4,7 @@ import { beforeEach, describe, test } from 'node:test';
 import { fireEvent, waitFor } from '@testing-library/dom';
 
 import { FormPayloadError, getFormControlPayload } from '../src/index.js';
+import { VALUE_AS_ARRAY_IDENTIFIER } from '../src/libs/constants/constants.js';
 import { ControlType } from '../src/libs/enums/enums.js';
 
 describe('getFormControlPayload should work correctly', () => {
@@ -72,30 +73,68 @@ describe('getFormControlPayload should work correctly', () => {
 			}
 		});
 
-		test('should get value from boolean inputs correctly', () => {
-			const inputs = /** @type {const} */ ([
-				[ControlType.CHECKBOX, false],
-			]);
+		describe('should get value from boolean inputs correctly', () => {
+			test('should get value from regular boolean input correctly', () => {
+				const inputs = /** @type {const} */ ([
+					[ControlType.CHECKBOX, false],
+				]);
 
-			for (const [type, value] of inputs) {
-				document.body.innerHTML = /* HTML */ `
-					<form>
-						<input type="${type}" value="${value}" />
-					</form>
-				`;
+				for (const [type, isChecked] of inputs) {
+					document.body.innerHTML = /* HTML */ `
+						<form>
+							<input
+								type="${type}"
+								${isChecked ? 'checked' : ''}
+							/>
+						</form>
+					`;
 
-				const control = /** @type {HTMLInputElement} */ (
-					document.querySelector('input')
-				);
+					const control = /** @type {HTMLInputElement} */ (
+						document.querySelector('input')
+					);
 
-				const controlValue = getFormControlPayload(control);
+					const controlValue = getFormControlPayload(control);
 
-				equal(typeof controlValue, 'boolean');
+					equal(typeof controlValue, 'boolean');
 
-				equal(controlValue, value);
+					equal(controlValue, isChecked);
 
-				document.body.innerHTML = '';
-			}
+					document.body.innerHTML = '';
+				}
+			});
+
+			test('should get single value from boolean input with collection identifier correctly', () => {
+				const inputs = /** @type {const} */ ([
+					[ControlType.CHECKBOX, 'banana', true],
+					[ControlType.CHECKBOX, 'apple', false],
+					[ControlType.CHECKBOX, 'apple', true],
+				]);
+
+				for (const [type, value, isChecked] of inputs) {
+					document.body.innerHTML = /* HTML */ `
+						<form>
+							<input
+								name="fruits${VALUE_AS_ARRAY_IDENTIFIER}"
+								type="${type}"
+								value="${value}"
+								${isChecked ? 'checked' : ''}
+							/>
+						</form>
+					`;
+
+					const control = /** @type {HTMLInputElement} */ (
+						document.querySelector('input')
+					);
+
+					const controlValue = getFormControlPayload(control);
+
+					equal(Array.isArray(controlValue), true);
+
+					deepEqual(controlValue, isChecked ? [value] : []);
+
+					document.body.innerHTML = '';
+				}
+			});
 		});
 
 		test('should get value from date inputs correctly', () => {

@@ -1,0 +1,3 @@
+const VALUE_AS_ARRAY_IDENTIFIER = '[]';
+
+export { VALUE_AS_ARRAY_IDENTIFIER };

@@ -1,9 +1,11 @@
 import { ControlType } from '../../libs/enums/enums.js';
 import { FormPayloadError } from '../../libs/exceptions/exceptions.js';
 import {
+	checkHasValueAsArray,
 	checkIsReferToAnotherNode,
 	getAllowedElements,
 	getCheckboxValue,
+	getCleanedValueAsArrayControlName,
 	getDatetimeLocalValue,
 	getFormControlValue,
 	getInputDateValue,
@@ -24,22 +26,32 @@ import {
 const getFormControlsPayload = (...controlElements) => {
 	const allowedElements = getAllowedElements(controlElements);
 
-	let elementsValues = /** @type {T} */ ({});
+	const elementsValues = /** @type {T} */ ({});
 
 	for (const element of allowedElements) {
 		const isReferToAnotherNode = checkIsReferToAnotherNode(
 			element,
-			...allowedElements,
+			allowedElements,
 		);
 
 		if (isReferToAnotherNode) {
 			continue;
 		}
 
-		elementsValues = {
-			...elementsValues,
-			[element.name]: getFormControlPayload(element),
-		};
+		let key = /** @type {keyof T} */ (element.name);
+		let value = /** @type {T[keyof T]} */ (getFormControlPayload(element));
+		const hasValueAsArray = checkHasValueAsArray(element);
+
+		if (hasValueAsArray) {
+			key = getCleanedValueAsArrayControlName(element);
+
+			value = /** @type {T[keyof T]} */ ([
+				.../** @type {unknown[]} */ (elementsValues[key] ?? []),
+				.../** @type {unknown[]} */ (getFormControlPayload(element)),
+			]);
+		}
+
+		elementsValues[key] = value;
 	}
 
 	return elementsValues;
