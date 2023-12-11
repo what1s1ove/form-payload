@@ -1,6 +1,6 @@
 {
 	"name": "form-payload",
-	"version": "1.3.0",
+	"version": "1.4.0",
 	"description": "Gets form-payload via form.elements",
 	"keywords": [
 		"form",
