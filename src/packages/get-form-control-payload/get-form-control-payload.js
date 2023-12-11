@@ -7,6 +7,7 @@ import {
 	getDatetimeLocalValue,
 	getFormControlValue,
 	getInputDateValue,
+	getInputEmailValue,
 	getInputFileValue,
 	getInputNumericValue,
 	getMultiSelectValues,
@@ -62,7 +63,6 @@ const getFormControlPayload = (controlNode) => {
 	switch (controlNode.type) {
 		case ControlType.TEXT:
 		case ControlType.PASSWORD:
-		case ControlType.EMAIL:
 		case ControlType.SEARCH:
 		case ControlType.URL:
 		case ControlType.TEL:
@@ -80,6 +80,13 @@ const getFormControlPayload = (controlNode) => {
 					 * 	| HTMLTextAreaElement
 					 * 	| HTMLSelectElement}
 					 */ (controlNode),
+				)
+			);
+		}
+		case ControlType.EMAIL: {
+			return /** @type {T} */ (
+				getInputEmailValue(
+					/** @type {HTMLInputElement} */ (controlNode),
 				)
 			);
 		}

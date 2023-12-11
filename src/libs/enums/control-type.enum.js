@@ -1,13 +1,14 @@
 const ControlType = /** @type {const} */ ({
 	TEXT: 'text',
 	PASSWORD: 'password',
-	EMAIL: 'email',
 	SEARCH: 'search',
 	URL: 'url',
 	TEL: 'tel',
 	COLOR: 'color',
 	RADIO: 'radio',
 	HIDDEN: 'hidden',
+
+	EMAIL: 'email',
 
 	NUMBER: 'number',
 	RANGE: 'range',
@@ -18,6 +19,7 @@ const ControlType = /** @type {const} */ ({
 	TIME: 'time',
 	MONTH: 'month',
 	WEEK: 'week',
+
 	DATETIME_LOCAL: 'datetime-local',
 
 	FILE: 'file',
