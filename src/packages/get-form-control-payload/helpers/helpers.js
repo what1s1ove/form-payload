@@ -4,6 +4,7 @@ export { getCheckboxValue } from './get-checkbox-value/get-checkbox-value.helper
 export { getFormControlValue } from './get-control-value/get-control-value.helper.js';
 export { getDatetimeLocalValue } from './get-datatime-local-value/get-datatime-local-value.helper.js';
 export { getInputDateValue } from './get-input-date-value/get-input-date-value.helper.js';
+export { getInputEmailValue } from './get-input-email-value/get-input-email-value.helper.js';
 export { getInputFileValue } from './get-input-file-value/get-input-file-value.helper.js';
 export { getInputNumericValue } from './get-input-numeric-value/get-input-numeric-value.helper.js';
 export { getMultiSelectValues } from './get-multi-select-values/get-multi-select-values.helper.js';

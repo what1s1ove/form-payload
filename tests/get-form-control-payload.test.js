@@ -16,7 +16,6 @@ describe('getFormControlPayload should work correctly', () => {
 			const inputs = /** @type {const} */ ([
 				[ControlType.TEXT, 'Name'],
 				[ControlType.PASSWORD, 'top-secret'],
-				[ControlType.EMAIL, 'test@mail.com'],
 				[ControlType.SEARCH, 'apples'],
 				[ControlType.URL, 'form-payload.com'],
 				[ControlType.TEL, '10000000000'],
@@ -125,6 +124,69 @@ describe('getFormControlPayload should work correctly', () => {
 
 				document.body.innerHTML = '';
 			}
+		});
+
+		describe('should get value from email inputs correctly', () => {
+			test('should get value from singular email input correctly', () => {
+				const email = 'test@mail.com';
+
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input type="${ControlType.EMAIL}" value="${email}" />
+					</form>
+				`;
+
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
+				);
+
+				const controlValue = getFormControlPayload(control);
+
+				equal(typeof controlValue, 'string');
+
+				equal(controlValue, email);
+			});
+
+			test('should get value from multiple email input correctly', () => {
+				const emails = [
+					'example@mail.com',
+					'example@mail.ua',
+					'example@mail.org',
+					'example@mail.co',
+				];
+
+				document.body.innerHTML = /* HTML */ `
+					<form>
+						<input
+							type="${ControlType.EMAIL}"
+							value="${emails.join(',')}"
+							multiple
+						/>
+					</form>
+				`;
+
+				const control = /** @type {HTMLInputElement} */ (
+					document.querySelector('input')
+				);
+
+				const controlValue = getFormControlPayload(control);
+
+				equal(Array.isArray(controlValue), true);
+
+				equal(
+					/** @type {string[]} */ (controlValue).length,
+					emails.length,
+				);
+
+				equal(
+					/** @type {string[]} */ (controlValue).every((email) => {
+						return email.trim().length === email.length;
+					}),
+					true,
+				);
+
+				deepEqual(controlValue, emails);
+			});
 		});
 
 		describe('should get value from file inputs correctly', () => {
