@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/what1s1ove/form-payload/compare/1.3.0...1.4.0) (2023-12-11)
+
+
+### Features
+
+* get value from input email multiple as array fp-97 ([#115](https://github.com/what1s1ove/form-payload/issues/115)) ([71bc62f](https://github.com/what1s1ove/form-payload/commit/71bc62f2f14cee53b62f622dcdcc1edf6f8d4920))
+
 ## [1.3.0](https://github.com/what1s1ove/form-payload/compare/1.2.0...1.3.0) (2023-12-10)
 
 
