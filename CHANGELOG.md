@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/what1s1ove/form-payload/compare/1.4.0...1.5.0) (2023-12-11)
+
+
+### Features
+
+* get checkboxes with same value as array fp-96 ([#117](https://github.com/what1s1ove/form-payload/issues/117)) ([397680a](https://github.com/what1s1ove/form-payload/commit/397680a72f355e92f4e13fffbf2cd8e39c25f284))
+
 ## [1.4.0](https://github.com/what1s1ove/form-payload/compare/1.3.0...1.4.0) (2023-12-11)
 
 
