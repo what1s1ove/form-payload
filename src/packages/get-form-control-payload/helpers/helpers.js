@@ -1,6 +1,8 @@
+export { checkHasValueAsArray } from './check-has-value-as-array/check-has-value-as-array.helper.js';
 export { checkIsReferToAnotherNode } from './check-is-refer-to-another-node/check-is-refer-to-another-node.helper.js';
 export { getAllowedElements } from './get-allowed-elements/get-allowed-elements.helper.js';
 export { getCheckboxValue } from './get-checkbox-value/get-checkbox-value.helper.js';
+export { getCleanedValueAsArrayControlName } from './get-cleaned-value-as-array-control-name/get-cleaned-value-as-array-control-name.helper.js';
 export { getFormControlValue } from './get-control-value/get-control-value.helper.js';
 export { getDatetimeLocalValue } from './get-datatime-local-value/get-datatime-local-value.helper.js';
 export { getInputDateValue } from './get-input-date-value/get-input-date-value.helper.js';
