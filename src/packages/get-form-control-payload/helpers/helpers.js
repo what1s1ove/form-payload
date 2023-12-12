@@ -5,6 +5,8 @@ export { getCheckboxValue } from './get-checkbox-value/get-checkbox-value.helper
 export { getCleanedValueAsArrayControlName } from './get-cleaned-value-as-array-control-name/get-cleaned-value-as-array-control-name.helper.js';
 export { getFormControlValue } from './get-control-value/get-control-value.helper.js';
 export { getDatetimeLocalValue } from './get-datatime-local-value/get-datatime-local-value.helper.js';
+export { getFieldsetValue } from './get-fieldset-value/get-fieldset-value.helper.js';
+export { getFormControlsPayload } from './get-form-controls-payload/get-form-controls-payload.js';
 export { getInputDateValue } from './get-input-date-value/get-input-date-value.helper.js';
 export { getInputEmailValue } from './get-input-email-value/get-input-email-value.helper.js';
 export { getInputFileValue } from './get-input-file-value/get-input-file-value.helper.js';

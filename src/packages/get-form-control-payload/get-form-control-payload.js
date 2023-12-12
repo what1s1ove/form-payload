@@ -1,12 +1,9 @@
 import { ControlType } from '../../libs/enums/enums.js';
 import { FormPayloadError } from '../../libs/exceptions/exceptions.js';
 import {
-	checkHasValueAsArray,
-	checkIsReferToAnotherNode,
-	getAllowedElements,
 	getCheckboxValue,
-	getCleanedValueAsArrayControlName,
 	getDatetimeLocalValue,
+	getFieldsetValue,
 	getFormControlValue,
 	getInputDateValue,
 	getInputEmailValue,
@@ -15,47 +12,7 @@ import {
 	getMultiSelectValues,
 } from './helpers/helpers.js';
 
-/** @typedef {import('../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 /** @typedef {import('../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
-
-/**
- * @template {Record<string, unknown>} T
- * @param {...HTMLFormControlElement} controlElements
- * @returns {T}
- */
-const getFormControlsPayload = (...controlElements) => {
-	const allowedElements = getAllowedElements(controlElements);
-
-	const elementsValues = /** @type {T} */ ({});
-
-	for (const element of allowedElements) {
-		const isReferToAnotherNode = checkIsReferToAnotherNode(
-			element,
-			allowedElements,
-		);
-
-		if (isReferToAnotherNode) {
-			continue;
-		}
-
-		let key = /** @type {keyof T} */ (element.name);
-		let value = /** @type {T[keyof T]} */ (getFormControlPayload(element));
-		const hasValueAsArray = checkHasValueAsArray(element);
-
-		if (hasValueAsArray) {
-			key = getCleanedValueAsArrayControlName(element);
-
-			value = /** @type {T[keyof T]} */ ([
-				.../** @type {unknown[]} */ (elementsValues[key] ?? []),
-				.../** @type {unknown[]} */ (getFormControlPayload(element)),
-			]);
-		}
-
-		elementsValues[key] = value;
-	}
-
-	return elementsValues;
-};
 
 /**
  * @template {unknown} T
@@ -143,13 +100,10 @@ const getFormControlPayload = (controlNode) => {
 			);
 		}
 		case ControlType.FIELDSET: {
-			const elements = [
-				.../** @type {HTMLFieldSetElement} */ (controlNode).elements,
-			];
-
 			return /** @type {T} */ (
-				getFormControlsPayload(
-					.../** @type {HTMLFormControlElement[]} */ (elements),
+				getFieldsetValue(
+					getFormControlPayload,
+					/** @type {HTMLFieldSetElement} */ (controlNode),
 				)
 			);
 		}
@@ -160,4 +114,5 @@ const getFormControlPayload = (controlNode) => {
 	});
 };
 
-export { getFormControlPayload, getFormControlsPayload };
+export { getFormControlsPayload } from './helpers/helpers.js';
+export { getFormControlPayload };
