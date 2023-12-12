@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/what1s1ove/form-payload/compare/1.5.0...1.6.0) (2023-12-12)
+
+
+### Features
+
+* get fieldsets with same value as array fp-98 ([#119](https://github.com/what1s1ove/form-payload/issues/119)) ([8158efe](https://github.com/what1s1ove/form-payload/commit/8158efe824ec4f78d60da40089b0804bf439a51f))
+
 ## [1.5.0](https://github.com/what1s1ove/form-payload/compare/1.4.0...1.5.0) (2023-12-11)
 
 
