@@ -421,7 +421,7 @@ describe('getFormControlPayload should work correctly', () => {
 	});
 
 	describe('should work with HTMLFieldSetElement correctly', () => {
-		test('should get value from HTMLFieldSetElement correctly', () => {
+		test('should get value from regular HTMLFieldSetElement correctly', () => {
 			const BirthdayDate = {
 				OWN: '1994-06-13',
 				SCHOOLFRIEND: '1995-03-18',
@@ -525,6 +525,36 @@ describe('getFormControlPayload should work correctly', () => {
 			);
 
 			deepEqual(getFormControlPayload(control), formPayload);
+		});
+
+		test('should get value from multiple HTMLFieldSetElement correctly', () => {
+			const FormPayloadKey = /** @type {const} */ ({
+				SHOP_NAME: 'name',
+			});
+
+			const formPayload = {
+				[FormPayloadKey.SHOP_NAME]: 'Fruit Shop',
+			};
+
+			document.body.innerHTML = /* HTML */ `
+				<fieldset name="shops${VALUE_AS_ARRAY_IDENTIFIER}">
+					<input
+						type="${ControlType.TEXT}"
+						name="${FormPayloadKey.SHOP_NAME}"
+						value="${formPayload.name}"
+					/>
+				</fieldset>
+			`;
+
+			const control = /** @type {HTMLFieldSetElement} */ (
+				document.querySelector('fieldset')
+			);
+
+			const controlValue = getFormControlPayload(control);
+
+			equal(Array.isArray(controlValue), true);
+
+			deepEqual(controlValue, [formPayload]);
 		});
 	});
 

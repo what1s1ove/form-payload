@@ -44,6 +44,7 @@ const importConfig = {
 		'import/first': ['error'],
 		'import/group-exports': ['error'],
 		'import/newline-after-import': ['error'],
+		'import/no-cycle': ['error'],
 		'import/no-default-export': ['error'],
 		'import/no-duplicates': ['error'],
 	},

@@ -1,4 +1,7 @@
-import { getFormControlsPayload } from '../get-form-control-payload/get-form-control-payload.js';
+import {
+	getFormControlPayload,
+	getFormControlsPayload,
+} from '../get-form-control-payload/get-form-control-payload.js';
 
 /** @typedef {import('../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 
@@ -12,7 +15,7 @@ const getFormPayload = (formNode) => {
 		...formNode.elements,
 	]);
 
-	return getFormControlsPayload(...elements);
+	return getFormControlsPayload(getFormControlPayload, ...elements);
 };
 
 export { getFormPayload };

@@ -63,6 +63,89 @@ describe('getFormPayload should work correctly', () => {
 		deepEqual(getFormPayload(formNode), {});
 	});
 
+	describe('should get multiple value from controls with collection identifier correctly', () => {
+		test('should get multiple value from boolean inputs with collection identifier correctly', () => {
+			const Fruit = {
+				APPLE: 'apple',
+				BANANA: 'banana',
+				ORANGE: 'orange',
+			};
+
+			const formPayload = {
+				fruits: [Fruit.BANANA, Fruit.ORANGE],
+			};
+
+			document.body.innerHTML = /* HTML */ `
+				<form>
+					${Object.values(Fruit)
+						.map(
+							(fruit) => /* HTML */ `
+								<input
+									name="fruits${VALUE_AS_ARRAY_IDENTIFIER}"
+									type="${ControlType.CHECKBOX}"
+									value="${fruit}"
+									${formPayload.fruits.includes(fruit)
+										? 'checked'
+										: ''}
+								/>
+							`,
+						)
+						.join('')}
+				</form>
+			`;
+
+			const formNode = /** @type {HTMLFormElement} */ (
+				document.querySelector('form')
+			);
+
+			deepEqual(getFormPayload(formNode), formPayload);
+		});
+
+		test('should get multiple value from fieldsets with collection identifier correctly', () => {
+			const FormPayloadKey = /** @type {const} */ ({
+				FRUIT_NAME: 'name',
+				FRUITS: 'fruits',
+			});
+
+			const formPayload = {
+				[FormPayloadKey.FRUITS]: [
+					{
+						[FormPayloadKey.FRUIT_NAME]: 'Apple',
+					},
+					{
+						[FormPayloadKey.FRUIT_NAME]: 'Banana',
+					},
+				],
+			};
+
+			document.body.innerHTML = /* HTML */ `
+				<form>
+					${formPayload.fruits
+						.map(
+							(fruit) => /* HTML */ `
+								<fieldset
+									name="${FormPayloadKey.FRUITS}${VALUE_AS_ARRAY_IDENTIFIER}"
+								>
+									<input
+										name="${FormPayloadKey.FRUIT_NAME}"
+										type="${ControlType.TEXT}"
+										value="${fruit.name}"
+									/>
+								</fieldset>
+							`,
+						)
+						.join('')}
+				</form>
+			`;
+
+			const formNode = /** @type {HTMLFormElement} */ (
+				document.querySelector('form')
+			);
+
+			deepEqual(getFormPayload(formNode), formPayload);
+		});
+	});
+
 	test('should return the correct object with values', () => {
 		const BIRTHDAY_DATE = '1992-06-13';
 
