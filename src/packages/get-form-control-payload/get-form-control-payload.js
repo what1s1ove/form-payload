@@ -1,27 +1,27 @@
-import { ControlType } from '../../libs/enums/enums.js';
+import { ControlElementType } from '../../libs/enums/enums.js';
 import { FormPayloadError } from '../../libs/exceptions/exceptions.js';
 import {
-	getCheckboxValue,
-	getDatetimeLocalValue,
-	getFieldsetValue,
-	getFormControlValue,
-	getInputDateValue,
-	getInputEmailValue,
-	getInputFileValue,
-	getInputNumericValue,
-	getMultiSelectValues,
+	getCheckboxControlElementValue,
+	getControlElementValue,
+	getDateControlElementValue,
+	getDatetimeLocaControlElementValue,
+	getEmailControlElementValue,
+	getFieldsetControlElementValue,
+	getFileControlElementValue,
+	getMultiselectControlElementValue,
+	getNumericControlElementValue,
 } from './helpers/helpers.js';
 
 /** @typedef {import('../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 /**
  * @template {unknown} T
- * @param {HTMLFormOperationalControlElement} controlNode
+ * @param {HTMLFormOperationalControlElement} controlElement
  * @returns {T}
  * @throws {FormPayloadError}
  */
-const getFormControlPayload = (controlNode) => {
-	const hasType = 'type' in controlNode;
+const getFormControlPayload = (controlElement) => {
+	const hasType = 'type' in controlElement;
 
 	if (!hasType) {
 		throw new FormPayloadError({
@@ -29,90 +29,96 @@ const getFormControlPayload = (controlNode) => {
 		});
 	}
 
-	switch (controlNode.type) {
-		case ControlType.TEXT:
-		case ControlType.PASSWORD:
-		case ControlType.SEARCH:
-		case ControlType.URL:
-		case ControlType.TEL:
-		case ControlType.COLOR:
-		case ControlType.RADIO:
-		case ControlType.HIDDEN:
-		case ControlType.TEXTAREA:
-		case ControlType.SELECT_ONE:
-		case ControlType.OUTPUT: {
+	switch (controlElement.type) {
+		case ControlElementType.TEXT:
+		case ControlElementType.PASSWORD:
+		case ControlElementType.SEARCH:
+		case ControlElementType.URL:
+		case ControlElementType.TEL:
+		case ControlElementType.COLOR:
+		case ControlElementType.RADIO:
+		case ControlElementType.HIDDEN:
+		case ControlElementType.TEXTAREA:
+		case ControlElementType.SELECT_ONE:
+		case ControlElementType.OUTPUT: {
 			return /** @type {T} */ (
-				getFormControlValue(
+				getControlElementValue(
 					/**
 					 * @type {HTMLInputElement
 					 * 	| HTMLOutputElement
 					 * 	| HTMLTextAreaElement
 					 * 	| HTMLSelectElement}
-					 */ (controlNode),
+					 */ (controlElement),
 				)
 			);
 		}
-		case ControlType.EMAIL: {
+		case ControlElementType.EMAIL: {
 			return /** @type {T} */ (
-				getInputEmailValue(
-					/** @type {HTMLInputElement} */ (controlNode),
+				getEmailControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
 				)
 			);
 		}
-		case ControlType.NUMBER:
-		case ControlType.RANGE: {
+		case ControlElementType.NUMBER:
+		case ControlElementType.RANGE: {
 			return /** @type {T} */ (
-				getInputNumericValue(
-					/** @type {HTMLInputElement} */ (controlNode),
+				getNumericControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
 				)
 			);
 		}
-		case ControlType.CHECKBOX: {
+		case ControlElementType.CHECKBOX: {
 			return /** @type {T} */ (
-				getCheckboxValue(/** @type {HTMLInputElement} */ (controlNode))
-			);
-		}
-		case ControlType.DATE:
-		case ControlType.TIME:
-		case ControlType.MONTH:
-		case ControlType.WEEK: {
-			return /** @type {T} */ (
-				getInputDateValue(/** @type {HTMLInputElement} */ (controlNode))
-			);
-		}
-		case ControlType.DATETIME_LOCAL: {
-			return /** @type {T} */ (
-				getDatetimeLocalValue(
-					/** @type {HTMLInputElement} */ (controlNode),
+				getCheckboxControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
 				)
 			);
 		}
-		case ControlType.FILE: {
+		case ControlElementType.DATE:
+		case ControlElementType.TIME:
+		case ControlElementType.MONTH:
+		case ControlElementType.WEEK: {
 			return /** @type {T} */ (
-				getInputFileValue(/** @type {HTMLInputElement} */ (controlNode))
-			);
-		}
-		case ControlType.SELECT_MULTIPLE: {
-			return /** @type {T} */ (
-				getMultiSelectValues(
-					/** @type {HTMLSelectElement} */ (controlNode),
+				getDateControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
 				)
 			);
 		}
-		case ControlType.FIELDSET: {
+		case ControlElementType.DATETIME_LOCAL: {
 			return /** @type {T} */ (
-				getFieldsetValue(
+				getDatetimeLocaControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.FILE: {
+			return /** @type {T} */ (
+				getFileControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.SELECT_MULTIPLE: {
+			return /** @type {T} */ (
+				getMultiselectControlElementValue(
+					/** @type {HTMLSelectElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.FIELDSET: {
+			return /** @type {T} */ (
+				getFieldsetControlElementValue(
 					getFormControlPayload,
-					/** @type {HTMLFieldSetElement} */ (controlNode),
+					/** @type {HTMLFieldSetElement} */ (controlElement),
 				)
 			);
 		}
 	}
 
 	throw new FormPayloadError({
-		message: `Unsupported control element type – ${controlNode.type}.`,
+		message: `Unsupported control element type – ${controlElement.type}.`,
 	});
 };
 
-export { getFormControlsPayload } from './helpers/helpers.js';
+export { getFormControlElementsPayload } from './helpers/helpers.js';
 export { getFormControlPayload };

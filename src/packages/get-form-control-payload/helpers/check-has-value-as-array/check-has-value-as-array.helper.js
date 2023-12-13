@@ -1,5 +1,5 @@
 import {
-	VALUE_AS_ARRAY_CUSTOM_CONTROL_TYPES,
+	VALUE_AS_ARRAY_CUSTOM_CONTROL_ELEMENT_TYPES,
 	VALUE_AS_ARRAY_IDENTIFIER,
 } from '../../../../libs/constants/constants.js';
 
@@ -10,12 +10,15 @@ import {
  * @returns {boolean}
  */
 const checkHasValueAsArray = (element) => {
-	return (
-		element.name.endsWith(VALUE_AS_ARRAY_IDENTIFIER) &&
-		/** @type {readonly string[]} */ (
-			VALUE_AS_ARRAY_CUSTOM_CONTROL_TYPES
-		).includes(element.type)
+	const hasValueAsArrayIdentifier = element.name.endsWith(
+		VALUE_AS_ARRAY_IDENTIFIER,
 	);
+	const isValueAsArrayCustomControlElementType =
+		/** @type {readonly string[]} */ (
+			VALUE_AS_ARRAY_CUSTOM_CONTROL_ELEMENT_TYPES
+		).includes(element.type);
+
+	return hasValueAsArrayIdentifier && isValueAsArrayCustomControlElementType;
 };
 
 export { checkHasValueAsArray };
