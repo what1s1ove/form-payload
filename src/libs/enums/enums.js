@@ -1,1 +1,1 @@
-export { ControlType } from './control-type.enum.js';
+export { ControlElementType } from './control-element-type.enum.js';

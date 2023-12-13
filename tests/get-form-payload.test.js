@@ -3,10 +3,10 @@ import { beforeEach, describe, test } from 'node:test';
 
 import { getFormPayload } from '../src/index.js';
 import {
-	BANNED_CONTROL_TYPES,
+	BANNED_CONTROL_ELEMENT_TYPES,
 	VALUE_AS_ARRAY_IDENTIFIER,
 } from '../src/libs/constants/constants.js';
-import { ControlType } from '../src/libs/enums/enums.js';
+import { ControlElementType } from '../src/libs/enums/enums.js';
 import { bannedElementNameToElementInstance } from '../src/libs/maps/maps.js';
 
 describe('getFormPayload should work correctly', () => {
@@ -14,20 +14,20 @@ describe('getFormPayload should work correctly', () => {
 		document.body.innerHTML = '';
 	});
 
-	test('should skip banned control types', () => {
+	test('should skip banned control element types', () => {
 		document.body.innerHTML = /* HTML */ `
 			<form>
-				${BANNED_CONTROL_TYPES.map(
+				${BANNED_CONTROL_ELEMENT_TYPES.map(
 					(type) => `<input type="${type}" name="${type}" />`,
 				).join(',')}
 			</form>
 		`;
 
-		const formNode = /** @type {HTMLFormElement} */ (
+		const formElement = /** @type {HTMLFormElement} */ (
 			document.querySelector('form')
 		);
 
-		deepEqual(getFormPayload(formNode), {});
+		deepEqual(getFormPayload(formElement), {});
 	});
 
 	test('should skip banned elements', () => {
@@ -42,28 +42,28 @@ describe('getFormPayload should work correctly', () => {
 			</form>
 		`;
 
-		const formNode = /** @type {HTMLFormElement} */ (
+		const formElement = /** @type {HTMLFormElement} */ (
 			document.querySelector('form')
 		);
 
-		deepEqual(getFormPayload(formNode), {});
+		deepEqual(getFormPayload(formElement), {});
 	});
 
-	test('should skip controls without name', () => {
+	test('should skip control elements without name', () => {
 		document.body.innerHTML = /* HTML */ `
 			<form>
 				<input name="" />
 			</form>
 		`;
 
-		const formNode = /** @type {HTMLFormElement} */ (
+		const formElement = /** @type {HTMLFormElement} */ (
 			document.querySelector('form')
 		);
 
-		deepEqual(getFormPayload(formNode), {});
+		deepEqual(getFormPayload(formElement), {});
 	});
 
-	describe('should get multiple value from controls with collection identifier correctly', () => {
+	describe('should get multiple value from control elements with collection identifier correctly', () => {
 		test('should get multiple value from boolean inputs with collection identifier correctly', () => {
 			const Fruit = {
 				APPLE: 'apple',
@@ -82,7 +82,7 @@ describe('getFormPayload should work correctly', () => {
 							(fruit) => /* HTML */ `
 								<input
 									name="fruits${VALUE_AS_ARRAY_IDENTIFIER}"
-									type="${ControlType.CHECKBOX}"
+									type="${ControlElementType.CHECKBOX}"
 									value="${fruit}"
 									${formPayload.fruits.includes(fruit)
 										? 'checked'
@@ -94,11 +94,11 @@ describe('getFormPayload should work correctly', () => {
 				</form>
 			`;
 
-			const formNode = /** @type {HTMLFormElement} */ (
+			const formElement = /** @type {HTMLFormElement} */ (
 				document.querySelector('form')
 			);
 
-			deepEqual(getFormPayload(formNode), formPayload);
+			deepEqual(getFormPayload(formElement), formPayload);
 		});
 
 		test('should get multiple value from fieldsets with collection identifier correctly', () => {
@@ -128,7 +128,7 @@ describe('getFormPayload should work correctly', () => {
 								>
 									<input
 										name="${FormPayloadKey.FRUIT_NAME}"
-										type="${ControlType.TEXT}"
+										type="${ControlElementType.TEXT}"
 										value="${fruit.name}"
 									/>
 								</fieldset>
@@ -138,11 +138,11 @@ describe('getFormPayload should work correctly', () => {
 				</form>
 			`;
 
-			const formNode = /** @type {HTMLFormElement} */ (
+			const formElement = /** @type {HTMLFormElement} */ (
 				document.querySelector('form')
 			);
 
-			deepEqual(getFormPayload(formNode), formPayload);
+			deepEqual(getFormPayload(formElement), formPayload);
 		});
 	});
 
@@ -171,28 +171,28 @@ describe('getFormPayload should work correctly', () => {
 		document.body.innerHTML = /* HTML */ `
 			<form>
 				<input
-					type="${ControlType.TEXT}"
+					type="${ControlElementType.TEXT}"
 					name="${FormPayloadKey.NAME}"
 					value="${formPayload.name}"
 				/>
 				<input
-					type="${ControlType.DATE}"
+					type="${ControlElementType.DATE}"
 					name="${FormPayloadKey.BIRTHDAY}"
 					value="${BIRTHDAY_DATE}"
 				/>
 				<input
-					type="${ControlType.CHECKBOX}"
+					type="${ControlElementType.CHECKBOX}"
 					name="${FormPayloadKey.HAS_FRIENDS}"
 					${formPayload.hasFriends ? 'checked' : ''}
 				/>
 				<input
-					type="${ControlType.NUMBER}"
+					type="${ControlElementType.NUMBER}"
 					name="${FormPayloadKey.FRIENDS_COUNT}"
 					value="${formPayload.friendsCount}"
 				/>
 				<fieldset name="${FormPayloadKey.MAIN_FRIEND}">
 					<input
-						type="${ControlType.TEXT}"
+						type="${ControlElementType.TEXT}"
 						name="${FormPayloadKey.MAIN_FRIEND_NAME}"
 						value="${formPayload.mainFriend.name}"
 					/>
@@ -200,14 +200,14 @@ describe('getFormPayload should work correctly', () => {
 			</form>
 		`;
 
-		const formNode = /** @type {HTMLFormElement} */ (
+		const formElement = /** @type {HTMLFormElement} */ (
 			document.querySelector('form')
 		);
 
-		deepEqual(getFormPayload(formNode), formPayload);
+		deepEqual(getFormPayload(formElement), formPayload);
 	});
 
-	describe('should get multiple value from controls with collection identifier correctly', () => {
+	describe('should get multiple value from control elements with collection identifier correctly', () => {
 		test('should get multiple value from boolean inputs with collection identifier correctly', () => {
 			const Fruit = {
 				APPLE: 'apple',
@@ -226,7 +226,7 @@ describe('getFormPayload should work correctly', () => {
 							(fruit) => /* HTML */ `
 								<input
 									name="fruits${VALUE_AS_ARRAY_IDENTIFIER}"
-									type="${ControlType.CHECKBOX}"
+									type="${ControlElementType.CHECKBOX}"
 									value="${fruit}"
 									${formPayload.fruits.includes(fruit)
 										? 'checked'
@@ -238,11 +238,11 @@ describe('getFormPayload should work correctly', () => {
 				</form>
 			`;
 
-			const formNode = /** @type {HTMLFormElement} */ (
+			const formElement = /** @type {HTMLFormElement} */ (
 				document.querySelector('form')
 			);
 
-			deepEqual(getFormPayload(formNode), formPayload);
+			deepEqual(getFormPayload(formElement), formPayload);
 		});
 	});
 });
