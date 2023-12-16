@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/what1s1ove/form-payload/compare/1.6.0...1.7.0) (2023-12-16)
+
+
+### Features
+
+* improve docs with more examples and readability fp-101 ([#122](https://github.com/what1s1ove/form-payload/issues/122)) ([b64c118](https://github.com/what1s1ove/form-payload/commit/b64c118f0bbcb0a1829f397f7fbf35623f006d84))
+
 ## [1.6.0](https://github.com/what1s1ove/form-payload/compare/1.5.0...1.6.0) (2023-12-12)
 
 
