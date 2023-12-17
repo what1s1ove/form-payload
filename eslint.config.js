@@ -1,24 +1,24 @@
-// @ts-expect-error: no declaration file
 import js from '@eslint/js';
-// @ts-expect-error: no declaration file
+import ts from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import { resolve as tsResolver } from 'eslint-import-resolver-typescript';
 import importPlugin from 'eslint-plugin-import';
-// @ts-expect-error: no declaration file
 import jsdoc from 'eslint-plugin-jsdoc';
-// @ts-expect-error: no declaration file
 import perfectionist from 'eslint-plugin-perfectionist';
-// @ts-expect-error: no declaration file
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import sonarjs from 'eslint-plugin-sonarjs';
-// @ts-expect-error: no declaration file
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @typedef {import('eslint').Linter.FlatConfig} FlatConfig */
+/** @typedef {import('eslint').Linter.ParserModule} ParserModule */
+
+/** @type {FlatConfig} */
 const ignoresConfig = {
 	ignores: ['dist'],
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
 const globalConfig = {
 	languageOptions: {
 		globals: globals.browser,
@@ -32,7 +32,7 @@ const globalConfig = {
 	},
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
 const importConfig = {
 	plugins: {
 		import: importPlugin,
@@ -52,10 +52,13 @@ const importConfig = {
 		'import/parsers': {
 			espree: ['.js', '.cjs'],
 		},
+		'import/resolver': {
+			typescript: tsResolver,
+		},
 	},
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
 const jsdocConfig = {
 	plugins: {
 		jsdoc,
@@ -83,7 +86,7 @@ const jsdocConfig = {
 	},
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
 const sonarConfig = {
 	plugins: {
 		sonarjs,
@@ -91,7 +94,7 @@ const sonarConfig = {
 	rules: sonarjs.configs.recommended.rules,
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
 const unicornConfig = {
 	plugins: {
 		unicorn,
@@ -102,7 +105,7 @@ const unicornConfig = {
 	},
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
 const perfectionistConfig = {
 	plugins: {
 		perfectionist,
@@ -110,7 +113,7 @@ const perfectionistConfig = {
 	rules: perfectionist.configs['recommended-natural'].rules,
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
 const simpleImportSortConfig = {
 	plugins: {
 		'simple-import-sort': simpleImportSort,
@@ -121,7 +124,23 @@ const simpleImportSortConfig = {
 	},
 };
 
-/** @type {import('eslint').Linter.FlatConfig} */
+/** @type {FlatConfig} */
+const typescriptPlugin = {
+	languageOptions: {
+		parser: /** @type {ParserModule} */ (tsParser),
+		parserOptions: {
+			project: './tsconfig.json',
+		},
+	},
+	plugins: {
+		'@typescript-eslint': ts,
+	},
+	rules: {
+		...ts.configs['strict-type-checked'].rules,
+	},
+};
+
+/** @type {FlatConfig} */
 const mainRulesConfig = {
 	rules: {
 		'arrow-parens': ['error', 'always'],
@@ -152,7 +171,7 @@ const mainRulesConfig = {
 	},
 };
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
+/** @type {FlatConfig[]} */
 const overridesConfigs = [
 	{
 		files: [
@@ -174,6 +193,7 @@ const overridesConfigs = [
 	{
 		files: ['tests/**/*.test.js'],
 		rules: {
+			'@typescript-eslint/no-floating-promises': ['off'],
 			'perfectionist/sort-imports': ['off'],
 			'sonarjs/cognitive-complexity': ['off'],
 		},
@@ -186,17 +206,18 @@ const overridesConfigs = [
 	},
 ];
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
+/** @type {FlatConfig[]} */
 const config = [
 	ignoresConfig,
 	globalConfig,
 	importConfig,
 	jsdocConfig,
-	mainRulesConfig,
+	typescriptPlugin,
 	sonarConfig,
 	unicornConfig,
 	perfectionistConfig,
 	simpleImportSortConfig,
+	mainRulesConfig,
 	...overridesConfigs,
 ];
 

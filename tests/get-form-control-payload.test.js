@@ -77,6 +77,7 @@ describe('getFormControlPayload should work correctly', () => {
 		describe('should get value from boolean inputs correctly', () => {
 			test('should get value from regular boolean input correctly', () => {
 				const inputs = /** @type {const} */ ([
+					[ControlElementType.CHECKBOX, true],
 					[ControlElementType.CHECKBOX, false],
 				]);
 
