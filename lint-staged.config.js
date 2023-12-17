@@ -1,4 +1,6 @@
-/** @type {import('lint-staged').Config} */
+/** @typedef {import('lint-staged').Config} Config */
+
+/** @type {Config} */
 const config = {
 	'*': ['npm run ci:lint:fs', 'npm run ci:lint:editor'],
 	'*.{json,md,yml,js}': ['npm run ci:lint:format'],
