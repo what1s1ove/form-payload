@@ -13,7 +13,7 @@ npm install form-payload
 
 ## Demo
 
-The library works perfectly with any framework. Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) and [form elements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements). The same applies to validations and any other libraries. Create your own wrappers on top of the functions exported by **form-payload** library.
+The library works perfectly with any framework. Just use a valid [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) and [form elements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements). If you want to add validation or any other functionality, create wrappers on top of the exported functions from the **form-payload** library.
 
 - [Pure JavaScript](https://stackblitz.com/edit/form-payload-javascript?file=index.js)
 - [TypeScript + Validation](https://stackblitz.com/edit/form-payload-typescript?file=index.ts,get-form-payload.ts)
@@ -55,6 +55,7 @@ The library works perfectly with any framework. Just use a valid [HTMLFormElemen
 
     // ✅ ideal
     const file = getFormControlPayload(evt.target);
+    // => File or null
   });
 
   mailingFormNode.addEventListener('input', (evt) => {
