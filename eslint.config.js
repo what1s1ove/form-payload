@@ -179,6 +179,7 @@ const overridesConfigs = [
 			'prettier.config.js',
 			'lint-staged.config.js',
 			'eslint.config.js',
+			'knip.config.js',
 		],
 		rules: {
 			'import/no-default-export': ['off'],
