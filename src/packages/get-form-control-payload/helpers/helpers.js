@@ -1,5 +1,3 @@
-export { checkHasValueAsArray } from './check-has-value-as-array/check-has-value-as-array.helper.js';
-export { checkIsReferToAnotherElement } from './check-is-refer-to-another-element/check-is-refer-to-another-element.helper.js';
 export { getCheckboxControlElementValue } from './get-checkbox-control-element-value/get-checkbox-control-element-value.helper.js';
 export { getControlElementValue } from './get-control-element-value/get-control-element-value.helper.js';
 export { getDatetimeLocaControlElementValue } from './get-datatime-local-control-element-value/get-datatime-local-control-element-value.helper.js';
@@ -10,5 +8,3 @@ export { getFileControlElementValue } from './get-file-control-element-value/get
 export { getFormControlElementsPayload } from './get-form-control-elements-payload/get-form-control-elements-payload.js';
 export { getMultiselectControlElementValue } from './get-multiselect-control-type-value/get-multiselect-control-type-value.helper.js';
 export { getNumericControlElementValue } from './get-numeric-control-element-value/get-numeric-control-element-value.helper.js';
-export { getOperationalControlElements } from './get-operational-control-elements/get-operational-control-elements.helper.js';
-export { normalizeValueAsArrayControlElementName } from './normalize-value-as-array-control-element-name/normalize-value-as-array-control-element-name.helper.js';
