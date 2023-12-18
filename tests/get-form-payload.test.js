@@ -63,6 +63,46 @@ describe('getFormPayload should work correctly', () => {
 		deepEqual(getFormPayload(formElement), {});
 	});
 
+	test('should get value from form with multiple radio inputs correctly', () => {
+		const Fruit = /** @type {const} */ ({
+			APPLE: 'apple',
+			BANANA: 'banana',
+			ORANGE: 'orange',
+		});
+
+		const RadioInputName = /** @type {const} */ ({
+			NAME: 'fruit',
+			SELECTED_VALUE: Fruit.BANANA,
+		});
+
+		document.body.innerHTML = /* HTML */ `
+			<form>
+				${Object.values(Fruit)
+					.map(
+						(fruit) => /* HTML */ `
+							<input
+								name="${RadioInputName.NAME}"
+								type="${ControlElementType.RADIO}"
+								value="${fruit}"
+								${fruit === RadioInputName.SELECTED_VALUE
+									? 'checked'
+									: ''}
+							/>
+						`,
+					)
+					.join('')}
+			</form>
+		`;
+
+		const formElement = /** @type {HTMLFormElement} */ (
+			document.querySelector('form')
+		);
+
+		deepEqual(getFormPayload(formElement), {
+			[RadioInputName.NAME]: RadioInputName.SELECTED_VALUE,
+		});
+	});
+
 	describe('should get multiple value from control elements with collection identifier correctly', () => {
 		test('should get multiple value from boolean inputs with collection identifier correctly', () => {
 			const Fruit = {
@@ -205,44 +245,5 @@ describe('getFormPayload should work correctly', () => {
 		);
 
 		deepEqual(getFormPayload(formElement), formPayload);
-	});
-
-	describe('should get multiple value from control elements with collection identifier correctly', () => {
-		test('should get multiple value from boolean inputs with collection identifier correctly', () => {
-			const Fruit = {
-				APPLE: 'apple',
-				BANANA: 'banana',
-				ORANGE: 'orange',
-			};
-
-			const formPayload = {
-				fruits: [Fruit.BANANA, Fruit.ORANGE],
-			};
-
-			document.body.innerHTML = /* HTML */ `
-				<form>
-					${Object.values(Fruit)
-						.map(
-							(fruit) => /* HTML */ `
-								<input
-									name="fruits${VALUE_AS_ARRAY_IDENTIFIER}"
-									type="${ControlElementType.CHECKBOX}"
-									value="${fruit}"
-									${formPayload.fruits.includes(fruit)
-										? 'checked'
-										: ''}
-								/>
-							`,
-						)
-						.join('')}
-				</form>
-			`;
-
-			const formElement = /** @type {HTMLFormElement} */ (
-				document.querySelector('form')
-			);
-
-			deepEqual(getFormPayload(formElement), formPayload);
-		});
 	});
 });

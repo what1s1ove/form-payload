@@ -1,4 +1,4 @@
-/** @typedef {import('../../../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
+/** @typedef {import('../../../../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 
 /**
  * @param {HTMLFormControlElement} element

@@ -1,6 +1,6 @@
-import { VALUE_AS_ARRAY_IDENTIFIER } from '../../../../libs/constants/constants.js';
+import { VALUE_AS_ARRAY_IDENTIFIER } from '../../../../../libs/constants/constants.js';
 
-/** @typedef {import('../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
+/** @typedef {import('../../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 /**
  * @param {HTMLFormOperationalControlElement} element

@@ -8,3 +8,4 @@ export { getFileControlElementValue } from './get-file-control-element-value/get
 export { getFormControlElementsPayload } from './get-form-control-elements-payload/get-form-control-elements-payload.js';
 export { getMultiselectControlElementValue } from './get-multiselect-control-type-value/get-multiselect-control-type-value.helper.js';
 export { getNumericControlElementValue } from './get-numeric-control-element-value/get-numeric-control-element-value.helper.js';
+export { getRadioControlElementValue } from './get-radio-control-element-value/get-radio-control-element-value.helper.js';

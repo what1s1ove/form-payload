@@ -2,7 +2,8 @@
  * @param {HTMLInputElement
  * 	| HTMLOutputElement
  * 	| HTMLTextAreaElement
- * 	| HTMLSelectElement} element
+ * 	| HTMLSelectElement
+ * 	| RadioNodeList} element
  * @returns {string}
  */
 const getControlElementValue = (element) => {

@@ -1,6 +1,6 @@
 import { getControlElementValue } from '../get-control-element-value/get-control-element-value.helper.js';
 
-const EMAIL_SEPARATOR = ',';
+const EMAIL_SEPARATOR = /** @type {const} */ (',');
 
 /**
  * @param {HTMLInputElement} element

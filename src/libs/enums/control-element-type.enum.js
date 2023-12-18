@@ -5,10 +5,11 @@ const ControlElementType = /** @type {const} */ ({
 	URL: 'url',
 	TEL: 'tel',
 	COLOR: 'color',
-	RADIO: 'radio',
 	HIDDEN: 'hidden',
 
 	EMAIL: 'email',
+
+	RADIO: 'radio',
 
 	NUMBER: 'number',
 	RANGE: 'range',
