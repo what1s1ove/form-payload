@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/what1s1ove/form-payload/compare/1.7.0...1.7.1) (2023-12-18)
+
+
+### Bug Fixes
+
+* fix getting value from radio input fp-126 ([#130](https://github.com/what1s1ove/form-payload/issues/130)) ([ab9e134](https://github.com/what1s1ove/form-payload/commit/ab9e1349105adbcff8232bf35a83d9a8e31b6d15))
+
 ## [1.7.0](https://github.com/what1s1ove/form-payload/compare/1.6.0...1.7.0) (2023-12-16)
 
 
