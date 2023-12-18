@@ -1,4 +1,4 @@
-import { VALUE_AS_ARRAY_IDENTIFIER } from '../../../../libs/constants/constants.js';
+import { VALUE_AS_ARRAY_IDENTIFIER } from '../../../../../libs/constants/constants.js';
 
 /**
  * @param {HTMLInputElement} element

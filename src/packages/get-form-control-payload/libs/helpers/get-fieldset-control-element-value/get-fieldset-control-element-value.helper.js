@@ -1,8 +1,7 @@
-import { VALUE_AS_ARRAY_IDENTIFIER } from '../../../../libs/constants/constants.js';
+import { VALUE_AS_ARRAY_IDENTIFIER } from '../../../../../libs/constants/constants.js';
 import { getFormControlElementsPayload } from '../get-form-control-elements-payload/get-form-control-elements-payload.js';
 
-/** @typedef {import('../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
-/** @typedef {import('../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
+/** @typedef {import('../../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 /**
  * @template {Record<string, unknown>} T
@@ -16,10 +15,9 @@ const getFieldsetControlElementValue = (
 	getFormControlElementPayloadCallback,
 	element,
 ) => {
-	const elements = [.../** @type {HTMLFieldSetElement} */ (element).elements];
 	const fieldsetValue = getFormControlElementsPayload(
 		getFormControlElementPayloadCallback,
-		.../** @type {HTMLFormControlElement[]} */ (elements),
+		element.elements,
 	);
 
 	const hasArrayValue = element.name.endsWith(VALUE_AS_ARRAY_IDENTIFIER);

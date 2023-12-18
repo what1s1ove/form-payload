@@ -4,14 +4,14 @@ import {
 	checkIsAllowedControlElementType,
 } from './helpers/helpers.js';
 
-/** @typedef {import('../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
-/** @typedef {import('../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
+/** @typedef {import('../../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
+/** @typedef {import('../../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
-const OPERATIONAL_CONTROL_ELEMENT_CHECKERS = [
+const OPERATIONAL_CONTROL_ELEMENT_CHECKERS = /** @type {const} */ ([
 	checkHasControlElementName,
 	checkIsAllowedControlElement,
 	checkIsAllowedControlElementType,
-];
+]);
 
 /**
  * @param {HTMLFormControlElement[]} elements

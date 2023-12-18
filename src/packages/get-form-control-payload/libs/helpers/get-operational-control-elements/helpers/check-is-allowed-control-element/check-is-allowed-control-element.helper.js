@@ -1,6 +1,6 @@
-import { bannedElementNameToElementInstance } from '../../../../../../libs/maps/maps.js';
+import { bannedElementNameToElementInstance } from '../../../../../../../libs/maps/maps.js';
 
-/** @typedef {import('../../../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
+/** @typedef {import('../../../../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 
 /**
  * @param {HTMLFormControlElement} element

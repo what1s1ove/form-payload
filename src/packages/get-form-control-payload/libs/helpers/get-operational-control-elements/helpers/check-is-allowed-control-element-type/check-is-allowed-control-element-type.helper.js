@@ -1,6 +1,6 @@
-import { BANNED_CONTROL_ELEMENT_TYPES } from '../../../../../../libs/constants/constants.js';
+import { BANNED_CONTROL_ELEMENT_TYPES } from '../../../../../../../libs/constants/constants.js';
 
-/** @typedef {import('../../../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
+/** @typedef {import('../../../../../../../libs/types/types.js').HTMLFormControlElement} HTMLFormControlElement */
 
 /**
  * @param {HTMLFormControlElement} element

@@ -10,7 +10,8 @@ import {
 	getFileControlElementValue,
 	getMultiselectControlElementValue,
 	getNumericControlElementValue,
-} from './helpers/helpers.js';
+	getRadioControlElementValue,
+} from './libs/helpers/helpers.js';
 
 /** @typedef {import('../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
@@ -36,7 +37,6 @@ const getFormControlPayload = (controlElement) => {
 		case ControlElementType.URL:
 		case ControlElementType.TEL:
 		case ControlElementType.COLOR:
-		case ControlElementType.RADIO:
 		case ControlElementType.HIDDEN:
 		case ControlElementType.TEXTAREA:
 		case ControlElementType.SELECT_ONE:
@@ -55,6 +55,13 @@ const getFormControlPayload = (controlElement) => {
 		case ControlElementType.EMAIL: {
 			return /** @type {T} */ (
 				getEmailControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.RADIO: {
+			return /** @type {T} */ (
+				getRadioControlElementValue(
 					/** @type {HTMLInputElement} */ (controlElement),
 				)
 			);
@@ -120,5 +127,5 @@ const getFormControlPayload = (controlElement) => {
 	});
 };
 
-export { getFormControlElementsPayload } from './helpers/helpers.js';
+export { getFormControlElementsPayload } from './libs/helpers/helpers.js';
 export { getFormControlPayload };
