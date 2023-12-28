@@ -1,9 +1,10 @@
-/** @typedef {import('./html-form-non-operational-control-element.type.js').HTMLFormNonOperationalControlElement} HTMLFormNonOperationalControlElement */
-/** @typedef {import('./html-form-operational-control-element.type.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
+import { HTMLFormNonOperationalControlElement } from './html-form-non-operational-control-element.type.js';
+import { HTMLFormOperationalControlElement } from './html-form-operational-control-element.type.js';
 
 /**
  * @typedef {HTMLFormNonOperationalControlElement
- * 	| HTMLFormOperationalControlElement} HTMLFormControlElement
+ * 	| HTMLFormOperationalControlElement}
  */
+let HTMLFormControlElement;
 
-export {};
+export { HTMLFormControlElement };

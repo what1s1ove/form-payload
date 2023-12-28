@@ -1,6 +1,4 @@
-/** @typedef {import('lint-staged').Config} Config */
-
-/** @type {Config} */
+/** @type {import('lint-staged').Config} */
 const config = {
 	'*': [
 		'npm run ci:lint:fs',

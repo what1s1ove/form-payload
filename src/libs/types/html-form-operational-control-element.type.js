@@ -3,7 +3,8 @@
  * 	| HTMLSelectElement
  * 	| HTMLOutputElement
  * 	| HTMLFieldSetElement
- * 	| HTMLTextAreaElement} HTMLFormOperationalControlElement
+ * 	| HTMLTextAreaElement}
  */
+let HTMLFormOperationalControlElement;
 
-export {};
+export { HTMLFormOperationalControlElement };

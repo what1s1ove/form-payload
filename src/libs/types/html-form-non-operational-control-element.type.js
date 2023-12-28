@@ -1,3 +1,4 @@
-/** @typedef {HTMLButtonElement | HTMLObjectElement} HTMLFormNonOperationalControlElement */
+/** @typedef {HTMLButtonElement | HTMLObjectElement} */
+let HTMLFormNonOperationalControlElement;
 
-export {};
+export { HTMLFormNonOperationalControlElement };

@@ -10,8 +10,10 @@ import sonarjs from 'eslint-plugin-sonarjs';
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 
-/** @typedef {import('eslint').Linter.FlatConfig} FlatConfig */
-/** @typedef {import('eslint').Linter.ParserModule} ParserModule */
+/** @typedef {import('eslint').Linter.FlatConfig} */
+let FlatConfig;
+/** @typedef {import('eslint').Linter.ParserModule} */
+let ParserModule;
 
 /** @type {FlatConfig} */
 const ignoresConfig = {
@@ -65,6 +67,7 @@ const jsdocConfig = {
 	},
 	rules: {
 		...jsdoc.configs['recommended-typescript-flavor-error'].rules,
+		'jsdoc/no-undefined-types': ['error'],
 		'jsdoc/require-jsdoc': [
 			'error',
 			{

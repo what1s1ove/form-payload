@@ -1,5 +1,6 @@
 import { ControlElementType } from '../../libs/enums/enums.js';
 import { FormPayloadError } from '../../libs/exceptions/exceptions.js';
+import { HTMLFormOperationalControlElement } from '../../libs/types/types.js';
 import {
 	getCheckboxControlElementValue,
 	getControlElementValue,
@@ -12,8 +13,6 @@ import {
 	getNumericControlElementValue,
 	getRadioControlElementValue,
 } from './libs/helpers/helpers.js';
-
-/** @typedef {import('../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 /**
  * @template {unknown} T
