@@ -1,13 +1,10 @@
 import { VALUE_AS_ARRAY_IDENTIFIER } from '../../../../../libs/constants/constants.js';
+import { HTMLFormOperationalControlElement } from '../../../../../libs/types/types.js';
 import { getFormControlElementsPayload } from '../get-form-control-elements-payload/get-form-control-elements-payload.js';
-
-/** @typedef {import('../../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
 
 /**
  * @template {Record<string, unknown>} T
- * @param {<T extends unknown>(
- * 	element: HTMLFormOperationalControlElement,
- * ) => T} getFormControlElementPayloadCallback
+ * @param {(element: HTMLFormOperationalControlElement) => unknown} getFormControlElementPayloadCallback
  * @param {HTMLFieldSetElement} element
  * @returns {T | [T]}
  */

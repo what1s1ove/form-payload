@@ -1,6 +1,4 @@
-/** @typedef {import('knip/dist').KnipConfig} KnipConfig */
-
-/** @type {KnipConfig} */
+/** @type {import('knip').KnipConfig} */
 const config = {
 	entry: ['src/index.js'],
 };

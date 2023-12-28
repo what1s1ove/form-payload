@@ -2,8 +2,7 @@ import {
 	VALUE_AS_ARRAY_CUSTOM_CONTROL_ELEMENT_TYPES,
 	VALUE_AS_ARRAY_IDENTIFIER,
 } from '../../../../../libs/constants/constants.js';
-
-/** @typedef {import('../../../../../libs/types/types.js').HTMLFormOperationalControlElement} HTMLFormOperationalControlElement */
+import { HTMLFormOperationalControlElement } from '../../../../../libs/types/types.js';
 
 /**
  * @param {HTMLFormOperationalControlElement} element
