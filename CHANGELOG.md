@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/what1s1ove/form-payload/compare/1.7.1...1.7.2) (2024-01-12)
+
+
+### Bug Fixes
+
+* remove postinstall script fp-138 ([#139](https://github.com/what1s1ove/form-payload/issues/139)) ([8cf9b1f](https://github.com/what1s1ove/form-payload/commit/8cf9b1f4a3126c33755dc634974ef69098952567))
+
 ## [1.7.1](https://github.com/what1s1ove/form-payload/compare/1.7.0...1.7.1) (2023-12-18)
 
 
