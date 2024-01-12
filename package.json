@@ -28,9 +28,9 @@
 		"node": ">=10"
 	},
 	"scripts": {
-		"postinstall": "npx simple-git-hooks",
 		"_prettier": "prettier \"**/*.{json,md,yml,js}\"",
-		"ci:lint:commit": "npx @commitlint/cli --edit",
+		"git:hook:precommit": "lint-staged",
+		"git:hook:commit": "npx @commitlint/cli --edit",
 		"ci:lint:fs": "ls-lint",
 		"ci:lint:editor": "editorconfig-checker",
 		"ci:lint:trash": "knip --config knip.config.js",
@@ -40,6 +40,7 @@
 		"ci:lint": "npm run ci:lint:fs && npm run ci:lint:editor && npm run ci:lint:trash && npm run ci:lint:format && npm run ci:lint:js && npm run ci:lint:type",
 		"ci:test": "node --import jsdom-global/register.js --test",
 		"ci:format": "npm run _prettier -- --write",
+		"ci:prepare": "simple-git-hooks",
 		"build:clean": "rm -rf dist",
 		"build:dist": "tsc -p tsconfig.build.json",
 		"build:cp": "cp -r src readme.md package.json LICENSE dist",
@@ -77,7 +78,7 @@
 		"typescript": "5.3.2"
 	},
 	"simple-git-hooks": {
-		"pre-commit": "npx lint-staged",
-		"commit-msg": "npm run ci:lint:commit"
+		"pre-commit": "npm run git:hook:precommit",
+		"commit-msg": "npm run git:hook:commit"
 	}
 }
