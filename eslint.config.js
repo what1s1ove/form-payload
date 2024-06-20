@@ -5,7 +5,6 @@ import { resolve as tsResolver } from 'eslint-import-resolver-typescript';
 import importPlugin from 'eslint-plugin-import';
 import jsdoc from 'eslint-plugin-jsdoc';
 import perfectionist from 'eslint-plugin-perfectionist';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import sonarjs from 'eslint-plugin-sonarjs';
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
@@ -117,17 +116,6 @@ const perfectionistConfig = {
 };
 
 /** @type {FlatConfig} */
-const simpleImportSortConfig = {
-	plugins: {
-		'simple-import-sort': simpleImportSort,
-	},
-	rules: {
-		'simple-import-sort/exports': ['error'],
-		'simple-import-sort/imports': ['error'],
-	},
-};
-
-/** @type {FlatConfig} */
 const typescriptPlugin = {
 	languageOptions: {
 		parser: /** @type {ParserModule} */ (tsParser),
@@ -198,7 +186,6 @@ const overridesConfigs = [
 		files: ['tests/**/*.test.js'],
 		rules: {
 			'@typescript-eslint/no-floating-promises': ['off'],
-			'perfectionist/sort-imports': ['off'],
 			'sonarjs/cognitive-complexity': ['off'],
 		},
 	},
@@ -220,7 +207,6 @@ const config = [
 	sonarConfig,
 	unicornConfig,
 	perfectionistConfig,
-	simpleImportSortConfig,
 	mainRulesConfig,
 	...overridesConfigs,
 ];

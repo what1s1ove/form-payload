@@ -1,7 +1,6 @@
+import { fireEvent, waitFor } from '@testing-library/dom';
 import { deepEqual, equal, throws } from 'node:assert/strict';
 import { beforeEach, describe, test } from 'node:test';
-
-import { fireEvent, waitFor } from '@testing-library/dom';
 
 import { FormPayloadError, getFormControlPayload } from '../src/index.js';
 import { VALUE_AS_ARRAY_IDENTIFIER } from '../src/libs/constants/constants.js';
