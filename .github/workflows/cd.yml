@@ -109,7 +109,7 @@ jobs:
 
       - name: Publish
         working-directory: ${{ env.ARTIFACT_PATH }}
-        run: npm publish
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
