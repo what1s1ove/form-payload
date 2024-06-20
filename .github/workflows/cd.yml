@@ -91,6 +91,8 @@ jobs:
     name: NPM Publish
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
       - name: Code Checkout
         uses: actions/checkout@v4
@@ -109,7 +111,7 @@ jobs:
 
       - name: Publish
         working-directory: ${{ env.ARTIFACT_PATH }}
-        run: npm publish
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
