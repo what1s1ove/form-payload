@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.3](https://github.com/what1s1ove/form-payload/compare/1.7.2...1.7.3) (2024-06-20)
+
+
+### Bug Fixes
+
+* add provenance statement to npm publish fp-136 ([#143](https://github.com/what1s1ove/form-payload/issues/143)) ([f929339](https://github.com/what1s1ove/form-payload/commit/f9293396238e4c227da3f30f88af89b858fcb5e7))
+
 ## [1.7.2](https://github.com/what1s1ove/form-payload/compare/1.7.1...1.7.2) (2024-01-12)
 
 
