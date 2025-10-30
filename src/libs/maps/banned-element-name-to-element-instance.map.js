@@ -1,6 +1,6 @@
 const bannedElementNameToElementInstance = /** @type {const} */ ({
-	button: HTMLButtonElement,
-	object: HTMLObjectElement,
+	button: globalThis.HTMLButtonElement,
+	object: globalThis.HTMLObjectElement,
 });
 
 export { bannedElementNameToElementInstance };
