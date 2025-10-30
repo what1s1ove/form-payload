@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.4](https://github.com/what1s1ove/form-payload/compare/1.7.3...1.7.4) (2025-10-30)
+
+
+### Bug Fixes
+
+* prevent ReferenceError for DOM constructors in SSR fp-146 ([#147](https://github.com/what1s1ove/form-payload/issues/147)) ([ff9a0a3](https://github.com/what1s1ove/form-payload/commit/ff9a0a3245dd0fba77457595c414818fe9fe0dda))
+
 ## [1.7.3](https://github.com/what1s1ove/form-payload/compare/1.7.2...1.7.3) (2024-06-20)
 
 
