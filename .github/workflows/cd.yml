@@ -35,7 +35,7 @@ jobs:
   dependencies:
     name: Install Dependencies
     needs: release
-    if: ${{ needs.release.outputs.release_created }}
+    if: ${{ needs.release.outputs.release_created || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
