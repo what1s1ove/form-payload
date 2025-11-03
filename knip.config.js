@@ -1,6 +1,4 @@
 /** @type {import('knip').KnipConfig} */
-const config = {
-	entry: ['src/index.js'],
-};
+const config = {};
 
 export default config;

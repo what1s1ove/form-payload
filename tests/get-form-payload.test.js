@@ -228,7 +228,7 @@ describe('getFormPayload should work correctly', () => {
 				<input
 					type="${ControlElementType.NUMBER}"
 					name="${FormPayloadKey.FRIENDS_COUNT}"
-					value="${formPayload.friendsCount}"
+					value="${formPayload.friendsCount.toString()}"
 				/>
 				<fieldset name="${FormPayloadKey.MAIN_FRIEND}">
 					<input

@@ -1,5 +1,5 @@
 {
-	"include": ["**/*.js", "./src/packages.d.ts"],
+	"include": ["**/*.js"],
 	"exclude": ["node_modules", "dist"],
 	"compilerOptions": {
 		"skipLibCheck": true,
