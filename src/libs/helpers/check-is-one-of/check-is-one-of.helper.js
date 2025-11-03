@@ -1,11 +1,10 @@
 /**
- * @template {unknown} T
  * @param {unknown} value
- * @param {...T} validValues
- * @returns {value is validValues[number]}
+ * @param {...unknown} validValues
+ * @returns {boolean}
  */
 const checkIsOnOf = (value, ...validValues) => {
-	return /** @type {unknown[]} */ (validValues).includes(value);
+	return validValues.includes(value);
 };
 
 export { checkIsOnOf };

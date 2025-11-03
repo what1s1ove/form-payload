@@ -13,7 +13,7 @@ describe('getFormControlPayload should work correctly', () => {
 
 	describe('should work with HTMLInputElement correctly', () => {
 		test('should get value from string inputs correctly', () => {
-			const inputs = [
+			const INPUTS = /** @type {const} */ ([
 				[ControlElementType.TEXT, 'Name'],
 				[ControlElementType.PASSWORD, 'top-secret'],
 				[ControlElementType.SEARCH, 'apples'],
@@ -21,9 +21,9 @@ describe('getFormControlPayload should work correctly', () => {
 				[ControlElementType.TEL, '10000000000'],
 				[ControlElementType.COLOR, '#999999'],
 				[ControlElementType.HIDDEN, 'metrics'],
-			];
+			]);
 
-			for (const [type, value] of inputs) {
+			for (const [type, value] of INPUTS) {
 				document.body.innerHTML = /* HTML */ `
 					<input type="${type}" value="${value}" />
 				`;
@@ -109,13 +109,13 @@ describe('getFormControlPayload should work correctly', () => {
 		});
 
 		test('should get value from radio inputs correctly', () => {
-			const inputs = [
+			const INPUTS = /** @type {const} */ ([
 				[ControlElementType.RADIO, 'banana', true],
 				[ControlElementType.RADIO, 'orange', false],
 				[ControlElementType.RADIO, 'apple', true],
-			];
+			]);
 
-			for (const [type, value, isChecked] of inputs) {
+			for (const [type, value, isChecked] of INPUTS) {
 				document.body.innerHTML = /* HTML */ `
 					<input
 						type="${type}"
@@ -140,14 +140,14 @@ describe('getFormControlPayload should work correctly', () => {
 		});
 
 		test('should get value from number inputs correctly', () => {
-			const inputs = [
+			const INPUTS = /** @type {const} */ ([
 				[ControlElementType.NUMBER, 18],
 				[ControlElementType.RANGE, 69],
-			];
+			]);
 
-			for (const [type, value] of inputs) {
+			for (const [type, value] of INPUTS) {
 				document.body.innerHTML = /* HTML */ `
-					<input type="${type}" value="${value}" />
+					<input type="${type}" value="${value.toString()}" />
 				`;
 
 				const controlElement = /** @type {HTMLInputElement} */ (
@@ -167,12 +167,12 @@ describe('getFormControlPayload should work correctly', () => {
 
 		describe('should get value from boolean inputs correctly', () => {
 			test('should get value from singular boolean input correctly', () => {
-				const inputs = [
+				const INPUTS = /** @type {const} */ ([
 					[ControlElementType.CHECKBOX, true],
 					[ControlElementType.CHECKBOX, false],
-				];
+				]);
 
-				for (const [type, isChecked] of inputs) {
+				for (const [type, isChecked] of INPUTS) {
 					document.body.innerHTML = /* HTML */ `
 						<input type="${type}" ${isChecked ? 'checked' : ''} />
 					`;
@@ -193,13 +193,13 @@ describe('getFormControlPayload should work correctly', () => {
 			});
 
 			test('should get value from boolean inputs with collection identifier correctly', () => {
-				const inputs = [
+				const INPUTS = /** @type {const} */ ([
 					[ControlElementType.CHECKBOX, 'banana', true],
 					[ControlElementType.CHECKBOX, 'apple', false],
 					[ControlElementType.CHECKBOX, 'orange', true],
-				];
+				]);
 
-				for (const [type, value, isChecked] of inputs) {
+				for (const [type, value, isChecked] of INPUTS) {
 					document.body.innerHTML = /* HTML */ `
 						<input
 							name="fruits${VALUE_AS_ARRAY_IDENTIFIER}"
@@ -226,15 +226,15 @@ describe('getFormControlPayload should work correctly', () => {
 		});
 
 		test('should get value from date inputs correctly', () => {
-			const inputs = [
+			const INPUTS = /** @type {const} */ ([
 				[ControlElementType.DATE, '1998-08-03'],
 				[ControlElementType.TIME, '13:30'],
 				[ControlElementType.MONTH, '2001-06'],
 				[ControlElementType.WEEK, '2017-W01'],
 				[ControlElementType.DATETIME_LOCAL, '2018-06-12T19:30'],
-			];
+			]);
 
-			for (const [type, value] of inputs) {
+			for (const [type, value] of INPUTS) {
 				document.body.innerHTML = /* HTML */ `
 					<input type="${type}" value="${value}" />
 				`;
@@ -512,7 +512,7 @@ describe('getFormControlPayload should work correctly', () => {
 							<input
 								type="${ControlElementType.NUMBER}"
 								name="${FormPayloadKey.BESTFRIEND_CHILD_AGE}"
-								value="${formPayload.bestfriend.child.age}"
+								value="${formPayload.bestfriend.child.age.toString()}"
 							/>
 							<input
 								type="${ControlElementType.CHECKBOX}"

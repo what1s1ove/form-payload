@@ -9,17 +9,17 @@ import sonarjs from 'eslint-plugin-sonarjs';
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 
-/** @typedef {import('eslint').Linter.FlatConfig} */
-let FlatConfig;
-/** @typedef {import('eslint').Linter.ParserModule} */
-let ParserModule;
+/** @typedef {import('eslint').Linter.Config} */
+let Config;
+/** @typedef {import('eslint').ESLint.Plugin} */
+let Plugin;
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const ignoresConfig = {
 	ignores: ['dist'],
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const globalConfig = {
 	languageOptions: {
 		globals: globals.browser,
@@ -33,7 +33,7 @@ const globalConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const importConfig = {
 	plugins: {
 		import: importPlugin,
@@ -50,22 +50,19 @@ const importConfig = {
 		'import/no-duplicates': ['error'],
 	},
 	settings: {
-		'import/parsers': {
-			espree: ['.js', '.cjs'],
-		},
 		'import/resolver': {
 			typescript: tsResolver,
 		},
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const jsdocConfig = {
 	plugins: {
 		jsdoc,
 	},
 	rules: {
-		...jsdoc.configs['recommended-typescript-flavor-error'].rules,
+		...jsdoc.configs['flat/recommended-typescript-flavor-error'].rules,
 		'jsdoc/no-undefined-types': ['error'],
 		'jsdoc/require-jsdoc': [
 			'error',
@@ -78,8 +75,13 @@ const jsdocConfig = {
 			},
 		],
 		'jsdoc/require-param-description': ['off'],
+		'jsdoc/require-returns': [
+			'error',
+			{
+				forceRequireReturn: true,
+			},
+		],
 		'jsdoc/require-returns-description': ['off'],
-		'jsdoc/valid-types': ['off'],
 	},
 	settings: {
 		jsdoc: {
@@ -88,15 +90,17 @@ const jsdocConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const sonarConfig = {
 	plugins: {
 		sonarjs,
 	},
-	rules: sonarjs.configs.recommended.rules,
+	rules: {
+		...sonarjs.configs.recommended.rules,
+	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const unicornConfig = {
 	plugins: {
 		unicorn,
@@ -107,31 +111,35 @@ const unicornConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const perfectionistConfig = {
 	plugins: {
 		perfectionist,
 	},
-	rules: perfectionist.configs['recommended-natural'].rules,
+	rules: {
+		...perfectionist.configs['recommended-natural'].rules,
+	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const typescriptPlugin = {
 	languageOptions: {
-		parser: /** @type {ParserModule} */ (tsParser),
+		parser: tsParser,
 		parserOptions: {
 			project: './tsconfig.json',
 		},
 	},
 	plugins: {
-		'@typescript-eslint': ts,
+		'@typescript-eslint': /** @type {Plugin} */ (
+			/** @type {unknown} */ (ts)
+		),
 	},
 	rules: {
-		...ts.configs['strict-type-checked'].rules,
+		...ts.configs['strict-type-checked']?.rules,
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const mainRulesConfig = {
 	rules: {
 		'arrow-parens': ['error', 'always'],
@@ -162,7 +170,7 @@ const mainRulesConfig = {
 	},
 };
 
-/** @type {FlatConfig[]} */
+/** @type {Config[]} */
 const overridesConfigs = [
 	{
 		files: [
@@ -187,17 +195,19 @@ const overridesConfigs = [
 		rules: {
 			'@typescript-eslint/no-floating-promises': ['off'],
 			'sonarjs/cognitive-complexity': ['off'],
+			'sonarjs/no-nested-functions': ['off'],
 		},
 	},
 	{
 		files: ['src/libs/enums/control-element-type.enum.js'],
 		rules: {
 			'perfectionist/sort-objects': ['off'],
+			'sonarjs/no-hardcoded-passwords': ['off'],
 		},
 	},
 ];
 
-/** @type {FlatConfig[]} */
+/** @type {Config[]} */
 const config = [
 	ignoresConfig,
 	globalConfig,

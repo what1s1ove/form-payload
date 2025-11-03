@@ -30,16 +30,23 @@ const getFormControlPayload = (controlElement) => {
 	}
 
 	switch (controlElement.type) {
-		case ControlElementType.TEXT:
-		case ControlElementType.PASSWORD:
-		case ControlElementType.SEARCH:
-		case ControlElementType.URL:
-		case ControlElementType.TEL:
+		case ControlElementType.CHECKBOX: {
+			return /** @type {T} */ (
+				getCheckboxControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
+				)
+			);
+		}
 		case ControlElementType.COLOR:
 		case ControlElementType.HIDDEN:
-		case ControlElementType.TEXTAREA:
+		case ControlElementType.OUTPUT:
+		case ControlElementType.PASSWORD:
+		case ControlElementType.SEARCH:
 		case ControlElementType.SELECT_ONE:
-		case ControlElementType.OUTPUT: {
+		case ControlElementType.TEL:
+		case ControlElementType.TEXT:
+		case ControlElementType.TEXTAREA:
+		case ControlElementType.URL: {
 			return /** @type {T} */ (
 				getControlElementValue(
 					/**
@@ -51,38 +58,9 @@ const getFormControlPayload = (controlElement) => {
 				)
 			);
 		}
-		case ControlElementType.EMAIL: {
-			return /** @type {T} */ (
-				getEmailControlElementValue(
-					/** @type {HTMLInputElement} */ (controlElement),
-				)
-			);
-		}
-		case ControlElementType.RADIO: {
-			return /** @type {T} */ (
-				getRadioControlElementValue(
-					/** @type {HTMLInputElement} */ (controlElement),
-				)
-			);
-		}
-		case ControlElementType.NUMBER:
-		case ControlElementType.RANGE: {
-			return /** @type {T} */ (
-				getNumericControlElementValue(
-					/** @type {HTMLInputElement} */ (controlElement),
-				)
-			);
-		}
-		case ControlElementType.CHECKBOX: {
-			return /** @type {T} */ (
-				getCheckboxControlElementValue(
-					/** @type {HTMLInputElement} */ (controlElement),
-				)
-			);
-		}
 		case ControlElementType.DATE:
-		case ControlElementType.TIME:
 		case ControlElementType.MONTH:
+		case ControlElementType.TIME:
 		case ControlElementType.WEEK: {
 			return /** @type {T} */ (
 				getDateControlElementValue(
@@ -97,17 +75,10 @@ const getFormControlPayload = (controlElement) => {
 				)
 			);
 		}
-		case ControlElementType.FILE: {
+		case ControlElementType.EMAIL: {
 			return /** @type {T} */ (
-				getFileControlElementValue(
+				getEmailControlElementValue(
 					/** @type {HTMLInputElement} */ (controlElement),
-				)
-			);
-		}
-		case ControlElementType.SELECT_MULTIPLE: {
-			return /** @type {T} */ (
-				getMultiselectControlElementValue(
-					/** @type {HTMLSelectElement} */ (controlElement),
 				)
 			);
 		}
@@ -116,6 +87,35 @@ const getFormControlPayload = (controlElement) => {
 				getFieldsetControlElementValue(
 					getFormControlPayload,
 					/** @type {HTMLFieldSetElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.FILE: {
+			return /** @type {T} */ (
+				getFileControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.NUMBER:
+		case ControlElementType.RANGE: {
+			return /** @type {T} */ (
+				getNumericControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.RADIO: {
+			return /** @type {T} */ (
+				getRadioControlElementValue(
+					/** @type {HTMLInputElement} */ (controlElement),
+				)
+			);
+		}
+		case ControlElementType.SELECT_MULTIPLE: {
+			return /** @type {T} */ (
+				getMultiselectControlElementValue(
+					/** @type {HTMLSelectElement} */ (controlElement),
 				)
 			);
 		}
