@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/what1s1ove/form-payload/compare/1.7.4...1.8.0) (2025-11-05)
+
+
+### Features
+
+* remove d.ts from build fp-157 ([#158](https://github.com/what1s1ove/form-payload/issues/158)) ([c12cec6](https://github.com/what1s1ove/form-payload/commit/c12cec6f3f4509c771b041f2bcbcbe3996205cfd))
+
 ## [1.7.4](https://github.com/what1s1ove/form-payload/compare/1.7.3...1.7.4) (2025-10-30)
 
 
