@@ -24,6 +24,7 @@
 	"license": "MIT",
 	"type": "module",
 	"main": "./src/index.js",
+	"types": "./src/index.js",
 	"engines": {
 		"node": ">=10"
 	},
@@ -42,10 +43,8 @@
 		"ci:format": "npm run _prettier -- --write",
 		"ci:prepare": "simple-git-hooks",
 		"build:clean": "rm -rf dist",
-		"build:dist": "tsc -p tsconfig.build.json",
-		"build:cp": "cp -r src readme.md package.json LICENSE dist",
-		"build:pkg": "cd dist && npm pkg set types=./src/index.d.ts",
-		"build": "npm run build:clean && npm run build:dist && npm run build:pkg && npm run build:cp"
+		"build:dist": "mkdir dist && cp -r src readme.md package.json LICENSE dist",
+		"build": "npm run build:clean && npm run build:dist"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "20.1.0",
