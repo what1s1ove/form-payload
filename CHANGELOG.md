@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/what1s1ove/form-payload/compare/1.8.0...1.8.1) (2025-11-05)
+
+
+### Bug Fixes
+
+* add d.ts to build fp-160 ([#161](https://github.com/what1s1ove/form-payload/issues/161)) ([ee96db3](https://github.com/what1s1ove/form-payload/commit/ee96db33e3db04cfe4d696ba4457f8e623393249))
+
 ## [1.8.0](https://github.com/what1s1ove/form-payload/compare/1.7.4...1.8.0) (2025-11-05)
 
 
