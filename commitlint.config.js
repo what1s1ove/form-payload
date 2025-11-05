@@ -11,8 +11,11 @@ const configuration = {
 		},
 	},
 	rules: {
+		'header-case': [RuleConfigSeverity.Error, 'always', 'lower-case'],
+		'header-trim': [RuleConfigSeverity.Error, 'always'],
 		'references-empty': [RuleConfigSeverity.Error, 'never'],
 	},
 };
 
+export { PROJECT_PREFIXES };
 export default configuration;
