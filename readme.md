@@ -1,7 +1,7 @@
 # form-payload
 
-[![Continuous Integration](https://github.com/what1s1ove/whatislove.dev/actions/workflows/ci.yml/badge.svg)](https://github.com/what1s1ove/whatislove.dev/actions/workflows/ci.yml)
-[![Continuous Delivery](https://github.com/what1s1ove/whatislove.dev/actions/workflows/cd.yml/badge.svg)](https://github.com/what1s1ove/whatislove.dev/actions/workflows/cd.yml)
+[![Continuous Integration](https://github.com/what1s1ove/form-payload/actions/workflows/ci.yml/badge.svg)](https://github.com/what1s1ove/form-payload/actions/workflows/ci.yml)
+[![Continuous Delivery](https://github.com/what1s1ove/form-payload/actions/workflows/cd.yml/badge.svg)](https://github.com/what1s1ove/form-payload/actions/workflows/cd.yml)
 
 Gets _proper_ form payload – via `form.elements`.
 
